@@ -69,9 +69,9 @@ The perceptron represents the fundamental building block of neural networks and 
 
 At its core, a perceptron takes multiple input signals, applies weights to these inputs, sums them together with a bias term, and then passes this sum through an activation function to produce an output. Mathematically, this can be represented as:
 
-y = f(∑(w_i * x_i) + b)
+$$y = f\left(\sum_{i} w_i x_i + b\right)$$
 
-Where x_i represents the input features, w_i represents the corresponding weights, b is the bias term, and f is the activation function. In the original perceptron model, the activation function was a simple step function that output 1 if the weighted sum exceeded a threshold and 0 otherwise.
+Where $x_i$ represents the input features, $w_i$ represents the corresponding weights, $b$ is the bias term, and $f$ is the activation function. In the original perceptron model, the activation function was a simple step function that output 1 if the weighted sum exceeded a threshold and 0 otherwise.
 
 The perceptron's significance lies in its ability to learn from data through a simple update rule. When the perceptron makes an incorrect prediction, the weights are adjusted proportionally to the error and the input values. This learning process continues until the perceptron correctly classifies all training examples or reaches a maximum number of iterations.
 
@@ -115,33 +115,33 @@ Activation functions introduce non-linearity into neural networks, enabling them
 
 ### Comparison of Common Activation Functions
 
-| Function      | Formula                | Output Range | Pros                        | Cons                        | Typical Use Cases           |
-|---------------|------------------------|--------------|-----------------------------|-----------------------------|-----------------------------|
-| Sigmoid       | 1/(1+e^-x)             | (0, 1)       | Probabilistic output        | Vanishing gradients         | Binary classification       |
-| Tanh          | (e^x-e^-x)/(e^x+e^-x)  | (-1, 1)      | Zero-centered, smooth       | Vanishing gradients         | Hidden layers (legacy)      |
-| ReLU          | max(0, x)              | [0, ∞)       | Fast, less vanishing grad.  | Dying ReLU                  | Most hidden layers          |
-| Leaky ReLU    | x if x>0 else αx       | (-∞, ∞)      | Prevents dying ReLU         | Adds a parameter            | Hidden layers               |
-| PReLU         | x if x>0 else αx (learned) | (-∞, ∞)   | Learns negative slope       | Slightly more complex       | Hidden layers               |
-| ELU           | x if x>0 else α(e^x-1) | (-α, ∞)      | Smooth, less bias shift     | More computation            | Hidden layers               |
-| Swish         | x * sigmoid(x)         | (-∞, ∞)      | Sometimes better than ReLU  | More computation            | Deep networks               |
+| Function      | Formula                                  | Output Range | Pros                        | Cons                        | Typical Use Cases           |
+|---------------|------------------------------------------|--------------|-----------------------------|-----------------------------|-----------------------------|
+| Sigmoid       | $\sigma(x) = \frac{1}{1+e^{-x}}$        | $(0, 1)$     | Probabilistic output        | Vanishing gradients         | Binary classification       |
+| Tanh          | $\tanh(x) = \frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}$ | $(-1, 1)$    | Zero-centered, smooth       | Vanishing gradients         | Hidden layers (legacy)      |
+| ReLU          | $f(x) = \max(0, x)$                    | $[0, \infty)$ | Fast, less vanishing grad.  | Dying ReLU                  | Most hidden layers          |
+| Leaky ReLU    | $f(x) = x$ if $x > 0$ else $\alpha x$ | $(-\infty, \infty)$ | Prevents dying ReLU         | Adds a parameter            | Hidden layers               |
+| PReLU         | $\alpha$ learnable                     | $(-\infty, \infty)$ | Learns negative slope       | Slightly more complex       | Hidden layers               |
+| ELU           | $f(x) = x$ if $x > 0$ else $\alpha(e^{x}-1)$ | $(-\alpha, \infty)$ | Smooth, less bias shift     | More computation            | Hidden layers               |
+| Swish         | $f(x) = x \cdot \sigma(x)$             | $(-\infty, \infty)$ | Sometimes better than ReLU  | More computation            | Deep networks               |
 
 ### Sigmoid, Tanh, ReLU and Variants
 
-The sigmoid function, defined as σ(x) = 1/(1 + e^(-x)), maps input values to the range (0,1). This makes it interpretable as a probability, which is useful for binary classification problems. In early neural networks, sigmoid was a popular choice for hidden layer activations. However, it suffers from the "vanishing gradient problem" when used in deep networks—as inputs move away from zero, the gradient becomes extremely small, slowing down learning in earlier layers.
+The sigmoid function, defined as $\sigma(x) = \frac{1}{1 + e^{-x}}$, maps input values to the range $(0,1)$. This makes it interpretable as a probability, which is useful for binary classification problems. In early neural networks, sigmoid was a popular choice for hidden layer activations. However, it suffers from the "vanishing gradient problem" when used in deep networks—as inputs move away from zero, the gradient becomes extremely small, slowing down learning in earlier layers.
 
 The hyperbolic tangent (tanh) function is similar to sigmoid but maps inputs to the range (-1,1), making the outputs zero-centered. This property often leads to faster convergence during training compared to sigmoid. Like sigmoid, tanh also suffers from the vanishing gradient problem in deep networks.
 
-The Rectified Linear Unit (ReLU), defined as f(x) = max(0,x), has become the most widely used activation function in modern deep learning. ReLU simply outputs the input if it's positive and zero otherwise. Its advantages include computational efficiency (requiring only a simple threshold operation) and reduced likelihood of vanishing gradients for positive inputs. However, ReLU can suffer from the "dying ReLU" problem, where neurons can become permanently inactive if they consistently receive negative inputs.
+The Rectified Linear Unit (ReLU), defined as $f(x) = \max(0,x)$, has become the most widely used activation function in modern deep learning. ReLU simply outputs the input if it's positive and zero otherwise. Its advantages include computational efficiency (requiring only a simple threshold operation) and reduced likelihood of vanishing gradients for positive inputs. However, ReLU can suffer from the "dying ReLU" problem, where neurons can become permanently inactive if they consistently receive negative inputs.
 
 Several variants of ReLU have been developed to address its limitations:
 
-Leaky ReLU allows a small gradient when the input is negative (f(x) = αx for x < 0, where α is a small constant like 0.01), preventing neurons from "dying."
+Leaky ReLU allows a small gradient when the input is negative ($f(x) = \alpha x$ for $x < 0$, where $\alpha$ is a small constant like 0.01), preventing neurons from "dying".
 
 Parametric ReLU (PReLU) makes the slope for negative inputs a learnable parameter, allowing the model to determine the optimal value during training.
 
 Exponential Linear Unit (ELU) uses an exponential function for negative inputs, providing smoother transitions and potentially better performance in some applications.
 
-Swish, defined as f(x) = x * sigmoid(x), was discovered through automated search and has shown promising results in deep networks.
+Swish, defined as $f(x) = x \cdot \sigma(x)$, was discovered through automated search and has shown promising results in deep networks.
 
 In radiation oncology applications, the choice of activation function can significantly impact model performance. For instance, in dose prediction models, ReLU and its variants might be preferred for hidden layers due to their training efficiency, while sigmoid activations might be used in the output layer to constrain dose predictions to a reasonable range.
 
@@ -193,12 +193,12 @@ In radiation oncology, feedforward neural networks have been applied to various 
 
 The operation of feedforward neural networks involves two key processes: forward propagation and backward propagation.
 
-Forward propagation is the process of computing the network's output given an input. For each layer, the weighted sum of inputs from the previous layer is calculated, the bias term is added, and the result is passed through the activation function. This process continues layer by layer until reaching the output. Mathematically, for layer l:
+Forward propagation is the process of computing the network's output given an input. For each layer, the weighted sum of inputs from the previous layer is calculated, the bias term is added, and the result is passed through the activation function. This process continues layer by layer until reaching the output. Mathematically, for layer $l$:
 
-Z^(l) = W^(l)a^(l-1) + b^(l)
-a^(l) = f(Z^(l))
+$$Z^{(l)} = W^{(l)}a^{(l-1)} + b^{(l)}$$
+$$a^{(l)} = f(Z^{(l)})$$
 
-Where W^(l) is the weight matrix, a^(l-1) is the activation from the previous layer, b^(l) is the bias vector, f is the activation function, Z^(l) is the weighted input, and a^(l) is the activation output.
+Where $W^{(l)}$ is the weight matrix, $a^{(l-1)}$ is the activation from the previous layer, $b^{(l)}$ is the bias vector, $f$ is the activation function, $Z^{(l)}$ is the weighted input, and $a^{(l)}$ is the activation output.
 
 Backward propagation (backpropagation) is the process of computing gradients of the loss function with respect to the network parameters (weights and biases). These gradients indicate how to adjust the parameters to reduce the error. The process starts at the output layer by computing the error derivative with respect to the output, then works backward through the network using the chain rule of calculus.
 
@@ -206,10 +206,10 @@ For the output layer, the gradient depends on the difference between predicted a
 
 Once gradients are computed, parameters are updated using an optimization algorithm like gradient descent:
 
-W^(l) = W^(l) - α * ∂L/∂W^(l)
-b^(l) = b^(l) - α * ∂L/∂b^(l)
+$$W^{(l)} = W^{(l)} - \alpha \frac{\partial L}{\partial W^{(l)}}$$
+$$b^{(l)} = b^{(l)} - \alpha \frac{\partial L}{\partial b^{(l)}}$$
 
-Where α is the learning rate and ∂L/∂W^(l) and ∂L/∂b^(l) are the gradients of the loss function with respect to the weights and biases.
+Where $\alpha$ is the learning rate and $\frac{\partial L}{\partial W^{(l)}}$ and $\frac{\partial L}{\partial b^{(l)}}$ are the gradients of the loss function with respect to the weights and biases.
 
 In radiation oncology applications, efficient and accurate backpropagation is crucial for training models that can reliably predict treatment outcomes or generate accurate contours. The complexity of the data and the critical nature of the predictions make proper training essential.
 
@@ -221,22 +221,22 @@ Loss functions quantify the difference between a model's predictions and the gro
 
 ### Summary Table: Loss Functions
 
-| Name                | Formula (see text)         | Typical Use Case                | Notes                                  |
-|---------------------|---------------------------|----------------------------------|----------------------------------------|
-| Mean Squared Error  | MSE = (1/n) Σ(y-ŷ)^2      | Regression (e.g., dose prediction) | Sensitive to outliers                  |
-| Cross-Entropy       | See text                  | Classification                   | Penalizes confident wrong predictions  |
-| Focal Loss          | See text                  | Imbalanced classification/segmentation | Down-weights easy examples        |
-| Dice Loss           | See text                  | Segmentation                     | Directly optimizes overlap             |
-| Hausdorff Loss      | See text                  | Segmentation (boundaries)         | Focuses on boundary accuracy           |
-| Combined Losses     | Weighted sum              | Complex tasks                    | E.g., Cross-Entropy + Dice             |
+| Name                | Formula                                    | Typical Use Case                | Notes                                  |
+|---------------------|--------------------------------------------|---------------------------------|----------------------------------------|
+| Mean Squared Error  | $MSE = \frac{1}{n}\sum_i (y_i - \hat{y}_i)^2$ | Regression (e.g., dose prediction) | Sensitive to outliers                  |
+| Cross-Entropy       | See text                                   | Classification                   | Penalizes confident wrong predictions  |
+| Focal Loss          | See text                                   | Imbalanced classification/segmentation | Down-weights easy examples        |
+| Dice Loss           | $DL = 1 - \frac{2\sum(y_i \cdot \hat{y}_i)}{\sum y_i + \sum \hat{y}_i}$ | Segmentation                     | Directly optimizes overlap             |
+| Hausdorff Loss      | See text                                   | Segmentation (boundaries)         | Focuses on boundary accuracy           |
+| Combined Losses     | Weighted sum                               | Complex tasks                    | E.g., Cross-Entropy + Dice             |
 
 ### Mean Squared Error
 
 Mean Squared Error (MSE) is one of the most common loss functions for regression problems. It calculates the average of the squared differences between predicted and actual values:
 
-MSE = (1/n) * ∑(y_i - ŷ_i)²
+$$MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
 
-Where y_i is the true value, ŷ_i is the predicted value, and n is the number of samples.
+Where $y_i$ is the true value, $\hat{y}_i$ is the predicted value, and $n$ is the number of samples.
 
 MSE heavily penalizes large errors due to the squaring operation, making it particularly sensitive to outliers. This property can be both an advantage and a disadvantage, depending on the application. In radiation oncology, MSE might be appropriate for dose prediction tasks where large deviations could have significant clinical consequences. However, its sensitivity to outliers could be problematic when working with noisy medical data.
 
@@ -246,15 +246,15 @@ A variant of MSE is the Root Mean Squared Error (RMSE), which takes the square r
 
 Cross-entropy loss is the standard choice for classification problems. For binary classification, it is defined as:
 
-BCE = -(1/n) * ∑[y_i * log(ŷ_i) + (1-y_i) * log(1-ŷ_i)]
+$$BCE = -\frac{1}{n} \sum_{i=1}^{n} \left[y_i \log(\hat{y}_i) + (1-y_i) \log(1-\hat{y}_i)\right]$$
 
-Where y_i is the true label (0 or 1), and ŷ_i is the predicted probability of class 1.
+Where $y_i$ is the true label (0 or 1), and $\hat{y}_i$ is the predicted probability of class 1.
 
 For multi-class classification, categorical cross-entropy is used:
 
-CCE = -(1/n) * ∑∑[y_ij * log(ŷ_ij)]
+$$CCE = -\frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{C} y_{ij} \log(\hat{y}_{ij})$$
 
-Where y_ij is 1 if sample i belongs to class j and 0 otherwise, and ŷ_ij is the predicted probability that sample i belongs to class j.
+Where $y_{ij}$ is 1 if sample $i$ belongs to class $j$ and 0 otherwise, and $\hat{y}_{ij}$ is the predicted probability that sample $i$ belongs to class $j$.
 
 Cross-entropy has several desirable properties for classification tasks. It heavily penalizes confident but wrong predictions, encouraging the model to output calibrated probabilities. It also produces larger gradients for misclassified examples compared to squared error, potentially leading to faster learning.
 
@@ -266,13 +266,13 @@ Standard loss functions may not be optimal for all problems in radiation oncolog
 
 Focal Loss modifies cross-entropy to address class imbalance by down-weighting well-classified examples. It's defined as:
 
-FL = -(1/n) * ∑[α * (1-ŷ_i)^γ * y_i * log(ŷ_i) + (1-α) * ŷ_i^γ * (1-y_i) * log(1-ŷ_i)]
+$$FL = -\frac{1}{n} \sum_{i=1}^{n} \left[\alpha (1-\hat{y}_i)^\gamma y_i \log(\hat{y}_i) + (1-\alpha) \hat{y}_i^\gamma (1-y_i) \log(1-\hat{y}_i)\right]$$
 
-Where α balances the importance of positive/negative examples, and γ is a focusing parameter that reduces the loss contribution from easy examples. Focal loss is particularly useful in medical image segmentation where background pixels often vastly outnumber the pixels belonging to structures of interest.
+Where $\alpha$ balances the importance of positive/negative examples, and $\gamma$ is a focusing parameter that reduces the loss contribution from easy examples. Focal loss is particularly useful in medical image segmentation where background pixels often vastly outnumber the pixels belonging to structures of interest.
 
 Dice Loss is based on the Dice similarity coefficient, a metric commonly used to evaluate segmentation quality. It's defined as:
 
-DL = 1 - (2 * ∑(y_i * ŷ_i)) / (∑y_i + ∑ŷ_i)
+$$DL = 1 - \frac{2 \sum (y_i \cdot \hat{y}_i)}{\sum y_i + \sum \hat{y}_i}$$
 
 Dice loss directly optimizes for overlap between predicted and ground truth segmentations, making it well-suited for medical image segmentation tasks like organ contouring in radiation therapy planning.
 
@@ -302,18 +302,19 @@ The algorithm consists of two main phases:
 
 The key insight of backpropagation is the efficient computation of these gradients using the chain rule of calculus. Rather than computing each gradient independently, intermediate results are cached and reused, dramatically reducing the computational cost.
 
-For a given layer l, the gradient of the loss L with respect to the weights W^(l) is:
+For a given layer $l$, the gradient of the loss $L$ with respect to the weights $W^{(l)}$ is:
 
-∂L/∂W^(l) = ∂L/∂Z^(l) * ∂Z^(l)/∂W^(l) = δ^(l) * (a^(l-1))^T
+$$\frac{\partial L}{\partial W^{(l)}} = \frac{\partial L}{\partial Z^{(l)}} \cdot \frac{\partial Z^{(l)}}{\partial W^{(l)}} = \delta^{(l)} (a^{(l-1)})^T$$
 
-Where δ^(l) = ∂L/∂Z^(l) is the "error" at layer l, and a^(l-1) is the activation from the previous layer.
+Where $\delta^{(l)} = \frac{\partial L}{\partial Z^{(l)}}$ is the "error" at layer $l$, and $a^{(l-1)}$ is the activation from the previous layer.
 
-The error term δ^(l) is computed recursively:
+The error term $\delta^{(l)}$ is computed recursively:
 
-For the output layer: δ^(L) = ∂L/∂a^(L) ⊙ f'(Z^(L))
-For hidden layers: δ^(l) = ((W^(l+1))^T * δ^(l+1)) ⊙ f'(Z^(l))
+For the output layer: $\delta^{(L)} = \frac{\partial L}{\partial a^{(L)}} \odot f'(Z^{(L)})$
 
-Where ⊙ represents element-wise multiplication, and f' is the derivative of the activation function.
+For hidden layers: $\delta^{(l)} = ((W^{(l+1)})^T \delta^{(l+1)}) \odot f'(Z^{(l)})$
+
+Where $\odot$ represents element-wise multiplication, and $f'$ is the derivative of the activation function.
 
 This recursive computation allows the error signal to propagate backward through the network, with each layer's parameters receiving gradients that indicate how they contributed to the final error.
 
@@ -339,14 +340,14 @@ Understanding computational graphs also helps in diagnosing and addressing train
 
 ### Summary Table: Initialization Methods
 
-| Method         | Formula/Approach                | Best For                | Notes                                 |
-|----------------|---------------------------------|-------------------------|---------------------------------------|
-| Random         | Uniform/Normal                  | Shallow nets            | Can cause vanishing/exploding gradients|
-| Xavier/Glorot  | Var(W)=2/(n_in+n_out)           | Tanh/Sigmoid activations| Balances variance across layers       |
-| He             | Var(W)=2/n_in                   | ReLU activations        | Prevents vanishing gradients          |
-| Orthogonal     | Orthogonal matrix               | Deep/recurrent nets     | Preserves gradient magnitude          |
-| Identity       | Close to identity matrix        | Residual nets           | Preserves input features              |
-| Pretrained     | From other tasks/datasets       | Transfer learning       | Leverages external data               |
+| Method         | Formula/Approach                           | Best For                | Notes                                 |
+|----------------|--------------------------------------------|-------------------------|---------------------------------------|
+| Random         | Uniform or Normal distribution              | Shallow nets            | Can cause vanishing/exploding gradients|
+| Xavier/Glorot  | $\text{Var}(W) = \frac{2}{n_{\text{in}}+n_{\text{out}}}$ | Tanh/Sigmoid activations| Balances variance across layers       |
+| He             | $\text{Var}(W) = \frac{2}{n_{\text{in}}}$ | ReLU activations        | Prevents vanishing gradients          |
+| Orthogonal     | Orthogonal matrix                          | Deep/recurrent nets     | Preserves gradient magnitude          |
+| Identity       | Close to identity matrix                   | Residual nets           | Preserves input features              |
+| Pretrained     | From other tasks/datasets                  | Transfer learning       | Leverages external data               |
 
 The initial values of neural network parameters significantly impact training dynamics and final performance. Poor initialization can lead to slow convergence, getting stuck in poor local minima, or even failure to train due to vanishing or exploding gradients.
 
@@ -356,13 +357,13 @@ Simple random initialization from a uniform or normal distribution was used in e
 
 Xavier/Glorot initialization, proposed by Xavier Glorot and Yoshua Bengio, draws weights from a distribution with variance scaled according to the number of input and output connections:
 
-Var(W) = 2 / (n_in + n_out)
+$$\text{Var}(W) = \frac{2}{n_{\text{in}} + n_{\text{out}}}$$
 
 This scaling helps maintain the variance of activations and gradients across layers, preventing them from growing or shrinking exponentially with network depth.
 
 He initialization, developed by Kaiming He, modifies Xavier initialization for ReLU activations:
 
-Var(W) = 2 / n_in
+$$\text{Var}(W) = \frac{2}{n_{\text{in}}}$$
 
 This accounts for the fact that ReLU activations effectively reduce the variance by setting negative values to zero.
 
@@ -390,15 +391,15 @@ Batch Normalization (BatchNorm) is a technique that normalizes the inputs to eac
 
 BatchNorm normalizes the pre-activation values of a layer by subtracting the batch mean and dividing by the batch standard deviation:
 
-x̂ = (x - μ_B) / √(σ_B² + ε)
+$$\hat{x} = \frac{x - \mu_B}{\sqrt{\sigma_B^2 + \varepsilon}}$$
 
-Where μ_B and σ_B² are the mean and variance of the current mini-batch, and ε is a small constant for numerical stability.
+Where $\mu_B$ and $\sigma_B^2$ are the mean and variance of the current mini-batch, and $\varepsilon$ is a small constant for numerical stability.
 
 After normalization, BatchNorm applies a learnable scale and shift:
 
-y = γ * x̂ + β
+$$y = \gamma \hat{x} + \beta$$
 
-Where γ and β are learnable parameters that allow the network to undo the normalization if necessary.
+Where $\gamma$ and $\beta$ are learnable parameters that allow the network to undo the normalization if necessary.
 
 During training, BatchNorm uses mini-batch statistics for normalization. During inference, it uses running estimates of the population mean and variance accumulated during training.
 
@@ -438,9 +439,9 @@ Convolutional Neural Networks (CNNs) have revolutionized the field of computer v
 
 The convolutional layer is the core building block of CNNs. Unlike fully connected layers that connect each neuron to every neuron in the previous layer, convolutional layers use a set of learnable filters (or kernels) that slide across the input, computing dot products between the filter weights and the input values at each spatial position. This operation, called convolution, can be mathematically represented as:
 
-(I * K)(x, y) = ∑∑ I(x-m, y-n) K(m, n)
+$$(I * K)(x, y) = \sum_{m} \sum_{n} I(x-m, y-n) K(m, n)$$
 
-Where I is the input, K is the kernel, and (x, y) represents spatial coordinates.
+Where $I$ is the input, $K$ is the kernel, and $(x, y)$ represents spatial coordinates.
 
 Each filter in a convolutional layer detects specific patterns or features, such as edges, textures, or more complex structures in deeper layers. The key properties that make convolutional layers particularly effective for image processing include:
 
@@ -531,16 +532,16 @@ RNNs process sequential data by maintaining an internal state (or "memory") that
 
 The basic RNN computation can be expressed as:
 
-h_t = f(W_xh * x_t + W_hh * h_{t-1} + b_h)
-y_t = g(W_hy * h_t + b_y)
+$$h_t = f(W_{xh} x_t + W_{hh} h_{t-1} + b_h)$$
+$$y_t = g(W_{hy} h_t + b_y)$$
 
 Where:
-- x_t is the input at time step t
-- h_t is the hidden state at time step t
-- y_t is the output at time step t
-- W_xh, W_hh, W_hy are weight matrices
-- b_h, b_y are bias vectors
-- f and g are activation functions
+- $x_t$ is the input at time step $t$
+- $h_t$ is the hidden state at time step $t$
+- $y_t$ is the output at time step $t$
+- $W_{xh}, W_{hh}, W_{hy}$ are weight matrices
+- $b_h, b_y$ are bias vectors
+- $f$ and $g$ are activation functions
 
 This recurrent structure enables RNNs to model dependencies between elements in a sequence, making them suitable for tasks like:
 
@@ -582,14 +583,19 @@ The output gate controls what parts of the cell state to output.
 
 This gating mechanism allows LSTMs to preserve information over many time steps when needed, while also being able to update or forget information when appropriate. Mathematically, the LSTM operations can be expressed as:
 
-f_t = σ(W_f * [h_{t-1}, x_t] + b_f)  # Forget gate
-i_t = σ(W_i * [h_{t-1}, x_t] + b_i)  # Input gate
-o_t = σ(W_o * [h_{t-1}, x_t] + b_o)  # Output gate
-c̃_t = tanh(W_c * [h_{t-1}, x_t] + b_c)  # Candidate cell state
-c_t = f_t * c_{t-1} + i_t * c̃_t  # Cell state update
-h_t = o_t * tanh(c_t)  # Hidden state output
+$$f_t = \sigma(W_f [h_{t-1}, x_t] + b_f)$$ (Forget gate)
 
-Where σ is the sigmoid function, * represents element-wise multiplication, and [h_{t-1}, x_t] denotes concatenation.
+$$i_t = \sigma(W_i [h_{t-1}, x_t] + b_i)$$ (Input gate)
+
+$$o_t = \sigma(W_o [h_{t-1}, x_t] + b_o)$$ (Output gate)
+
+$$\tilde{c}_t = \tanh(W_c [h_{t-1}, x_t] + b_c)$$ (Candidate cell state)
+
+$$c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t$$ (Cell state update)
+
+$$h_t = o_t \odot \tanh(c_t)$$ (Hidden state output)
+
+Where $\sigma$ is the sigmoid function, $\odot$ represents element-wise multiplication, and $[h_{t-1}, x_t]$ denotes concatenation.
 
 Gated Recurrent Units (GRUs) are a simplified variant of LSTMs with fewer parameters. GRUs combine the forget and input gates into a single "update gate" and merge the cell state and hidden state. This simplification makes GRUs computationally more efficient while often achieving comparable performance to LSTMs.
 
