@@ -123,7 +123,7 @@ Useful calibration analyses include:
 - Brier score;
 - subgroup and temporal calibration.
 
-The commonly used Hosmer-Lemeshow test should not be the sole calibration assessment because results depend on grouping and sample size. Calibration should be examined graphically and quantitatively [1].
+The commonly used Hosmer-Lemeshow test should not be the sole calibration assessment because results depend on grouping and sample size. Calibration should be examined graphically and quantitatively [[1]](https://doi.org/10.1093/jamia/ocz228).
 
 Dose prediction is often deterministic, but uncertainty-aware models may produce intervals or distributions. Validate both coverage—how often the interval contains the outcome—and sharpness—whether intervals are narrow enough to be useful.
 
@@ -167,7 +167,7 @@ Surrogate efficiency gains should not be described as patient benefit without ev
 
 ### Reporting and Risk-of-Bias Assessment
 
-TRIPOD+AI provides updated reporting guidance for clinical prediction models using regression or machine learning [2]. PROBAST+AI distinguishes quality of model development from risk of bias in performance evaluation and gives explicit attention to fairness and applicability [3]. Using these frameworks early improves study design; using them only at manuscript submission cannot repair a weak evaluation.
+TRIPOD+AI provides updated reporting guidance for clinical prediction models using regression or machine learning [[2]](https://doi.org/10.1136/bmj-2023-078378). PROBAST+AI distinguishes quality of model development from risk of bias in performance evaluation and gives explicit attention to fairness and applicability [[3]](https://doi.org/10.1136/bmj-2024-082505). Using these frameworks early improves study design; using them only at manuscript submission cannot repair a weak evaluation.
 
 ## Statistical Planning
 
@@ -196,7 +196,7 @@ Monitoring delayed clinical outcomes may require linkage months or years later. 
 
 ### Updating a Model
 
-Possible responses include recalibrating probabilities, adjusting thresholds, retraining, narrowing intended use, or retiring the model. Every update creates a new configuration that requires proportional validation and traceability. FDA and international GMLP principles emphasize total-product-lifecycle management and real-world monitoring [4].
+Possible responses include recalibrating probabilities, adjusting thresholds, retraining, narrowing intended use, or retiring the model. Every update creates a new configuration that requires proportional validation and traceability. FDA and international GMLP principles emphasize total-product-lifecycle management and real-world monitoring [[4]](https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles).
 
 ### Governance and Stop Rules
 
@@ -204,9 +204,9 @@ Name the owner of the deployed system, the review frequency, escalation pathway,
 
 ## Current Research and Recent Advances
 
-- **AI-specific reporting guidance:** TRIPOD+AI updates prediction-model reporting for regression and machine-learning methods and strengthens expectations around protocol, data, evaluation, and open science [2]. _(added: 2026-07)_
-- **Updated risk-of-bias assessment:** PROBAST+AI separates development quality from evaluation bias and incorporates applicability and fairness throughout its domains, reflecting the broader evidence needed for clinical AI [3]. _(added: 2026-07)_
-- **Total-lifecycle evaluation:** International GMLP principles emphasize representative datasets, independent test sets, human-AI team performance, clear user information, and monitoring of deployed models [4]. _(added: 2026-07)_
+- **AI-specific reporting guidance:** TRIPOD+AI updates prediction-model reporting for regression and machine-learning methods and strengthens expectations around protocol, data, evaluation, and open science [[2]](https://doi.org/10.1136/bmj-2023-078378). _(added: 2026-07)_
+- **Updated risk-of-bias assessment:** PROBAST+AI separates development quality from evaluation bias and incorporates applicability and fairness throughout its domains, reflecting the broader evidence needed for clinical AI [[3]](https://doi.org/10.1136/bmj-2024-082505). _(added: 2026-07)_
+- **Total-lifecycle evaluation:** International GMLP principles emphasize representative datasets, independent test sets, human-AI team performance, clear user information, and monitoring of deployed models [[4]](https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles). _(added: 2026-07)_
 
 ## Recap
 
@@ -214,7 +214,7 @@ AI validation begins with a precise intended use and follows the system from dat
 
 ## References
 
-1. Huang Y, Li W, Macheret F, Gabriel RA, Ohno-Machado L. A tutorial on calibration measurements and calibration models for clinical prediction models. *Journal of the American Medical Informatics Association*. 2020;27(4):621-633. https://doi.org/10.1093/jamia/ocz228
-2. Collins GS, Moons KGM, Dhiman P, et al. TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods. *BMJ*. 2024;385:e078378. https://doi.org/10.1136/bmj-2023-078378
-3. Moons KGM, Damen JAA, Kaul T, et al. PROBAST+AI: an updated quality, risk of bias, and applicability assessment tool for prediction models using regression or artificial intelligence methods. *BMJ*. 2025;388:e082505. https://doi.org/10.1136/bmj-2024-082505
-4. U.S. Food and Drug Administration. Good Machine Learning Practice for Medical Device Development: Guiding Principles. Updated 2025. https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles
+1. Huang Y, Li W, Macheret F, Gabriel RA, Ohno-Machado L. A tutorial on calibration measurements and calibration models for clinical prediction models. *Journal of the American Medical Informatics Association*. 2020;27(4):621-633. [DOI](https://doi.org/10.1093/jamia/ocz228)
+2. Collins GS, Moons KGM, Dhiman P, et al. TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods. *BMJ*. 2024;385:e078378. [DOI](https://doi.org/10.1136/bmj-2023-078378)
+3. Moons KGM, Damen JAA, Kaul T, et al. PROBAST+AI: an updated quality, risk of bias, and applicability assessment tool for prediction models using regression or artificial intelligence methods. *BMJ*. 2025;388:e082505. [DOI](https://doi.org/10.1136/bmj-2024-082505)
+4. U.S. Food and Drug Administration. Good Machine Learning Practice for Medical Device Development: Guiding Principles. Updated 2025. [FDA guidance](https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles)

@@ -54,7 +54,7 @@ Every chapter file (`docs/<folder>/<name>.md`) must contain, in this order:
 2. **Body sections** using MyST Markdown headers (`##`, `###`). No manual "table of contents" block of hand-written `[text](#anchor)` links at the top of the file — see Rule 3 below for why this is forbidden, not just discouraged.
 3. **`## Current Research and Recent Advances`** — the section the monthly literature-review process maintains. Each entry is one bullet or short paragraph, ends with a citation, and is tagged with the review cycle that added it: `_(added: 2026-07)_`. Never delete an entry here without moving its claim into the main body first or confirming (via a todo, see below) that it's been superseded.
 4. **`## Recap`** — a short summary paragraph.
-5. **`## References`** — numbered list, one entry per source cited anywhere in the chapter, each with a resolvable URL (DOI, PubMed, arXiv, or publisher link).
+5. **`## References`** — numbered list, one entry per source cited anywhere in the chapter, each with a resolvable Markdown link (DOI, PubMed, arXiv, or publisher link). Numbered in-text citations must also be clickable, using the visible form `[[1]](https://...)`; do not leave citation markers such as `[1]` or reference URLs as plain text.
 
 A chapter that has only a title and no body is a **Critical** gap, not a Medium one. The original six-stub gap and its resolution are retained in `todo/done/p0-write-stub-chapters.md`.
 

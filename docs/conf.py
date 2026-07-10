@@ -30,7 +30,12 @@ intersphinx_disabled_domains = ["std"]
 templates_path = ["_templates"]
 
 master_doc = "index"
-source_suffix = [".rst", ".md"]
+source_suffix = {
+    ".rst": "restructuredtext",
+    ".md": "markdown",
+}
+
+myst_enable_extensions = ["dollarmath"]
 
 # -- Options for HTML output
 

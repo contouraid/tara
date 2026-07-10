@@ -2,7 +2,7 @@
 
 Image registration estimates a spatial relationship between images. In radiation oncology, that relationship may connect different modalities acquired for planning, daily images acquired for positioning, or images collected across a treatment course. Registration makes image fusion possible, but the transformation—not the blended display—is the clinically consequential output.
 
-A registration result is always used for a purpose: transferring a contour, comparing anatomy, accumulating dose, positioning a patient, or guiding a decision. Its suitability must therefore be judged for that specific task and anatomical region. A visually convincing overlay is not, by itself, proof that the transformation is accurate where it matters [1].
+A registration result is always used for a purpose: transferring a contour, comparing anatomy, accumulating dose, positioning a patient, or guiding a decision. Its suitability must therefore be judged for that specific task and anatomical region. A visually convincing overlay is not, by itself, proof that the transformation is accurate where it matters [[1]](https://doi.org/10.1002/mp.12256).
 
 ## The Registration Problem
 
@@ -80,7 +80,7 @@ Initialization matters. Similarity objectives can contain local optima, and a me
 
 ### Direct Transformation Prediction
 
-Learning-based methods can train a neural network to predict transformation parameters or a dense deformation field from an image pair. VoxelMorph established a widely used formulation in which a convolutional network estimates the field and is trained with image similarity plus deformation regularization, optionally using auxiliary segmentations [2]. Once trained, inference can be substantially faster than pairwise iterative optimization.
+Learning-based methods can train a neural network to predict transformation parameters or a dense deformation field from an image pair. VoxelMorph established a widely used formulation in which a convolutional network estimates the field and is trained with image similarity plus deformation regularization, optionally using auxiliary segmentations [[2]](https://doi.org/10.1109/TMI.2019.2897538). Once trained, inference can be substantially faster than pairwise iterative optimization.
 
 Fast inference is especially attractive for online adaptive radiotherapy. It does not guarantee safe generalization: unusual anatomy, implants, truncated images, protocol changes, or disease outside the training distribution can produce confident but incorrect transformations.
 
@@ -98,7 +98,7 @@ Probabilistic registration represents a distribution over plausible transformati
 
 ### Transformer and Sequence Models
 
-Attention-based models can capture long-range spatial relationships, while cascaded networks refine coarse fields progressively. For longitudinal radiotherapy, sequence models can use multiple treatment images rather than registering every fraction independently. Seq2Morph, for example, incorporated temporal information from weekly CBCTs and reported faster inference than an iterative comparator in a 50-patient study [3].
+Attention-based models can capture long-range spatial relationships, while cascaded networks refine coarse fields progressively. For longitudinal radiotherapy, sequence models can use multiple treatment images rather than registering every fraction independently. Seq2Morph, for example, incorporated temporal information from weekly CBCTs and reported faster inference than an iterative comparator in a 50-patient study [[3]](https://pubmed.ncbi.nlm.nih.gov/36303270/).
 
 ## Clinical Applications
 
@@ -116,7 +116,7 @@ PET may inform target definition or biological interpretation. Registration must
 
 Four-dimensional CT sorts image data into respiratory phases. Registration between phases supports motion estimation, contour propagation, ventilation imaging research, and dose accumulation. Lung registration is difficult near sliding pleural surfaces, low-contrast regions, and anatomy affected by artifacts or disease.
 
-Learning-based 4D-CT methods have used recursive cascades and full-resolution residual networks, demonstrating active progress on public and institutional datasets [4]. Clinical use still requires patient-specific plausibility checks because respiratory irregularity and 4D-CT sorting artifacts can corrupt the assumed correspondence.
+Learning-based 4D-CT methods have used recursive cascades and full-resolution residual networks, demonstrating active progress on public and institutional datasets [[4]](https://pubmed.ncbi.nlm.nih.gov/38023695/). Clinical use still requires patient-specific plausibility checks because respiratory irregularity and 4D-CT sorting artifacts can corrupt the assumed correspondence.
 
 ### Adaptive Radiotherapy
 
@@ -124,7 +124,7 @@ DIR can propagate contours from planning CT to daily CBCT or MRI, initialize rec
 
 ## Validation and Quality Assurance
 
-AAPM Task Group 132 recommends evaluating registration and fusion software and communicating uncertainty in radiotherapy applications [1]. Commissioning should include representative anatomical sites, modalities, transformation magnitudes, artifacts, and intended downstream uses.
+AAPM Task Group 132 recommends evaluating registration and fusion software and communicating uncertainty in radiotherapy applications [[1]](https://doi.org/10.1002/mp.12256). Commissioning should include representative anatomical sites, modalities, transformation magnitudes, artifacts, and intended downstream uses.
 
 ### Evaluation Methods
 
@@ -146,9 +146,9 @@ Before a transformation drives care, the user should inspect alignment at the re
 
 ## Current Research and Recent Advances
 
-- **Longitudinal learning:** Sequence-aware registration models are beginning to use the ordered anatomy of a radiotherapy course, rather than treating every image pair independently. Seq2Morph demonstrated this approach for planning CT and weekly CBCT registration, while emphasizing the need for broader validation [3]. _(added: 2026-07)_
-- **Coarse-to-fine learned deformation:** Cascaded and transformer-based architectures seek larger capture ranges and finer local correspondence. Recent 4D-CT work reports gains over selected iterative and learning-based baselines, but most evidence remains dataset-specific [4]. _(added: 2026-07)_
-- **Clinical emphasis on uncertainty and task validity:** The central research problem is shifting from producing a visually smooth warp to showing that a transformation is plausible, generalizes across sites, and is safe for a defined downstream task. TG-132's task-specific QA principles remain directly relevant to learned methods [1]. _(added: 2026-07)_
+- **Longitudinal learning:** Sequence-aware registration models are beginning to use the ordered anatomy of a radiotherapy course, rather than treating every image pair independently. Seq2Morph demonstrated this approach for planning CT and weekly CBCT registration, while emphasizing the need for broader validation [[3]](https://pubmed.ncbi.nlm.nih.gov/36303270/). _(added: 2026-07)_
+- **Coarse-to-fine learned deformation:** Cascaded and transformer-based architectures seek larger capture ranges and finer local correspondence. Recent 4D-CT work reports gains over selected iterative and learning-based baselines, but most evidence remains dataset-specific [[4]](https://pubmed.ncbi.nlm.nih.gov/38023695/). _(added: 2026-07)_
+- **Clinical emphasis on uncertainty and task validity:** The central research problem is shifting from producing a visually smooth warp to showing that a transformation is plausible, generalizes across sites, and is safe for a defined downstream task. TG-132's task-specific QA principles remain directly relevant to learned methods [[1]](https://doi.org/10.1002/mp.12256). _(added: 2026-07)_
 
 ## Recap
 
@@ -156,7 +156,7 @@ Image registration estimates spatial correspondence; fusion merely displays info
 
 ## References
 
-1. Brock KK, Mutic S, McNutt TR, Li H, Kessler ML. Use of image registration and fusion algorithms and techniques in radiotherapy: Report of AAPM Task Group No. 132. *Medical Physics*. 2017;44(7):e43-e76. https://doi.org/10.1002/mp.12256
-2. Balakrishnan G, Zhao A, Sabuncu MR, Guttag J, Dalca AV. VoxelMorph: A learning framework for deformable medical image registration. *IEEE Transactions on Medical Imaging*. 2019;38(8):1788-1800. https://doi.org/10.1109/TMI.2019.2897538
-3. Li X, et al. Seq2Morph: A deep learning deformable image registration algorithm for longitudinal imaging studies and adaptive radiotherapy. *Medical Physics*. 2023;50(1):274-287. https://pubmed.ncbi.nlm.nih.gov/36303270/
-4. Fu Y, et al. 4D-CT deformable image registration using unsupervised recursive cascaded full-resolution residual networks. *Medical Physics*. 2024;51(2):1037-1051. https://pubmed.ncbi.nlm.nih.gov/38023695/
+1. Brock KK, Mutic S, McNutt TR, Li H, Kessler ML. Use of image registration and fusion algorithms and techniques in radiotherapy: Report of AAPM Task Group No. 132. *Medical Physics*. 2017;44(7):e43-e76. [DOI](https://doi.org/10.1002/mp.12256)
+2. Balakrishnan G, Zhao A, Sabuncu MR, Guttag J, Dalca AV. VoxelMorph: A learning framework for deformable medical image registration. *IEEE Transactions on Medical Imaging*. 2019;38(8):1788-1800. [DOI](https://doi.org/10.1109/TMI.2019.2897538)
+3. Li X, et al. Seq2Morph: A deep learning deformable image registration algorithm for longitudinal imaging studies and adaptive radiotherapy. *Medical Physics*. 2023;50(1):274-287. [PubMed](https://pubmed.ncbi.nlm.nih.gov/36303270/)
+4. Fu Y, et al. 4D-CT deformable image registration using unsupervised recursive cascaded full-resolution residual networks. *Medical Physics*. 2024;51(2):1037-1051. [PubMed](https://pubmed.ncbi.nlm.nih.gov/38023695/)

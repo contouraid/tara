@@ -359,8 +359,8 @@ As imaging and radiation therapy technologies continue to advance, their integra
 
 1. Larobina M, Murino L. Medical Image File Formats. J Digit Imaging. 2014;27(2):200-206.
 2. Hussain S, Mubeen I, Ullah N, et al. Modern Diagnostic Imaging Technique Applications and Risk Factors in the Medical Field: A Review. Biomed Res Int. 2022;2022:5164970.
-3. National Institute of Biomedical Imaging and Bioengineering. X-rays. https://www.nibib.nih.gov/science-education/science-topics/x-rays
-4. National Institute of Biomedical Imaging and Bioengineering. Nuclear Medicine. https://www.nibib.nih.gov/science-education/science-topics/nuclear-medicine
-5. Digital Imaging and Communications in Medicine. DICOM Standard. https://www.dicomstandard.org/
+3. National Institute of Biomedical Imaging and Bioengineering. X-rays. [NIBIB](https://www.nibib.nih.gov/science-education/science-topics/x-rays)
+4. National Institute of Biomedical Imaging and Bioengineering. Nuclear Medicine. [NIBIB](https://www.nibib.nih.gov/science-education/science-topics/nuclear-medicine)
+5. Digital Imaging and Communications in Medicine. DICOM Standard. [DICOM](https://www.dicomstandard.org/)
 6. "How tomographic reconstruction works?": [This video](https://www.youtube.com/watch?v=f0sxjhGHRPo) inspired by 3Blue1Brown shows how CT images are reconstructed in 3D using a series of single plane projections.
 7. "Radiology Modalities Explained: Understanding Medical Imaging Techniques": [This article](https://ccdcare.com/resource-center/radiology-modalities/) includes an overview of various radiology modalities, including X-rays, CT scans, MRI, ultrasound, and nuclear medicine. It explains how each modality works, their diagnostic applications, and considerations regarding radiation exposure.

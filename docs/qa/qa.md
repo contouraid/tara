@@ -75,7 +75,7 @@ Training data present a challenge because serious faults are rare. Synthetic fau
 
 Patient-specific QA asks whether an individual plan is correctly calculated, transferred, and deliverable. The program may include secondary dose calculation, data-transfer checks, measurement-based verification, delivery-log analysis, and structured plan review.
 
-For IMRT measurement-based verification, AAPM Task Group 218 recommends defined tolerance and action limits and discusses standardized use of gamma analysis [1]. Gamma pass rate combines dose difference and distance-to-agreement, but it is not a direct measure of clinical consequence. Results must be interpreted alongside the delivery technique, detector limitations, spatial failure pattern, and relevant anatomy.
+For IMRT measurement-based verification, AAPM Task Group 218 recommends defined tolerance and action limits and discusses standardized use of gamma analysis [[1]](https://doi.org/10.1002/mp.12810). Gamma pass rate combines dose difference and distance-to-agreement, but it is not a direct measure of clinical consequence. Results must be interpreted alongside the delivery technique, detector limitations, spatial failure pattern, and relevant anatomy.
 
 ### Independent Dose Calculation
 
@@ -112,7 +112,7 @@ Useful error-detection datasets should include realistic near misses and deliber
 - unusual overrides or couch models;
 - plan changes not reflected in treatment records.
 
-A model trained only to reproduce historical plan approval may learn institutional preference rather than safety. Explainability methods can help reviewers understand automated QA classifications, but explanations must themselves be validated for usefulness [2].
+A model trained only to reproduce historical plan approval may learn institutional preference rather than safety. Explainability methods can help reviewers understand automated QA classifications, but explanations must themselves be validated for usefulness [[2]](https://pubmed.ncbi.nlm.nih.gov/34844219/).
 
 ### Workflow Surveillance
 
@@ -153,19 +153,19 @@ Monitoring should include input drift, missingness, output distributions, failur
 
 Regulation depends on jurisdiction and intended use. In the United States, an AI function that meets the definition of a medical device may require FDA review through an applicable pathway. Clearance or authorization addresses a specified intended use; it does not replace local acceptance, commissioning, training, and QA.
 
-IEC 62304 defines a framework for medical-device software lifecycle processes, including development and maintenance [3]. It is adjacent to the clinical QA workflow because a department may operate software built under such a lifecycle, but the standard is not a substitute for local clinical validation and does not by itself validate the final medical device.
+IEC 62304 defines a framework for medical-device software lifecycle processes, including development and maintenance [[3]](https://webstore.iec.ch/en/publication/22794). It is adjacent to the clinical QA workflow because a department may operate software built under such a lifecycle, but the standard is not a substitute for local clinical validation and does not by itself validate the final medical device.
 
 Other relevant lifecycle concepts include quality management, risk management, usability engineering, cybersecurity, change control, complaint handling, and post-market surveillance. The precise applicable standards and laws should be determined with institutional regulatory and legal expertise.
 
 ### Adaptive Models and Change Control
 
-An AI system that changes after deployment raises questions about what version is authorized, how modifications are bounded, and what evidence is required. FDA's 2025 final guidance on predetermined change control plans recommends describing planned modifications, the protocol for development, validation and implementation, and an impact assessment [4]. A local department should still know when a model has changed and whether local revalidation is required.
+An AI system that changes after deployment raises questions about what version is authorized, how modifications are bounded, and what evidence is required. FDA's 2025 final guidance on predetermined change control plans recommends describing planned modifications, the protocol for development, validation and implementation, and an impact assessment [[4]](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence). A local department should still know when a model has changed and whether local revalidation is required.
 
 ## Current Research and Recent Advances
 
-- **Explainable automated QA:** Research is moving beyond binary plan flags toward explanations that identify influential regions or features. Early work shows feasibility, but explanation quality and the effect on reviewer decisions need direct evaluation [2]. _(added: 2026-07)_
-- **Lifecycle regulation for evolving AI:** FDA's final predetermined-change-control-plan guidance formalizes a route for certain planned AI device modifications while retaining evidence and risk controls across the lifecycle [4]. _(added: 2026-07)_
-- **From pass-rate prediction to risk-based QA:** Current work increasingly combines plan complexity, log data, dose reconstruction, and clinical context. The important validation target is sensitivity to meaningful faults and downstream dose impact, not reproduction of a conventional QA label [1]. _(added: 2026-07)_
+- **Explainable automated QA:** Research is moving beyond binary plan flags toward explanations that identify influential regions or features. Early work shows feasibility, but explanation quality and the effect on reviewer decisions need direct evaluation [[2]](https://pubmed.ncbi.nlm.nih.gov/34844219/). _(added: 2026-07)_
+- **Lifecycle regulation for evolving AI:** FDA's final predetermined-change-control-plan guidance formalizes a route for certain planned AI device modifications while retaining evidence and risk controls across the lifecycle [[4]](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence). _(added: 2026-07)_
+- **From pass-rate prediction to risk-based QA:** Current work increasingly combines plan complexity, log data, dose reconstruction, and clinical context. The important validation target is sensitivity to meaningful faults and downstream dose impact, not reproduction of a conventional QA label [[1]](https://doi.org/10.1002/mp.12810). _(added: 2026-07)_
 
 ## Recap
 
@@ -173,7 +173,7 @@ Radiotherapy QA is a layered system spanning acceptance, commissioning, routine 
 
 ## References
 
-1. Miften M, Olch A, Mihailidis D, et al. Tolerance limits and methodologies for IMRT measurement-based verification QA: Recommendations of AAPM Task Group No. 218. *Medical Physics*. 2018;45(4):e53-e83. https://doi.org/10.1002/mp.12810
-2. Nyflot MJ, et al. Understanding machine learning classifier decisions in automated radiotherapy quality assurance. *Medical Physics*. 2022;49(1):370-382. https://pubmed.ncbi.nlm.nih.gov/34844219/
-3. International Electrotechnical Commission. IEC 62304:2006+A1:2015, Medical device software—Software life cycle processes. https://webstore.iec.ch/en/publication/22794
-4. U.S. Food and Drug Administration. *Marketing Submission Recommendations for a Predetermined Change Control Plan for Artificial Intelligence-Enabled Device Software Functions*. Final guidance; 2025. https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence
+1. Miften M, Olch A, Mihailidis D, et al. Tolerance limits and methodologies for IMRT measurement-based verification QA: Recommendations of AAPM Task Group No. 218. *Medical Physics*. 2018;45(4):e53-e83. [DOI](https://doi.org/10.1002/mp.12810)
+2. Nyflot MJ, et al. Understanding machine learning classifier decisions in automated radiotherapy quality assurance. *Medical Physics*. 2022;49(1):370-382. [PubMed](https://pubmed.ncbi.nlm.nih.gov/34844219/)
+3. International Electrotechnical Commission. IEC 62304:2006+A1:2015, Medical device software—Software life cycle processes. [IEC publication](https://webstore.iec.ch/en/publication/22794)
+4. U.S. Food and Drug Administration. *Marketing Submission Recommendations for a Predetermined Change Control Plan for Artificial Intelligence-Enabled Device Software Functions*. Final guidance; 2025. [FDA guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence)

@@ -14,7 +14,7 @@ The principal treatment modalities are:
 - **Brachytherapy sources:** sealed radioactive sources placed in or near a target, producing a steep dose gradient governed strongly by distance.
 - **Unsealed radionuclides:** radiopharmaceuticals that localize through physiological or molecular mechanisms and irradiate disease from within the body.
 
-The IAEA radiation oncology physics handbook provides a comprehensive treatment of the machines, interactions, dosimetry, and safety systems behind these modalities [1].
+The IAEA radiation oncology physics handbook provides a comprehensive treatment of the machines, interactions, dosimetry, and safety systems behind these modalities [[1]](https://www-pub.iaea.org/MTCD/Publications/PDF/Pub1196_web.pdf).
 
 ### Absorbed Dose
 
@@ -136,9 +136,9 @@ The clinical question is not whether a model is accurate in isolation. It is whe
 
 ## Current Research and Recent Advances
 
-- **Biology-guided personalization:** Research increasingly combines spatial dose with imaging, molecular, and longitudinal response data to move beyond population-level constraints. These models remain sensitive to endpoint definition, confounding, and dataset shift, so prospective clinical utility must be demonstrated rather than inferred from retrospective discrimination alone [2]. _(added: 2026-07)_
-- **Online adaptive radiotherapy:** Integrated imaging, automated contour propagation or segmentation, rapid replanning, and on-couch review are turning adaptation into a fraction-level workflow. The opportunity is tighter personalization; the safety challenge is validating every compressed step under time pressure [3]. _(added: 2026-07)_
-- **Automation as a sociotechnical system:** Contemporary radiation oncology AI guidance emphasizes data quality, representative evaluation, human factors, and lifecycle monitoring rather than benchmark performance alone [2]. _(added: 2026-07)_
+- **Biology-guided personalization:** Research increasingly combines spatial dose with imaging, molecular, and longitudinal response data to move beyond population-level constraints. These models remain sensitive to endpoint definition, confounding, and dataset shift, so prospective clinical utility must be demonstrated rather than inferred from retrospective discrimination alone [[2]](https://doi.org/10.1038/s41571-020-0417-8). _(added: 2026-07)_
+- **Online adaptive radiotherapy:** Integrated imaging, automated contour propagation or segmentation, rapid replanning, and on-couch review are turning adaptation into a fraction-level workflow. The opportunity is tighter personalization; the safety challenge is validating every compressed step under time pressure [[3]](https://doi.org/10.1016/j.ijrobp.2020.10.021). _(added: 2026-07)_
+- **Automation as a sociotechnical system:** Contemporary radiation oncology AI guidance emphasizes data quality, representative evaluation, human factors, and lifecycle monitoring rather than benchmark performance alone [[2]](https://doi.org/10.1038/s41571-020-0417-8). _(added: 2026-07)_
 
 ## Recap
 
@@ -146,6 +146,6 @@ Radiation oncology combines radiation physics, patient-specific dosimetry, radio
 
 ## References
 
-1. Podgorsak EB, ed. *Radiation Oncology Physics: A Handbook for Teachers and Students*. International Atomic Energy Agency; 2005. https://www-pub.iaea.org/MTCD/Publications/PDF/Pub1196_web.pdf
-2. Huynh E, Hosny A, Guthier C, et al. Artificial intelligence in radiation oncology. *Nature Reviews Clinical Oncology*. 2020;17:771-781. https://doi.org/10.1038/s41571-020-0417-8
-3. Glide-Hurst CK, Lee P, Yock AD, et al. Adaptive radiation therapy (ART) strategies and technical considerations: a state of the ART review from NRG Oncology. *International Journal of Radiation Oncology, Biology, Physics*. 2021;109(4):1054-1075. https://doi.org/10.1016/j.ijrobp.2020.10.021
+1. Podgorsak EB, ed. *Radiation Oncology Physics: A Handbook for Teachers and Students*. International Atomic Energy Agency; 2005. [IAEA publication](https://www-pub.iaea.org/MTCD/Publications/PDF/Pub1196_web.pdf)
+2. Huynh E, Hosny A, Guthier C, et al. Artificial intelligence in radiation oncology. *Nature Reviews Clinical Oncology*. 2020;17:771-781. [DOI](https://doi.org/10.1038/s41571-020-0417-8)
+3. Glide-Hurst CK, Lee P, Yock AD, et al. Adaptive radiation therapy (ART) strategies and technical considerations: a state of the ART review from NRG Oncology. *International Journal of Radiation Oncology, Biology, Physics*. 2021;109(4):1054-1075. [DOI](https://doi.org/10.1016/j.ijrobp.2020.10.021)

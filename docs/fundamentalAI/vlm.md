@@ -36,7 +36,7 @@ The defining feature is not a chat interface. It is learned coupling between the
 
 A dual-encoder model uses one network for images and another for text. Both produce embeddings in a shared space. Training encourages matched image-text pairs to be close and unmatched pairs to be farther apart.
 
-CLIP demonstrated the scale and transfer potential of this contrastive approach using natural-language supervision [1]. After training, a text prompt such as "an image containing pleural effusion" can be embedded and compared with an image embedding. This enables retrieval and zero-shot classification without a task-specific output class learned in the usual supervised way.
+CLIP demonstrated the scale and transfer potential of this contrastive approach using natural-language supervision [[1]](https://arxiv.org/abs/2103.00020). After training, a text prompt such as "an image containing pleural effusion" can be embedded and compared with an image embedding. This enables retrieval and zero-shot classification without a task-specific output class learned in the usual supervised way.
 
 Dual encoders are computationally efficient for search because image and text embeddings can be precomputed. Their global embeddings may, however, miss fine spatial relationships and are not naturally generative.
 
@@ -104,7 +104,7 @@ Image-report pairs contain protected health information. De-identification must 
 
 A VLM could draft structured descriptions of simulation images, on-treatment imaging, or adaptive changes. It could also help assemble documentation from verified structured inputs. Every generated statement should remain traceable to source evidence and undergo clinical review.
 
-Radiology report-generation research shows both promise and persistent evaluation difficulty. A 2025 expert study of chest-radiograph reports found performance varied by clinical setting and that clinically significant errors occurred in both AI- and human-written reports [2]. This is evidence for careful human-AI workflow evaluation, not for direct transfer to radiotherapy reporting.
+Radiology report-generation research shows both promise and persistent evaluation difficulty. A 2025 expert study of chest-radiograph reports found performance varied by clinical setting and that clinically significant errors occurred in both AI- and human-written reports [[2]](https://doi.org/10.1038/s41591-024-03302-1). This is evidence for careful human-AI workflow evaluation, not for direct transfer to radiotherapy reporting.
 
 ### Multimodal Search and Retrieval
 
@@ -144,7 +144,7 @@ Lexical measures such as BLEU or ROUGE compare generated and reference wording. 
 - reader preference and editing time;
 - performance of the human-VLM team.
 
-The 2024 review by Hartsock and Rasool highlights the lack of adequate standardized evaluation and limited medical VLM datasets [3].
+The 2024 review by Hartsock and Rasool highlights the lack of adequate standardized evaluation and limited medical VLM datasets [[3]](https://doi.org/10.3389/frai.2024.1430984).
 
 ### Grounding
 
@@ -178,9 +178,9 @@ Monitor edit distance, factual corrections, rejected outputs, unsupported claims
 
 ## Current Research and Recent Advances
 
-- **Generalist biomedical VLMs:** Models trained across diverse biomedical image-text tasks show that one multimodal representation can support classification, retrieval, question answering, and generation. Their radiotherapy relevance remains a transfer hypothesis until evaluated on volumetric RT data and clinical tasks [4]. _(added: 2026-07)_
-- **Clinician-VLM collaboration:** Expert evaluation of Flamingo-CXR reports showed that comparative quality varied across clinical settings and that both model and clinician reports contained consequential errors. This supports evaluating collaboration and correction workflows rather than model fluency alone [2]. _(added: 2026-07)_
-- **Evaluation is lagging capability:** Recent medical VLM reviews consistently identify limited dataset diversity, weak standardized clinical metrics, privacy constraints, and insufficient external validation as major barriers [3]. _(added: 2026-07)_
+- **Generalist biomedical VLMs:** Models trained across diverse biomedical image-text tasks show that one multimodal representation can support classification, retrieval, question answering, and generation. Their radiotherapy relevance remains a transfer hypothesis until evaluated on volumetric RT data and clinical tasks [[4]](https://doi.org/10.1038/s41591-024-03185-2). _(added: 2026-07)_
+- **Clinician-VLM collaboration:** Expert evaluation of Flamingo-CXR reports showed that comparative quality varied across clinical settings and that both model and clinician reports contained consequential errors. This supports evaluating collaboration and correction workflows rather than model fluency alone [[2]](https://doi.org/10.1038/s41591-024-03302-1). _(added: 2026-07)_
+- **Evaluation is lagging capability:** Recent medical VLM reviews consistently identify limited dataset diversity, weak standardized clinical metrics, privacy constraints, and insufficient external validation as major barriers [[3]](https://doi.org/10.3389/frai.2024.1430984). _(added: 2026-07)_
 
 ## Recap
 
@@ -188,7 +188,7 @@ Vision-language models connect visual and textual representations through contra
 
 ## References
 
-1. Radford A, Kim JW, Hallacy C, et al. Learning transferable visual models from natural language supervision. *Proceedings of the 38th International Conference on Machine Learning*. 2021. https://arxiv.org/abs/2103.00020
-2. Tanno R, Barrett DGT, Sellergren A, et al. Collaboration between clinicians and vision-language models in radiology report generation. *Nature Medicine*. 2025;31:599-608. https://doi.org/10.1038/s41591-024-03302-1
-3. Hartsock I, Rasool G. Vision-language models for medical report generation and visual question answering: a review. *Frontiers in Artificial Intelligence*. 2024;7:1430984. https://doi.org/10.3389/frai.2024.1430984
-4. Zhang S, Xu Y, Usuyama N, et al. A generalist vision-language foundation model for diverse biomedical tasks. *Nature Medicine*. 2024;30:3129-3141. https://doi.org/10.1038/s41591-024-03185-2
+1. Radford A, Kim JW, Hallacy C, et al. Learning transferable visual models from natural language supervision. *Proceedings of the 38th International Conference on Machine Learning*. 2021. [arXiv](https://arxiv.org/abs/2103.00020)
+2. Tanno R, Barrett DGT, Sellergren A, et al. Collaboration between clinicians and vision-language models in radiology report generation. *Nature Medicine*. 2025;31:599-608. [DOI](https://doi.org/10.1038/s41591-024-03302-1)
+3. Hartsock I, Rasool G. Vision-language models for medical report generation and visual question answering: a review. *Frontiers in Artificial Intelligence*. 2024;7:1430984. [DOI](https://doi.org/10.3389/frai.2024.1430984)
+4. Zhang S, Xu Y, Usuyama N, et al. A generalist vision-language foundation model for diverse biomedical tasks. *Nature Medicine*. 2024;30:3129-3141. [DOI](https://doi.org/10.1038/s41591-024-03185-2)

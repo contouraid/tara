@@ -228,7 +228,7 @@ An oversight group should have authority to approve deployment, restrict use, re
 - monitoring and periodic reapproval;
 - retirement and data retention.
 
-WHO guidance emphasizes autonomy, safety, transparency, accountability, inclusiveness, and responsiveness throughout AI design and use [1]. These principles become operational only when connected to named owners, measures, and decision rights.
+WHO guidance emphasizes autonomy, safety, transparency, accountability, inclusiveness, and responsiveness throughout AI design and use [[1]](https://www.who.int/publications/i/item/9789240029200). These principles become operational only when connected to named owners, measures, and decision rights.
 
 ## Measuring Success
 
@@ -267,9 +267,9 @@ Measure the full pathway. A model that shortens one task but increases downstrea
 
 ## Current Research and Recent Advances
 
-- **Readiness and workforce capacity:** WHO's 2025 assessment across 50 European-region Member States highlights governance, workforce readiness, data governance, and stakeholder engagement as health-system prerequisites for AI integration [2]. _(added: 2026-07)_
-- **Clinical adoption is uneven across tasks:** A 2026 national survey of Italian radiotherapy departments reported more routine use of autosegmentation than autoplanning, illustrating that integration maturity depends on use case, infrastructure, and workflow—not AI availability alone [3]. _(added: 2026-07)_
-- **Human-centered governance:** Current guidance continues to emphasize human autonomy, transparent limitations, accountability, and continuous evaluation in actual use. These are workflow design requirements, not abstract ethical additions [1]. _(added: 2026-07)_
+- **Readiness and workforce capacity:** WHO's 2025 assessment across 50 European-region Member States highlights governance, workforce readiness, data governance, and stakeholder engagement as health-system prerequisites for AI integration [[2]](https://www.who.int/europe/publications/i/item/WHO-EURO-2025-12707-52481-81028). _(added: 2026-07)_
+- **Clinical adoption is uneven across tasks:** A 2026 national survey of Italian radiotherapy departments reported more routine use of autosegmentation than autoplanning, illustrating that integration maturity depends on use case, infrastructure, and workflow—not AI availability alone [[3]](https://doi.org/10.1016/j.ejmp.2026.105867). _(added: 2026-07)_
+- **Human-centered governance:** Current guidance continues to emphasize human autonomy, transparent limitations, accountability, and continuous evaluation in actual use. These are workflow design requirements, not abstract ethical additions [[1]](https://www.who.int/publications/i/item/9789240029200). _(added: 2026-07)_
 
 ## Recap
 
@@ -277,6 +277,6 @@ Successful AI integration starts with a measured clinical problem and a map of r
 
 ## References
 
-1. World Health Organization. *Ethics and Governance of Artificial Intelligence for Health*. 2021. https://www.who.int/publications/i/item/9789240029200
-2. World Health Organization Regional Office for Europe. *Artificial intelligence is reshaping health systems: state of readiness across the WHO European Region*. 2025. https://www.who.int/europe/publications/i/item/WHO-EURO-2025-12707-52481-81028
-3. Fusella M, Placidi L, Dusi F, Marrazzo L, Pallotta S. Adoption of AI-driven automation and adaptive radiotherapy in clinical practice: results from a national survey. *Physica Medica*. 2026;148:105867. https://doi.org/10.1016/j.ejmp.2026.105867
+1. World Health Organization. *Ethics and Governance of Artificial Intelligence for Health*. 2021. [WHO publication](https://www.who.int/publications/i/item/9789240029200)
+2. World Health Organization Regional Office for Europe. *Artificial intelligence is reshaping health systems: state of readiness across the WHO European Region*. 2025. [WHO publication](https://www.who.int/europe/publications/i/item/WHO-EURO-2025-12707-52481-81028)
+3. Fusella M, Placidi L, Dusi F, Marrazzo L, Pallotta S. Adoption of AI-driven automation and adaptive radiotherapy in clinical practice: results from a national survey. *Physica Medica*. 2026;148:105867. [DOI](https://doi.org/10.1016/j.ejmp.2026.105867)
