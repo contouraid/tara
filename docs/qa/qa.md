@@ -4,6 +4,8 @@ Quality assurance (QA) in radiation oncology is the planned set of activities us
 
 AI can increase the reach and speed of QA by learning patterns across images, plans, log files, and workflow events. It can also create new failure modes. A model may share a hidden dependency with the system it checks, fail silently after a software update, or automate a weak surrogate rather than the clinically important hazard. AI-based QA must therefore be one layer in a broader safety architecture, not the sole source of assurance.
 
+The canonical [radiotherapy data and informatics foundations](../medicalImaging/medicalImaging.md) explain how images, structures, plans, dose, registrations, treatment records, and clinical outcomes connect, and how their identity, units, provenance, and versions should be checked. This chapter treats those checks as inputs to a layered QA system.
+
 ## Why Radiotherapy Requires Layered QA
 
 Radiotherapy links many specialized systems over days or weeks. Simulation images, contours, prescriptions, plan parameters, dose distributions, treatment records, and machine instructions move between people and software. A defect may be introduced early but become visible only at delivery.

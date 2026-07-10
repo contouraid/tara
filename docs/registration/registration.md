@@ -4,6 +4,8 @@ Image registration estimates a spatial relationship between images. In radiation
 
 A registration result is always used for a purpose: transferring a contour, comparing anatomy, accumulating dose, positioning a patient, or guiding a decision. Its suitability must therefore be judged for that specific task and anatomical region. A visually convincing overlay is not, by itself, proof that the transformation is accurate where it matters [[1]](https://doi.org/10.1002/mp.12256).
 
+The shared prerequisites for DICOM object linkage, frames of reference, world and voxel coordinates, resampling provenance, cohort construction, and patient-level splitting are defined in [Radiotherapy Data and Informatics Foundations](../medicalImaging/medicalImaging.md). This chapter focuses on estimating and validating spatial transformations.
+
 ## The Registration Problem
 
 Let $F(x)$ be the fixed image and $M(x)$ the moving image. Registration estimates a transformation $T$ such that the transformed moving image $M(T(x))$ aligns with $F(x)$. A typical optimization problem is:

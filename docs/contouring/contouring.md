@@ -2,6 +2,8 @@
 
 Accurate delineation of target volumes and organs at risk (OARs) is a critical and often time-consuming step in radiation therapy planning. Manual contouring is subject to inter-observer variability and can be a significant bottleneck in the clinical workflow. Deep learning, particularly convolutional neural networks (CNNs), has shown remarkable success in automating this process, offering the potential for increased efficiency, consistency, and accuracy.
 
+Before constructing a contouring dataset, use the canonical [radiotherapy data and informatics foundations](../medicalImaging/medicalImaging.md): it covers RTSTRUCT/SEG provenance, physical geometry, contour rasterization, naming harmonization, patient-level splitting, and leakage-safe preprocessing.
+
 ## Contouring Fundamentals
 
 Contouring in radiation oncology is fundamentally a segmentation task—assigning a label (e.g., tumor, specific OAR, background) to each voxel in a 3D medical image (typically CT or MRI). Understanding the different types of segmentation is essential for applying deep learning effectively.

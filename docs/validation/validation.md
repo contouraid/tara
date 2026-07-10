@@ -21,6 +21,8 @@ The same model may be suitable for prioritizing review but unsuitable for autono
 
 ## Data for Development and Evaluation
 
+Use [Radiotherapy Data and Informatics Foundations](../medicalImaging/medicalImaging.md) for the canonical RT object model, cohort manifest, longitudinal identity, label provenance, missingness, de-identification, and preprocessing controls. The sections below focus on how those curated data support an unbiased evaluation.
+
 ### Separate the Data Splits
 
 Training data estimate model parameters. Validation data support model and hyperparameter selection. Test data estimate final performance after development decisions are frozen. Repeatedly consulting the test set turns it into development data and produces optimistic results.

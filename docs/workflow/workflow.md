@@ -93,6 +93,8 @@ For every output, define who reviews it, who may edit it, who approves it, and w
 
 Radiotherapy systems exchange DICOM images and DICOM-RT objects, but implementation details vary. Integration testing should verify patient identity, frame of reference, orientation, units, structure names, dose scaling, transfer completeness, and behavior with unsupported objects.
 
+The complete object relationships, geometry checks, provenance requirements, de-identification surfaces, and dataset controls are defined once in [Radiotherapy Data and Informatics Foundations](../medicalImaging/medicalImaging.md). A deployed interface should preserve those relationships rather than flattening each case into unrelated files.
+
 APIs and messaging interfaces should use authenticated connections, least-privilege access, encryption, audit logs, timeouts, and explicit error responses. A partial transfer must not be displayed as a completed result.
 
 ### Orchestration and State

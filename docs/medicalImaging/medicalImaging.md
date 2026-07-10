@@ -345,22 +345,132 @@ These systems must address several critical requirements, including long-term ar
 
 ---
 
+## Radiotherapy Data and Informatics Foundations
+
+An AI dataset is not a folder of unrelated images. It is a selection from a longitudinal clinical record in which objects refer to one another, may be revised, and may describe what was intended rather than what was delivered. Before extracting arrays, define the clinical episode, resolve the object relationships, and retain enough provenance to reconstruct every derived example. DICOM Working Group 7 maintains the radiotherapy objects and their relationships [[8]](https://www.dicomstandard.org/activity/wgs/wg-07); the DICOM Standard remains the authority for the exact information model and attributes [[5]](https://www.dicomstandard.org/).
+
+### One Patient, Connected Data
+
+The following table is a conceptual object graph for one patient. Arrows mean "references, is derived from, or is linked to," not merely "has the same filename."
+
+| Patient-level entity | Typical source or object | Connects to | What must remain traceable |
+|---|---|---|---|
+| Stable longitudinal identity and treatment course | oncology information system (OIS), enterprise master patient index | all studies, prescriptions, plans, fractions, notes, and outcomes | source identifiers, pseudonym map, episode rules, and merge/split history |
+| Planning and diagnostic images | DICOM CT, MR, PET, CBCT, radiographs | frame of reference; structures; registrations; acquisition protocol | Study/Series/SOP Instance UIDs, modality, timestamps, orientation, spacing, and calibration |
+| Targets and organs at risk | RT Structure Set (RTSTRUCT), DICOM Segmentation (SEG), surface or newer RT geometric objects | source images; plan; dose; annotator and guideline | ROI/segment identifier, meaning, version, author, creation method, and source image |
+| Prescription and intent | OIS/electronic health record (EHR), structured prescription, newer RT course objects | plan, diagnosis, treatment course | dose and fractionation, units, target, intent, approval state, and amendments |
+| Planned treatment | RT Plan and newer second-generation RT radiation objects | structures, prescription, beams/control points, calculated dose | plan UID, plan version, approval status, machine/technique, and referenced objects |
+| Calculated dose | RT Dose | plan, dose grid, structures, and image frame | Dose Units, Dose Type, Dose Summation Type, Dose Grid Scaling, grid geometry, and algorithm |
+| Spatial relationships | Spatial Registration, Deformable Spatial Registration, rigid transforms | image series, contours, and sometimes dose accumulation | source/target frames, transform direction, algorithm, reviewer, and intended use |
+| Delivery and verification | RT Treatment Record, newer RT Radiation Record, machine logs, setup images | plan, fraction/session, machine, and measured or reconstructed dose | delivered control points, timestamps, interruptions, overrides, and deviations |
+| Clinical variables and outcomes | EHR/OIS tables, pathology, laboratory systems, notes, toxicity and survival registries | patient, diagnosis, treatment episode, follow-up time | definition, code system, observation time, censoring, extraction method, and adjudication |
+
+Legacy RTSTRUCT stores contours as patient-coordinate points associated with referenced images; DICOM SEG stores labeled pixels with coded segment metadata. RT Plan represents intended treatment, RT Dose a calculated or measured dose distribution, and treatment records what a delivery system reports as performed. These objects are complementary, not interchangeable. Newer second-generation RT objects separate prescriptions, radiation sets, and radiation records more explicitly, but support across clinical systems remains uneven [[18]](https://www.dicomstandard.org/news/supplements/view/rt-radiation-records). An OIS or EHR is still needed for diagnosis, prescription context, approvals, toxicity, and outcomes that are absent or inconsistently encoded in DICOM.
+
+File proximity and matching patient names do not establish a valid relationship. Resolve DICOM references and UIDs, confirm the clinical episode and approval state, then record any heuristic fallback. A plan may reference an earlier structure-set version; a dose may be associated with one plan sum rather than a delivered course; a copied plan may coexist with the approved plan; and a treatment record may be incomplete.
+
+### Geometry, Coordinates, and Units
+
+A voxel index $(i,j,k)$ is an array address. A world or patient coordinate $(x,y,z)$ is a physical location, usually expressed in millimetres. They are connected by an affine mapping built from image origin, row and column direction cosines, pixel spacing, and slice positions. DICOM's Image Position (Patient), Image Orientation (Patient), and Pixel Spacing describe slices in a patient-based coordinate system [[9]](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.2.html). Array order chosen by a software library is not a substitute for this metadata.
+
+A Frame of Reference UID identifies a spatial coordinate frame. Matching frames support direct geometric interpretation, but do not prove that anatomy is unchanged. Different frames require a verified registration or another explicit transform. Always record transform direction: a matrix that maps moving coordinates to fixed coordinates cannot safely be used as its inverse without inversion and validation.
+
+Before using an image, contour, registration, or dose grid, verify:
+
+- origin, direction cosines, handedness, patient position, field of view, spacing, and slice ordering;
+- Frame of Reference UIDs and the complete chain of spatial transforms;
+- physical units, including millimetres versus centimetres, Gy versus cGy, CT rescale slope/intercept, PET SUV conventions, and RT Dose Grid Scaling;
+- whether coordinates denote voxel centres or boundaries and whether a crop or pad changed the origin;
+- dose grid origin, orientation, offsets, dimensions, and referenced plan—not only its matrix shape.
+
+RTSTRUCT contour points are continuous physical coordinates. Rasterization converts polygons to a label grid and therefore requires a declared target grid, inside/outside rule, treatment of holes and non-planar contours, and boundary convention. Converting the mask back to contours is not exactly reversible. Partial-volume or supersampling methods may preserve small structures better than a single centre-point test, but their output is still a derived representation.
+
+Resampling chooses a new grid and estimates values that were not directly acquired. Linear or higher-order interpolation is commonly used for continuous intensities; nearest-neighbour or label-aware methods avoid inventing category values in masks. Dose interpolation should preserve geometry and units, but interpolation alone does not establish that dose is physically transferable between changing anatomies. Every resampled object should retain the source UID, transform, target grid, interpolation method, software version, and quality checks.
+
+#### Worked failure: a plausible but wrong dose feature
+
+Suppose a planning CT has 1 mm in-plane spacing and 3 mm slice spacing, while RT Dose is stored on a separate 2.5 mm grid. A script reads both pixel arrays, resizes dose to the CT matrix dimensions, and calculates mean parotid dose inside a rasterized RTSTRUCT mask. The overlay looks plausible, but the script ignored Image Position (Patient), orientation, dose-grid offsets, and Dose Grid Scaling. The dose is shifted superiorly and its stored integer values are interpreted as Gy.
+
+The result can be numerically stable and clinically wrong. The correct workflow is to convert contour points and dose samples into their declared patient coordinates, apply any required verified registration, multiply stored dose values by Dose Grid Scaling, resample physical dose onto a declared evaluation grid, and compare landmarks, extents, isocentre, and known DVH values. A unit test with identical matrix shapes would not detect the error; a physical-coordinate phantom with an asymmetric landmark would.
+
+### Cohort Construction and Provenance
+
+Write the cohort definition before inspecting model performance. Name the clinical question, sites and dates, unit of analysis, index time, eligible modalities and protocols, treatment intent, inclusion/exclusion rules, follow-up requirement, and outcome definitions. Preserve a flow count from all potentially eligible patients through every exclusion, including missing or corrupt data. Excluding records after seeing their labels or predictions introduces selection bias.
+
+Build a manifest with one row per source object or derived artifact. It should include a stable pseudonymous patient key, episode and time point, source system, DICOM UIDs or database keys, acquisition and approval times, object version, checksum, extraction query or code version, label provenance, and exclusion reason. Keep the immutable raw snapshot separate from versioned derived data.
+
+Common curation failures and controls include:
+
+- **Longitudinal identity:** reconcile local identifiers, merges, aliases, and transfers through an approved linkage process. Never infer identity from name alone. Preserve the mapping in a separately controlled location.
+- **Duplicates and relatives:** detect duplicate SOP instances, repeated reconstructions, copied plans, propagated contours, and near-identical exports. Decide which is canonical without erasing the relationship.
+- **Labels:** distinguish manual, consensus, propagated, algorithm-generated, edited, and administratively coded labels. Record annotator role, guideline, tools, source information, blinding, and adjudication. Measure inter-observer variation when no unique ground truth exists.
+- **Names and ontologies:** preserve the source ROI name, map it to a controlled concept and code where possible, record laterality and target role separately, and version the mapping table. Do not merge `Parotid_L`, `Lt_Parotid`, and `parotid` by string similarity without review.
+- **Missingness:** distinguish not measured, not applicable, unavailable, failed extraction, and truly negative. Report missingness by site, period, and outcome; missing fields may encode workflow or disease severity.
+- **Versions:** freeze dataset releases. A corrected contour, changed outcome, new follow-up date, or revised mapping creates a new version with a change log rather than silently altering the old release.
+
+### Split First, Then Fit Preprocessing
+
+Assign patients—not slices, patches, structures, plans, or fractions—to exactly one development or evaluation partition. Group known duplicates and related treatment episodes before splitting. If the intended use predicts a future event, ensure that every feature was available at the prediction time and prefer a temporal test cohort. For multi-site studies, reserve sites or scanner/protocol groups when the claim is transportability, and keep the final test set inaccessible until decisions are frozen.
+
+Leakage can occur even after patient-level splitting. The following must be learned or selected using training data only: intensity-normalization statistics, histogram templates, imputation values, feature selection, registration atlases, patch-sampling distributions, class weights, augmentation ranges informed by the data, harmonization parameters, calibration, and decision thresholds. Fit them within each cross-validation training fold, then apply the frozen transform to its validation fold. Never use test labels to select crops, reject "bad" cases, or choose a checkpoint.
+
+Registration and preprocessing also carry clinical information. Registering every case to a template built from all patients leaks test anatomy. Cropping around a test-set ground-truth contour gives the model localization information unavailable in use. Patch extraction can put neighbouring patches or propagated versions of the same structure in different splits. Augmented copies remain members of their source patient's split. Save the complete preprocessing graph and test it on held-out cases with missing series, unexpected orientation, extreme spacing, and unsupported labels.
+
+### De-identification, Linkage, and Governance
+
+Privacy work is risk management, not a single "remove patient name" operation. The DICOM Basic Application Level Confidentiality Profile addresses metadata; separate options cover burned-in pixels, recognizable visual features, structured content, descriptors, dates, UIDs, and private attributes [[10]](https://dicom.nema.org/medical/dicom/current/output/html/part15.html). A release process should inventory and test all of these surfaces:
+
+- standard and private DICOM metadata, UIDs, filenames, directory paths, device and institution identifiers;
+- burned-in text, overlays, screenshots, secondary captures, and scanned documents;
+- free-text reports, plan/structure descriptions, comments, prescriptions, and machine logs;
+- absolute and relative dates, rare event sequences, ages, locations, and longitudinal visit patterns;
+- facial anatomy in head CT, MR, PET, surface images, and reconstructions;
+- join keys and quasi-identifiers across imaging, genomic, billing, registry, and outcomes tables.
+
+Date shifting must be consistent within a patient if intervals matter, while its method and resulting analytic limitations are documented. Removing facial anatomy may impair head-and-neck tasks and must be validated. Retaining stable UIDs or dates can aid longitudinal linkage but increases re-identification risk. Free-text review and pixel inspection require dedicated controls; a metadata allow-list cannot inspect what is visually encoded.
+
+**Legal note:** the meanings and sufficiency of anonymization, de-identification, consent, and lawful processing depend on jurisdiction, purpose, data flow, and institutional policy. This chapter is technical guidance, not legal advice. Anonymization aims to make re-identification no longer reasonably possible under the applicable standard; pseudonymization replaces direct identifiers but retains a separately controlled re-linkage route and therefore usually remains personal or protected data. Consent is one possible governance basis, not a synonym for de-identification. Obtain local privacy, ethics, information-security, data-use, retention, and cross-border-transfer review.
+
+### Reproducible and Shareable Datasets
+
+A reusable dataset release should include a data dictionary, cohort flow, object relationship schema, provenance manifest, ontology mapping, missingness report, de-identification statement, intended and prohibited uses, license or data-use agreement, known errors and limitations, version history, and checksums. Dataset documentation can follow the datasheet pattern of recording motivation, composition, collection, preprocessing, uses, distribution, and maintenance [[15]](https://doi.org/10.1145/3458723). A model card should separately state intended use, training and evaluation populations, metrics, subgroup and robustness results, limitations, ethical considerations, and model/preprocessing version.
+
+FAIR means **findable, accessible, interoperable, and reusable**; it does not mean unrestricted or anonymous. Controlled-access data can be FAIR when metadata, identifiers, access procedures, standards, and reuse conditions are clear [[11]](https://doi.org/10.1038/sdata.2016.18).
+
+Representative public or research-access RT datasets illustrate why the access terms and limitations must be read rather than inferred from the word "public":
+
+| Dataset | Modalities and representative task | License/access | Important limitations |
+|---|---|---|---|
+| NSCLC-Radiomics [[12]](https://www.cancerimagingarchive.net/collection/nsclc-radiomics/) | 422 lung-cancer CT studies with RTSTRUCT/SEG and clinical outcomes; segmentation, radiomics, and outcome modelling | TCIA download; CC BY-NC 3.0 | retrospective single-domain cohort; selected structures; some scans have missing slices; collection corrections and versions matter |
+| LCTSC [[13]](https://www.cancerimagingarchive.net/collection/lctsc/) | 60 thoracic CT/RTSTRUCT cases; organ-at-risk segmentation | TCIA download; CC BY 3.0 | small challenge cohort; limited structures and diversity; a structure-name error was corrected in a later version |
+| Head-Neck-PET-CT [[14]](https://www.cancerimagingarchive.net/collection/head-neck-pet-ct/) | 298 patients with PET/CT, planning CT, REG, RTSTRUCT, RTPLAN, RTDOSE, clinical variables and outcomes; multimodal radiomics and treatment-data research | images require a TCIA restricted agreement; clinical tables are CC BY 3.0 | older retrospective acquisitions across four institutions; heterogeneous GTV names; facial reconstruction risk and access conditions constrain reuse |
+| OpenKBP [[16]](https://doi.org/10.1002/mp.14845) | 340 head-and-neck cases represented as CT, masks and dose for 3-D dose prediction and DVH benchmarking | public challenge dataset; verify the current host's terms before redistribution | task-specific, preprocessed representation rather than a complete DICOM clinical record; fixed challenge split and one planning context limit broader claims |
+
+Federated or distributed learning moves computation to institutional data and aggregates model updates or statistics instead of pooling raw records. It can broaden collaboration where central sharing is impractical, but it does not remove the need for contracts, privacy/security analysis, common definitions, data-quality checks, site-level evaluation, or protection against update leakage and attacks. Non-identically distributed institutional data can produce unstable or unfair performance, and model updates may disclose information. Federated learning should therefore be documented as a governed data flow, not described as automatic anonymization [[17]](https://doi.org/10.1038/s41598-020-69250-1).
+
 ## Recap
 
-Medical imaging forms the foundation of modern radiation oncology practice, enabling precise target delineation, treatment planning, delivery verification, and response assessment. Each imaging modality offers unique strengths and limitations, with multimodality approaches often providing the most comprehensive information for clinical decision-making.
-
-The evolution of imaging technologies continues to drive advances in radiation therapy, from improved target definition with functional imaging to real-time guidance during treatment delivery. Simultaneously, standardized file formats and sophisticated storage systems ensure that imaging data can be efficiently managed, shared, and integrated into the radiation oncology workflow.
-
-As imaging and radiation therapy technologies continue to advance, their integration will become even more seamless, enabling truly personalized approaches to cancer treatment based on comprehensive anatomical, functional, and biological information. Understanding the technical aspects of medical imaging modalities and their associated file formats is therefore essential for radiation oncology professionals seeking to optimize patient care in this rapidly evolving field.
+Medical imaging supports target delineation, planning, guidance, and response assessment, but an RT-AI example is meaningful only when its images, structures, prescription, plan, dose, registration, delivery, clinical variables, and outcomes are linked to the correct patient and time point. Physical coordinates, frames of reference, transforms, units, rasterization, and dose-grid geometry must be verified before arrays are compared. Reproducible development also requires explicit cohort rules, patient-level and temporal splits, training-only preprocessing, label and version provenance, privacy controls across metadata and content, and documentation of access conditions and limitations.
 
 ---
 
 ## References
 
-1. Larobina M, Murino L. Medical Image File Formats. J Digit Imaging. 2014;27(2):200-206.
-2. Hussain S, Mubeen I, Ullah N, et al. Modern Diagnostic Imaging Technique Applications and Risk Factors in the Medical Field: A Review. Biomed Res Int. 2022;2022:5164970.
+1. Larobina M, Murino L. Medical Image File Formats. *Journal of Digital Imaging*. 2014;27(2):200-206. [DOI](https://doi.org/10.1007/s10278-013-9657-9)
+2. Hussain S, Mubeen I, Ullah N, et al. Modern Diagnostic Imaging Technique Applications and Risk Factors in the Medical Field: A Review. *BioMed Research International*. 2022;2022:5164970. [DOI](https://doi.org/10.1155/2022/5164970)
 3. National Institute of Biomedical Imaging and Bioengineering. X-rays. [NIBIB](https://www.nibib.nih.gov/science-education/science-topics/x-rays)
 4. National Institute of Biomedical Imaging and Bioengineering. Nuclear Medicine. [NIBIB](https://www.nibib.nih.gov/science-education/science-topics/nuclear-medicine)
 5. Digital Imaging and Communications in Medicine. DICOM Standard. [DICOM](https://www.dicomstandard.org/)
 6. "How tomographic reconstruction works?": [This video](https://www.youtube.com/watch?v=f0sxjhGHRPo) inspired by 3Blue1Brown shows how CT images are reconstructed in 3D using a series of single plane projections.
 7. "Radiology Modalities Explained: Understanding Medical Imaging Techniques": [This article](https://ccdcare.com/resource-center/radiology-modalities/) includes an overview of various radiology modalities, including X-rays, CT scans, MRI, ultrasound, and nuclear medicine. It explains how each modality works, their diagnostic applications, and considerations regarding radiation exposure.
+8. DICOM Standards Committee Working Group 7. Radiotherapy. [DICOM WG-07](https://www.dicomstandard.org/activity/wgs/wg-07)
+9. DICOM Standards Committee. PS3.3, Image Plane Module. [DICOM Standard](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.2.html)
+10. DICOM Standards Committee. PS3.15, Security and System Management Profiles: Attribute Confidentiality Profiles. [DICOM Standard](https://dicom.nema.org/medical/dicom/current/output/html/part15.html)
+11. Wilkinson MD, Dumontier M, Aalbersberg IJ, et al. The FAIR Guiding Principles for scientific data management and stewardship. *Scientific Data*. 2016;3:160018. [DOI](https://doi.org/10.1038/sdata.2016.18)
+12. Aerts HJWL, et al. Data From NSCLC-Radiomics (version 4). The Cancer Imaging Archive. 2014. [Dataset DOI](https://doi.org/10.7937/K9/TCIA.2015.PF0M9REI)
+13. Yang J, et al. Data from Lung CT Segmentation Challenge. The Cancer Imaging Archive. 2017. [Dataset DOI](https://doi.org/10.7937/K9/TCIA.2017.3R3FVZ08)
+14. Vallières M, et al. Data from Head-Neck-PET-CT. The Cancer Imaging Archive. 2017. [Dataset DOI](https://doi.org/10.7937/K9/TCIA.2017.8OJE5Q00)
+15. Gebru T, Morgenstern J, Vecchione B, et al. Datasheets for Datasets. *Communications of the ACM*. 2021;64(12):86-92. [DOI](https://doi.org/10.1145/3458723)
+16. Babier A, Zhang B, Mahmood R, et al. OpenKBP: The open-access knowledge-based planning grand challenge and dataset. *Medical Physics*. 2021;48(9):5549-5561. [DOI](https://doi.org/10.1002/mp.14845)
+17. Sheller MJ, Edwards B, Reina GA, et al. Federated learning in medicine: facilitating multi-institutional collaborations without sharing patient data. *Scientific Reports*. 2020;10:12598. [DOI](https://doi.org/10.1038/s41598-020-69250-1)
+18. DICOM Standards Committee. Supplement 191: Radiotherapy Radiation Record. [DICOM supplement](https://www.dicomstandard.org/news/supplements/view/rt-radiation-records)

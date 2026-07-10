@@ -28,4 +28,29 @@ Append one entry per cycle, in the format below, at the **top** of the log (newe
 
 ## Log
 
-No review cycles have run yet. This repository was set up for autonomous literature-tracking on 2026-07-10 — see `../GUIDE.md` for the process and `README.md` for open todos. The first cycle should start with `p0-write-stub-chapters.md` and `p1-fix-broken-toc-anchors.md`, since both block the "Current Research" mechanism the later P2 literature-currency todos depend on.
+## 2026-07-11 review
+
+**Chapters reviewed:** `medicalImaging/`, `contouring/`, `registration/`, `treatmentPlanning/`, `qa/`, `validation/`, `workflow/`
+**Todos closed:** `p1-add-radiotherapy-data-and-informatics-foundations.md`
+**Todos opened:** none
+
+### Searches run
+- medicalImaging: "radiotherapy DICOM RT Structure Set Segmentation RT Plan RT Dose treatment record registration objects" (DICOM Standard) — current standard, WG-07, and second-generation RT materials reviewed
+- medicalImaging: "radiotherapy collection license RTSTRUCT RTDOSE CT dataset" (TCIA) — NSCLC-Radiomics, LCTSC, Head-Neck-PET-CT, HNSCC, and RADCURE candidates reviewed
+- medicalImaging: "OpenKBP dataset official license CT dose structures" (publisher and challenge sources) — peer-reviewed dataset paper verified
+- medicalImaging: "FAIR principles", "Datasheets for Datasets", and "federated learning medicine multi-institutional" (publisher and PubMed sources) — foundational documentation and distributed-learning sources verified
+
+### Added
+- medicalImaging: canonical patient-level RT data model, geometry and units, cohort construction, leakage prevention, provenance, privacy, dataset documentation, public datasets, and federated-learning foundations with 11 new verified references.
+- application chapters: concise links to the canonical data foundations from contouring, registration, treatment planning, QA, validation, and workflow.
+
+### Rejected
+- Dataset summaries without authoritative access/license information were not used; collection landing pages or the peer-reviewed dataset publication were required.
+- Search results that were preprints, secondary summaries, or unrelated datasets were not cited where a primary standard, collection page, or peer-reviewed source was available.
+
+### Notes for next cycle
+- The separate `p2-literature-currency-medicalImaging.md` todo remains open; this review backfilled foundational informatics rather than performing the chapter's recent-advances scan.
+
+### Initialization note (2026-07-10)
+
+At setup time, no review cycles had run. This repository was set up for autonomous literature-tracking on 2026-07-10 — see `../GUIDE.md` for the process and `README.md` for open todos. The first cycle was expected to start with `p0-write-stub-chapters.md` and `p1-fix-broken-toc-anchors.md`, since both blocked the "Current Research" mechanism the later P2 literature-currency todos depend on.

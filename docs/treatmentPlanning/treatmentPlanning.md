@@ -2,6 +2,8 @@
 
 Treatment planning is a complex, iterative process that aims to deliver an optimal radiation dose to the target volume while minimizing dose to surrounding healthy tissues. This process traditionally requires significant expertise and time from medical physicists and dosimetrists. Deep learning approaches offer the potential to automate aspects of treatment planning, predict optimal dose distributions, and potentially improve plan quality and consistency while reducing planning time.
 
+Planning models depend on correctly linked images, structures, prescriptions, plan versions, dose grids, and delivery records. See the canonical [radiotherapy data and informatics foundations](../medicalImaging/medicalImaging.md) for the object model, geometry and units, dose-grid alignment, cohort construction, and leakage-safe preprocessing used throughout this chapter.
+
 ## Dose Prediction Models
 
 Dose prediction models use deep learning to estimate the radiation dose distribution that would result from a treatment plan, without performing the full physics-based dose calculation. These models can serve as rapid approximations or as components in automated planning systems.

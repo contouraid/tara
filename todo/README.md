@@ -73,8 +73,8 @@ When the work is complete, change the title prefix from `TODO` to `DONE`, add `*
 | Priority | Definition |
 |---|---|
 | **Critical** | A chapter promised by `docs/index.md` has no real content, or a defect breaks the published site. Resolve before the next monthly cycle completes. |
-| **High** | A written chapter is missing a section required by `GUIDE.md` (Recent Advances / Recap / References), or has a verified structural defect. Target: next monthly cycle. |
-| **Medium** | Chapter is structurally complete but its "Current Research and Recent Advances" section predates known developments in the sub-field. Target: addressed opportunistically as the monthly literature scan covers that chapter. |
+| **High** | A written chapter is missing a required section, an essential prerequisite or major promised topic is absent, or the book has a verified structural or evidence-integrity defect. Target: next monthly cycle. |
+| **Medium** | A chapter is structurally complete but its literature is stale, or a cross-cutting evidence-synthesis improvement is needed. Target: addressed opportunistically as the monthly literature scan covers that chapter. |
 | **Low** | Nice to have; improves clarity or navigation but blocks nothing. |
 
 ---
@@ -83,10 +83,17 @@ When the work is complete, change the title prefix from `TODO` to `DONE`, add `*
 
 Sorted by priority prefix (p0 → p3), then alphabetically within each tier.
 `review-log.md` is a standing log, not a closeable todo — no priority prefix.
-Last reconciled against the `tara` `main` branch on **2026-07-10**.
+Last reconciled against the working tree on **2026-07-11**.
 
 | File | Section | Priority | Status |
 |---|---|---|---|
+| [p1-audit-evidence-citations-and-claims.md](p1-audit-evidence-citations-and-claims.md) | Root (cross-cutting) | P1 High | 🔴 Citation coverage and required chapter structure are inconsistent |
+| [p1-consolidate-responsible-ai-regulation-and-security.md](p1-consolidate-responsible-ai-regulation-and-security.md) | Root (cross-cutting) | P1 High | 🔴 Governance, equity, regulation, and security lack a canonical treatment |
+| [p1-cover-clinical-prediction-radiomics-and-causal-inference.md](p1-cover-clinical-prediction-radiomics-and-causal-inference.md) | Root (cross-cutting) | P1 High | 🔴 Outcome modeling and causal interpretation are largely absent |
+| [p1-cover-language-models-generative-ai-and-agents.md](p1-cover-language-models-generative-ai-and-agents.md) | `fundamentalAI/` | P1 High | 🔴 Text LLM, RAG, and agent foundations are absent |
+| [p1-establish-novice-learning-architecture.md](p1-establish-novice-learning-architecture.md) | Root (cross-cutting) | P1 High | 🔴 No explicit learning routes, outcomes, or shared prerequisite structure |
+| [p1-strengthen-radiotherapy-clinical-foundations.md](p1-strengthen-radiotherapy-clinical-foundations.md) | `fundamentalRO/` | P1 High | 🔴 Clinical foundations are too compressed for non-RT readers |
+| [p2-establish-research-synthesis-and-evidence-grading.md](p2-establish-research-synthesis-and-evidence-grading.md) | Root (cross-cutting) | P2 Medium | 🔴 Recency tracking lacks evidence grading and critical synthesis |
 | [p2-literature-currency-contouring.md](p2-literature-currency-contouring.md) | `contouring/` | P2 Medium | 🔴 No coverage of foundation-model-based segmentation |
 | [p2-literature-currency-fundamentalAI.md](p2-literature-currency-fundamentalAI.md) | `fundamentalAI/` | P2 Medium | 🔴 No "Recent Advances" section yet |
 | [p2-literature-currency-fundamentalRO.md](p2-literature-currency-fundamentalRO.md) | `fundamentalRO/` | P2 Medium | 🔴 Initial chapter needs a current adaptive and biology-guided literature review |
@@ -98,10 +105,12 @@ Last reconciled against the `tara` `main` branch on **2026-07-10**.
 | [p2-literature-currency-validation.md](p2-literature-currency-validation.md) | `validation/` | P2 Medium | 🔴 Initial chapter needs ongoing standards and monitoring review |
 | [p2-literature-currency-vlm.md](p2-literature-currency-vlm.md) | `fundamentalAI/vlm.md` | P2 Medium | 🔴 Fast-moving VLM evidence needs a dedicated currency review |
 | [p2-literature-currency-workflow.md](p2-literature-currency-workflow.md) | `workflow/` | P2 Medium | 🔴 Initial chapter needs current real-world implementation evidence |
+| [p3-add-worked-cases-and-formative-assessment.md](p3-add-worked-cases-and-formative-assessment.md) | Root (cross-cutting) | P3 Low | 🔴 Few worked cases or opportunities to test applied understanding |
 
 ## Completed Todos
 
 Completed work is retained in [`done/`](done/). The archive currently includes:
 
 - [p0-write-stub-chapters.md](done/p0-write-stub-chapters.md)
+- [p1-add-radiotherapy-data-and-informatics-foundations.md](done/p1-add-radiotherapy-data-and-informatics-foundations.md)
 - [p1-fix-broken-toc-anchors.md](done/p1-fix-broken-toc-anchors.md)
