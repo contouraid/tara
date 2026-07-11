@@ -3,7 +3,7 @@
 # -- Project information
 
 project = "ART101"
-copyright = "2025, Amith Kamath"
+copyright = "2025-2026, Amith Kamath"
 author = "Amith Kamath"
 
 release = "0.1"
@@ -45,6 +45,14 @@ html_theme_options = {
     "navigation_depth": 4,  # Depth of nested TOC items
     "show_nav_level": 2,  # Show top-level items expanded
     "collapse_navigation": True,  # Collapse subsections by default
+    "extra_footer": (
+        '<p>This work is licensed under '
+        '<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" '
+        'target="_blank" rel="license noopener noreferrer">'
+        'CC BY-NC-ND 4.0</a> '
+        '(Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 '
+        'International).</p>'
+    ),
 }
 
 # -- Options for EPUB output
