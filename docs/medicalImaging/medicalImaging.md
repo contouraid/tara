@@ -1,8 +1,8 @@
-# 4. Medical Imaging Modalities and Storage File Types
+# 4: Medical Imaging in Radiation Oncology
 
 ## How to Use This Guide
 
-This guide is designed for clinicians, researchers, and students interested in understanding the various imaging modalities used in radiation oncology and the file formats used to store these images. Each section provides detailed information on a specific imaging modality, including its clinical applications, strengths, and limitations. The final section covers the various file formats and storage systems used in medical imaging. Use this guide as a reference for understanding the technical aspects of medical imaging in radiation oncology practice.
+This guide introduces imaging modalities used in radiation oncology and the formats used to store and exchange their data. Acquisition time, availability, image quality, and risk vary by protocol and institution, so the summary table is illustrative rather than a universal operational specification [[2]](https://doi.org/10.1155/2022/5164970).
 
 | Modality     | Typical Uses                                                                 | Duration             | Pros                                                                 | Cons                                                                   |
 |--------------|-------------------------------------------------------------------------------|----------------------|----------------------------------------------------------------------|------------------------------------------------------------------------|
@@ -18,7 +18,7 @@ This guide is designed for clinicians, researchers, and students interested in u
 
 ## X-ray Imaging
 
-X-ray imaging represents one of the oldest and most fundamental medical imaging techniques, using high-energy electromagnetic radiation to create images of internal structures. When X-rays pass through the body, they are absorbed differently by various tissues based on their density and atomic composition, creating a projection image on a detector.
+X-ray imaging creates a projection from differential attenuation of ionizing electromagnetic radiation in the body [[3]](https://www.nibib.nih.gov/science-education/science-topics/medical-x-rays).
 
 At its core, X-ray imaging works by directing a controlled beam of X-rays through the patient's body toward a detector. Dense structures like bones absorb more radiation and appear white or light gray on the resulting image, while less dense tissues like fat and air appear darker. This differential absorption creates the contrast necessary for diagnostic interpretation.
 
@@ -64,7 +64,7 @@ Understanding these strengths and limitations helps radiation oncologists determ
 
 ## Computed Tomography (CT)
 
-Computed Tomography (CT) represents a revolutionary advancement in medical imaging that transformed radiation oncology practice. Developed in the 1960s by Godfrey Hounsfield, CT technology creates cross-sectional images by acquiring multiple X-ray projections around a patient and using computer processing to reconstruct detailed tomographic slices.
+Computed tomography (CT) reconstructs cross-sectional attenuation maps from multiple X-ray projections. Its radiotherapy role, contrast, artifacts, and risks depend on the acquisition and reconstruction protocol [[2]](https://doi.org/10.1155/2022/5164970).
 
 Unlike conventional X-rays that project all structures onto a single plane, CT provides true anatomical cross-sections by measuring the X-ray attenuation coefficients of tissues from multiple angles. These measurements are reconstructed into images where each pixel represents a tissue's radiodensity, quantified in Hounsfield Units (HU). This standardized scale assigns water a value of 0 HU, with air at approximately -1000 HU and dense bone reaching +1000 HU or higher.
 
@@ -111,7 +111,7 @@ Despite these limitations, CT remains the primary imaging modality for radiation
 
 ## Magnetic Resonance Imaging (MRI)
 
-Magnetic Resonance Imaging (MRI) represents a paradigm shift in medical imaging, providing exceptional soft tissue contrast without using ionizing radiation. Developed in the 1970s based on the principles of nuclear magnetic resonance, MRI has become an indispensable tool in radiation oncology for precise tumor delineation and critical structure identification.
+Magnetic resonance imaging (MRI) uses nuclear magnetic resonance rather than ionizing radiation and can provide multiple forms of soft-tissue contrast. Its appearance and geometric fidelity depend on the sequence, hardware, reconstruction, and correction methods [[2]](https://doi.org/10.1155/2022/5164970).
 
 MRI utilizes powerful magnetic fields, radio frequency pulses, and sophisticated computer processing to generate detailed images of the body's internal structures. The fundamental principle involves aligning hydrogen protons in the body with a strong magnetic field, then disturbing this alignment with radiofrequency pulses. As protons return to their equilibrium state, they emit signals that are detected and processed into images. The varying relaxation properties of different tissues—primarily T1 (longitudinal) and T2 (transverse) relaxation times—create the remarkable contrast that distinguishes MRI from other imaging modalities.
 
@@ -158,7 +158,7 @@ Despite these limitations, MRI has become essential in radiation oncology, parti
 
 ## Ultrasound Imaging
 
-Ultrasound imaging represents a unique approach to medical visualization that uses high-frequency sound waves rather than ionizing radiation to create real-time images of internal structures. This non-invasive modality has carved out specific niches in radiation oncology practice, particularly for applications requiring real-time guidance and where radiation exposure is a concern.
+Ultrasound forms images from transmitted and received acoustic waves rather than ionizing radiation. Image quality is operator-, window-, anatomy-, and device-dependent [[2]](https://doi.org/10.1155/2022/5164970).
 
 The fundamental principle of ultrasound involves transmitting sound waves with frequencies above the range of human hearing (typically 2-15 MHz) into the body using a transducer. As these waves encounter tissues with different acoustic properties, they are reflected back to the transducer at varying intensities. The transducer converts these reflected sound waves into electrical signals that are processed to generate real-time images. The time delay between transmission and reception of the sound waves determines the depth of the reflecting structures, while the intensity of the reflected signals creates contrast between different tissue types.
 
@@ -204,7 +204,7 @@ Understanding these strengths and limitations helps radiation oncologists determ
 
 ## Positron Emission Tomography (PET)
 
-Positron Emission Tomography (PET) represents a revolutionary approach to medical imaging that visualizes physiological and biochemical processes rather than just anatomical structures. This molecular imaging technique has transformed radiation oncology by enabling visualization of tumor metabolism, proliferation, and hypoxia, providing critical information for target delineation and treatment response assessment.
+Positron emission tomography (PET) estimates the spatial distribution of a positron-emitting radiotracer. What the image represents depends on the tracer, uptake interval, acquisition, reconstruction, and biological context [[4]](https://www.nibib.nih.gov/science-education/science-topics/nuclear-medicine).
 
 PET imaging relies on the detection of positron-emitting radiopharmaceuticals (tracers) that are introduced into the patient's body, typically via intravenous injection. These tracers consist of biologically active molecules labeled with positron-emitting radionuclides such as fluorine-18, carbon-11, or oxygen-15. As these radionuclides decay, they emit positrons that travel a short distance before colliding with electrons in surrounding tissues. This collision results in annihilation, producing two 511 keV gamma rays traveling in nearly opposite directions. PET scanners detect these coincident gamma rays and use sophisticated algorithms to reconstruct three-dimensional images of the tracer distribution.
 
@@ -253,7 +253,7 @@ Despite these limitations, PET has become an essential component of radiation on
 
 ## Nuclear Medicine
 
-Nuclear medicine encompasses a broad range of diagnostic and therapeutic techniques that use radioactive materials to evaluate organ function and treat disease. While often overlapping with PET imaging, conventional nuclear medicine employs different radiotracers and detection systems, providing complementary information that can be valuable in radiation oncology practice.
+Nuclear medicine uses radiopharmaceuticals for functional imaging or therapy. Planar scintigraphy, SPECT, PET, and radionuclide therapy have different instrumentation and intended uses [[4]](https://www.nibib.nih.gov/science-education/science-topics/nuclear-medicine).
 
 The fundamental principle of nuclear medicine involves administering radioactive tracers (radiopharmaceuticals) that localize in specific organs or tissues based on their physiological or pathological characteristics. These tracers emit gamma rays that are detected by gamma cameras, which create two-dimensional planar images or, with Single Photon Emission Computed Tomography (SPECT), three-dimensional tomographic images. Unlike PET, which detects paired gamma rays resulting from positron annihilation, conventional nuclear medicine directly detects the gamma rays emitted by radiotracers such as technetium-99m, iodine-123, or gallium-67.
 
@@ -300,7 +300,7 @@ Understanding these strengths and limitations helps radiation oncologists determ
 
 ## Medical Imaging Storage File Types
 
-The efficient storage, retrieval, and exchange of medical images is a critical component of radiation oncology practice. Various file formats and storage systems have been developed to address the complex requirements of medical imaging data, with standardization efforts enabling interoperability between different systems and institutions.
+Storage formats encode pixels together with geometry, acquisition, identifiers, and other metadata. DICOM is the clinical interoperability standard; research formats such as NIfTI and MINC have different information models and conversion can discard clinically important metadata [[1]](https://doi.org/10.1007/s10278-013-9657-9).
 
 Medical image file formats must accommodate not only the pixel data representing the images themselves but also extensive metadata describing acquisition parameters, patient information, and in the case of radiation oncology, treatment planning details. The complexity of these requirements has led to the development of specialized formats and systems tailored to medical applications.
 
@@ -347,7 +347,7 @@ These systems must address several critical requirements, including long-term ar
 
 ## Radiotherapy Data and Informatics Foundations
 
-An AI dataset is not a folder of unrelated images. It is a selection from a longitudinal clinical record in which objects refer to one another, may be revised, and may describe what was intended rather than what was delivered. Before extracting arrays, define the clinical episode, resolve the object relationships, and retain enough provenance to reconstruct every derived example. DICOM Working Group 7 maintains the radiotherapy objects and their relationships [[8]](https://www.dicomstandard.org/activity/wgs/wg-07); the DICOM Standard remains the authority for the exact information model and attributes [[5]](https://www.dicomstandard.org/).
+An AI dataset is not a folder of unrelated images. It is a selection from a longitudinal clinical record in which objects refer to one another, may be revised, and may describe what was intended rather than what was delivered. Before extracting arrays, define the clinical episode, resolve the object relationships, and retain enough provenance to reconstruct every derived example. DICOM Working Group 7 maintains the radiotherapy objects and their relationships [[6]](https://www.dicomstandard.org/activity/wgs/wg-07); the DICOM Standard remains the authority for the exact information model and attributes [[5]](https://www.dicomstandard.org/).
 
 ### One Patient, Connected Data
 
@@ -365,13 +365,13 @@ The following table is a conceptual object graph for one patient. Arrows mean "r
 | Delivery and verification | RT Treatment Record, newer RT Radiation Record, machine logs, setup images | plan, fraction/session, machine, and measured or reconstructed dose | delivered control points, timestamps, interruptions, overrides, and deviations |
 | Clinical variables and outcomes | EHR/OIS tables, pathology, laboratory systems, notes, toxicity and survival registries | patient, diagnosis, treatment episode, follow-up time | definition, code system, observation time, censoring, extraction method, and adjudication |
 
-Legacy RTSTRUCT stores contours as patient-coordinate points associated with referenced images; DICOM SEG stores labeled pixels with coded segment metadata. RT Plan represents intended treatment, RT Dose a calculated or measured dose distribution, and treatment records what a delivery system reports as performed. These objects are complementary, not interchangeable. Newer second-generation RT objects separate prescriptions, radiation sets, and radiation records more explicitly, but support across clinical systems remains uneven [[18]](https://www.dicomstandard.org/news/supplements/view/rt-radiation-records). An OIS or EHR is still needed for diagnosis, prescription context, approvals, toxicity, and outcomes that are absent or inconsistently encoded in DICOM.
+Legacy RTSTRUCT stores contours as patient-coordinate points associated with referenced images; DICOM SEG stores labeled pixels with coded segment metadata. RT Plan represents intended treatment, RT Dose a calculated or measured dose distribution, and treatment records what a delivery system reports as performed. These objects are complementary, not interchangeable. Newer second-generation RT objects separate prescriptions, radiation sets, and radiation records more explicitly, but support across clinical systems remains uneven [[16]](https://www.dicomstandard.org/news/supplements/view/rt-radiation-records). An OIS or EHR is still needed for diagnosis, prescription context, approvals, toxicity, and outcomes that are absent or inconsistently encoded in DICOM.
 
 File proximity and matching patient names do not establish a valid relationship. Resolve DICOM references and UIDs, confirm the clinical episode and approval state, then record any heuristic fallback. A plan may reference an earlier structure-set version; a dose may be associated with one plan sum rather than a delivered course; a copied plan may coexist with the approved plan; and a treatment record may be incomplete.
 
 ### Geometry, Coordinates, and Units
 
-A voxel index $(i,j,k)$ is an array address. A world or patient coordinate $(x,y,z)$ is a physical location, usually expressed in millimetres. They are connected by an affine mapping built from image origin, row and column direction cosines, pixel spacing, and slice positions. DICOM's Image Position (Patient), Image Orientation (Patient), and Pixel Spacing describe slices in a patient-based coordinate system [[9]](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.2.html). Array order chosen by a software library is not a substitute for this metadata.
+A voxel index $(i,j,k)$ is an array address. A world or patient coordinate $(x,y,z)$ is a physical location, usually expressed in millimetres. They are connected by an affine mapping built from image origin, row and column direction cosines, pixel spacing, and slice positions. DICOM's Image Position (Patient), Image Orientation (Patient), and Pixel Spacing describe slices in a patient-based coordinate system [[7]](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.2.html). Array order chosen by a software library is not a substitute for this metadata.
 
 A Frame of Reference UID identifies a spatial coordinate frame. Matching frames support direct geometric interpretation, but do not prove that anatomy is unchanged. Different frames require a verified registration or another explicit transform. Always record transform direction: a matrix that maps moving coordinates to fixed coordinates cannot safely be used as its inverse without inversion and validation.
 
@@ -418,7 +418,7 @@ Registration and preprocessing also carry clinical information. Registering ever
 
 ### De-identification, Linkage, and Governance
 
-Privacy work is risk management, not a single "remove patient name" operation. The DICOM Basic Application Level Confidentiality Profile addresses metadata; separate options cover burned-in pixels, recognizable visual features, structured content, descriptors, dates, UIDs, and private attributes [[10]](https://dicom.nema.org/medical/dicom/current/output/html/part15.html). A release process should inventory and test all of these surfaces:
+Privacy work is risk management, not a single "remove patient name" operation. The DICOM Basic Application Level Confidentiality Profile addresses metadata; separate options cover burned-in pixels, recognizable visual features, structured content, descriptors, dates, UIDs, and private attributes [[8]](https://dicom.nema.org/medical/dicom/current/output/html/part15.html). A release process should inventory and test all of these surfaces:
 
 - standard and private DICOM metadata, UIDs, filenames, directory paths, device and institution identifiers;
 - burned-in text, overlays, screenshots, secondary captures, and scanned documents;
@@ -433,20 +433,26 @@ Date shifting must be consistent within a patient if intervals matter, while its
 
 ### Reproducible and Shareable Datasets
 
-A reusable dataset release should include a data dictionary, cohort flow, object relationship schema, provenance manifest, ontology mapping, missingness report, de-identification statement, intended and prohibited uses, license or data-use agreement, known errors and limitations, version history, and checksums. Dataset documentation can follow the datasheet pattern of recording motivation, composition, collection, preprocessing, uses, distribution, and maintenance [[15]](https://doi.org/10.1145/3458723). A model card should separately state intended use, training and evaluation populations, metrics, subgroup and robustness results, limitations, ethical considerations, and model/preprocessing version.
+A reusable dataset release should include a data dictionary, cohort flow, object relationship schema, provenance manifest, ontology mapping, missingness report, de-identification statement, intended and prohibited uses, license or data-use agreement, known errors and limitations, version history, and checksums. Dataset documentation can follow the datasheet pattern of recording motivation, composition, collection, preprocessing, uses, distribution, and maintenance [[13]](https://doi.org/10.1145/3458723). A model card should separately state intended use, training and evaluation populations, metrics, subgroup and robustness results, limitations, ethical considerations, and model/preprocessing version.
 
-FAIR means **findable, accessible, interoperable, and reusable**; it does not mean unrestricted or anonymous. Controlled-access data can be FAIR when metadata, identifiers, access procedures, standards, and reuse conditions are clear [[11]](https://doi.org/10.1038/sdata.2016.18).
+FAIR means **findable, accessible, interoperable, and reusable**; it does not mean unrestricted or anonymous. Controlled-access data can be FAIR when metadata, identifiers, access procedures, standards, and reuse conditions are clear [[9]](https://doi.org/10.1038/sdata.2016.18).
 
 Representative public or research-access RT datasets illustrate why the access terms and limitations must be read rather than inferred from the word "public":
 
 | Dataset | Modalities and representative task | License/access | Important limitations |
 |---|---|---|---|
-| NSCLC-Radiomics [[12]](https://www.cancerimagingarchive.net/collection/nsclc-radiomics/) | 422 lung-cancer CT studies with RTSTRUCT/SEG and clinical outcomes; segmentation, radiomics, and outcome modelling | TCIA download; CC BY-NC 3.0 | retrospective single-domain cohort; selected structures; some scans have missing slices; collection corrections and versions matter |
-| LCTSC [[13]](https://www.cancerimagingarchive.net/collection/lctsc/) | 60 thoracic CT/RTSTRUCT cases; organ-at-risk segmentation | TCIA download; CC BY 3.0 | small challenge cohort; limited structures and diversity; a structure-name error was corrected in a later version |
-| Head-Neck-PET-CT [[14]](https://www.cancerimagingarchive.net/collection/head-neck-pet-ct/) | 298 patients with PET/CT, planning CT, REG, RTSTRUCT, RTPLAN, RTDOSE, clinical variables and outcomes; multimodal radiomics and treatment-data research | images require a TCIA restricted agreement; clinical tables are CC BY 3.0 | older retrospective acquisitions across four institutions; heterogeneous GTV names; facial reconstruction risk and access conditions constrain reuse |
-| OpenKBP [[16]](https://doi.org/10.1002/mp.14845) | 340 head-and-neck cases represented as CT, masks and dose for 3-D dose prediction and DVH benchmarking | public challenge dataset; verify the current host's terms before redistribution | task-specific, preprocessed representation rather than a complete DICOM clinical record; fixed challenge split and one planning context limit broader claims |
+| NSCLC-Radiomics [[10]](https://doi.org/10.7937/K9/TCIA.2015.PF0M9REI) | 422 lung-cancer CT studies with RTSTRUCT/SEG and clinical outcomes; segmentation, radiomics, and outcome modelling | TCIA download; CC BY-NC 3.0 | retrospective single-domain cohort; selected structures; some scans have missing slices; collection corrections and versions matter |
+| LCTSC [[11]](https://doi.org/10.7937/K9/TCIA.2017.3R3FVZ08) | 60 thoracic CT/RTSTRUCT cases; organ-at-risk segmentation | TCIA download; CC BY 3.0 | small challenge cohort; limited structures and diversity; a structure-name error was corrected in a later version |
+| Head-Neck-PET-CT [[12]](https://doi.org/10.7937/K9/TCIA.2017.8OJE5Q00) | 298 patients with PET/CT, planning CT, REG, RTSTRUCT, RTPLAN, RTDOSE, clinical variables and outcomes; multimodal radiomics and treatment-data research | images require a TCIA restricted agreement; clinical tables are CC BY 3.0 | older retrospective acquisitions across four institutions; heterogeneous GTV names; facial reconstruction risk and access conditions constrain reuse |
+| OpenKBP [[14]](https://doi.org/10.1002/mp.14845) | 340 head-and-neck cases represented as CT, masks and dose for 3-D dose prediction and DVH benchmarking | public challenge dataset; verify the current host's terms before redistribution | task-specific, preprocessed representation rather than a complete DICOM clinical record; fixed challenge split and one planning context limit broader claims |
 
-Federated or distributed learning moves computation to institutional data and aggregates model updates or statistics instead of pooling raw records. It can broaden collaboration where central sharing is impractical, but it does not remove the need for contracts, privacy/security analysis, common definitions, data-quality checks, site-level evaluation, or protection against update leakage and attacks. Non-identically distributed institutional data can produce unstable or unfair performance, and model updates may disclose information. Federated learning should therefore be documented as a governed data flow, not described as automatic anonymization [[17]](https://doi.org/10.1038/s41598-020-69250-1).
+Federated or distributed learning moves computation to institutional data and aggregates model updates or statistics instead of pooling raw records. It can broaden collaboration where central sharing is impractical, but it does not remove the need for contracts, privacy/security analysis, common definitions, data-quality checks, site-level evaluation, or protection against update leakage and attacks. Non-identically distributed institutional data can produce unstable or unfair performance, and model updates may disclose information. Federated learning should therefore be documented as a governed data flow, not described as automatic anonymization [[15]](https://doi.org/10.1038/s41598-020-69250-1).
+
+## Current Research and Recent Advances
+
+- **Second-generation radiotherapy objects:** DICOM is separating prescriptions, radiation sets, and radiation records more explicitly than legacy RT objects. Adoption remains system-dependent, so datasets must declare which object generation and implementation they use [[16]](https://www.dicomstandard.org/news/supplements/view/rt-radiation-records). _(added: 2026-07)_
+- **Distributed learning:** Federated learning supports multi-institution analysis without centralizing raw records, but heterogeneous sites, privacy leakage, security, and governance remain active constraints rather than solved properties [[15]](https://doi.org/10.1038/s41598-020-69250-1). _(added: 2026-07)_
+- **Dataset documentation:** Datasheets make provenance, composition, intended use, and known limitations inspectable. For radiotherapy, this documentation must also cover linked DICOM objects, coordinate handling, plan versions, and whether dose was planned or delivered [[13]](https://doi.org/10.1145/3458723). _(added: 2026-07)_
 
 ## Recap
 
@@ -458,19 +464,17 @@ Medical imaging supports target delineation, planning, guidance, and response as
 
 1. Larobina M, Murino L. Medical Image File Formats. *Journal of Digital Imaging*. 2014;27(2):200-206. [DOI](https://doi.org/10.1007/s10278-013-9657-9)
 2. Hussain S, Mubeen I, Ullah N, et al. Modern Diagnostic Imaging Technique Applications and Risk Factors in the Medical Field: A Review. *BioMed Research International*. 2022;2022:5164970. [DOI](https://doi.org/10.1155/2022/5164970)
-3. National Institute of Biomedical Imaging and Bioengineering. X-rays. [NIBIB](https://www.nibib.nih.gov/science-education/science-topics/x-rays)
+3. National Institute of Biomedical Imaging and Bioengineering. X-rays. [NIBIB](https://www.nibib.nih.gov/science-education/science-topics/medical-x-rays)
 4. National Institute of Biomedical Imaging and Bioengineering. Nuclear Medicine. [NIBIB](https://www.nibib.nih.gov/science-education/science-topics/nuclear-medicine)
 5. Digital Imaging and Communications in Medicine. DICOM Standard. [DICOM](https://www.dicomstandard.org/)
-6. "How tomographic reconstruction works?": [This video](https://www.youtube.com/watch?v=f0sxjhGHRPo) inspired by 3Blue1Brown shows how CT images are reconstructed in 3D using a series of single plane projections.
-7. "Radiology Modalities Explained: Understanding Medical Imaging Techniques": [This article](https://ccdcare.com/resource-center/radiology-modalities/) includes an overview of various radiology modalities, including X-rays, CT scans, MRI, ultrasound, and nuclear medicine. It explains how each modality works, their diagnostic applications, and considerations regarding radiation exposure.
-8. DICOM Standards Committee Working Group 7. Radiotherapy. [DICOM WG-07](https://www.dicomstandard.org/activity/wgs/wg-07)
-9. DICOM Standards Committee. PS3.3, Image Plane Module. [DICOM Standard](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.2.html)
-10. DICOM Standards Committee. PS3.15, Security and System Management Profiles: Attribute Confidentiality Profiles. [DICOM Standard](https://dicom.nema.org/medical/dicom/current/output/html/part15.html)
-11. Wilkinson MD, Dumontier M, Aalbersberg IJ, et al. The FAIR Guiding Principles for scientific data management and stewardship. *Scientific Data*. 2016;3:160018. [DOI](https://doi.org/10.1038/sdata.2016.18)
-12. Aerts HJWL, et al. Data From NSCLC-Radiomics (version 4). The Cancer Imaging Archive. 2014. [Dataset DOI](https://doi.org/10.7937/K9/TCIA.2015.PF0M9REI)
-13. Yang J, et al. Data from Lung CT Segmentation Challenge. The Cancer Imaging Archive. 2017. [Dataset DOI](https://doi.org/10.7937/K9/TCIA.2017.3R3FVZ08)
-14. Vallières M, et al. Data from Head-Neck-PET-CT. The Cancer Imaging Archive. 2017. [Dataset DOI](https://doi.org/10.7937/K9/TCIA.2017.8OJE5Q00)
-15. Gebru T, Morgenstern J, Vecchione B, et al. Datasheets for Datasets. *Communications of the ACM*. 2021;64(12):86-92. [DOI](https://doi.org/10.1145/3458723)
-16. Babier A, Zhang B, Mahmood R, et al. OpenKBP: The open-access knowledge-based planning grand challenge and dataset. *Medical Physics*. 2021;48(9):5549-5561. [DOI](https://doi.org/10.1002/mp.14845)
-17. Sheller MJ, Edwards B, Reina GA, et al. Federated learning in medicine: facilitating multi-institutional collaborations without sharing patient data. *Scientific Reports*. 2020;10:12598. [DOI](https://doi.org/10.1038/s41598-020-69250-1)
-18. DICOM Standards Committee. Supplement 191: Radiotherapy Radiation Record. [DICOM supplement](https://www.dicomstandard.org/news/supplements/view/rt-radiation-records)
+6. DICOM Standards Committee Working Group 7. Radiotherapy. [DICOM WG-07](https://www.dicomstandard.org/activity/wgs/wg-07)
+7. DICOM Standards Committee. PS3.3, Image Plane Module. [DICOM Standard](https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.2.html)
+8. DICOM Standards Committee. PS3.15, Security and System Management Profiles: Attribute Confidentiality Profiles. [DICOM Standard](https://dicom.nema.org/medical/dicom/current/output/html/part15.html)
+9. Wilkinson MD, Dumontier M, Aalbersberg IJ, et al. The FAIR Guiding Principles for scientific data management and stewardship. *Scientific Data*. 2016;3:160018. [DOI](https://doi.org/10.1038/sdata.2016.18)
+10. Aerts HJWL, et al. Data From NSCLC-Radiomics (version 4). The Cancer Imaging Archive. 2014. [Dataset DOI](https://doi.org/10.7937/K9/TCIA.2015.PF0M9REI)
+11. Yang J, et al. Data from Lung CT Segmentation Challenge. The Cancer Imaging Archive. 2017. [Dataset DOI](https://doi.org/10.7937/K9/TCIA.2017.3R3FVZ08)
+12. Vallières M, et al. Data from Head-Neck-PET-CT. The Cancer Imaging Archive. 2017. [Dataset DOI](https://doi.org/10.7937/K9/TCIA.2017.8OJE5Q00)
+13. Gebru T, Morgenstern J, Vecchione B, et al. Datasheets for Datasets. *Communications of the ACM*. 2021;64(12):86-92. [DOI](https://doi.org/10.1145/3458723)
+14. Babier A, Zhang B, Mahmood R, et al. OpenKBP: The open-access knowledge-based planning grand challenge and dataset. *Medical Physics*. 2021;48(9):5549-5561. [DOI](https://doi.org/10.1002/mp.14845)
+15. Sheller MJ, Edwards B, Reina GA, et al. Federated learning in medicine: facilitating multi-institutional collaborations without sharing patient data. *Scientific Reports*. 2020;10:12598. [DOI](https://doi.org/10.1038/s41598-020-69250-1)
+16. DICOM Standards Committee. Supplement 191: Radiotherapy Radiation Record. [DICOM supplement](https://www.dicomstandard.org/news/supplements/view/rt-radiation-records)

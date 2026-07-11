@@ -1,6 +1,6 @@
 # 5: AI for Image Contouring
 
-Accurate delineation of target volumes and organs at risk (OARs) is a critical and often time-consuming step in radiation therapy planning. Manual contouring is subject to inter-observer variability and can be a significant bottleneck in the clinical workflow. Deep learning, particularly convolutional neural networks (CNNs), has shown remarkable success in automating this process, offering the potential for increased efficiency, consistency, and accuracy.
+Target and organ-at-risk (OAR) delineation is a consequential, often time-consuming step in radiotherapy planning. Manual contours vary between observers, especially where boundaries depend on interpretation rather than a clearly visible interface [[1]](https://doi.org/10.1016/j.radonc.2016.09.019). Automated segmentation can reduce editing time for some structures and settings, but geometric agreement alone does not demonstrate clinical acceptability.
 
 Before constructing a contouring dataset, use the canonical [radiotherapy data and informatics foundations](../medicalImaging/medicalImaging.md): it covers RTSTRUCT/SEG provenance, physical geometry, contour rasterization, naming harmonization, patient-level splitting, and leakage-safe preprocessing.
 
@@ -35,7 +35,7 @@ Several deep learning architectures have proven particularly effective for medic
 - Attention U-Net
 - U-Net++
 
-The U-Net architecture, specifically designed for biomedical image segmentation, remains the cornerstone of many contouring applications. Its encoder-decoder structure with skip connections effectively combines multi-scale feature extraction with precise spatial localization.
+The U-Net architecture was designed for biomedical image segmentation. Its encoder-decoder structure and same-scale skip connections combine contextual features with spatial localization [[2]](https://doi.org/10.1007/978-3-319-24574-4_28).
 
 Key features of U-Net include:
 
@@ -57,7 +57,7 @@ These U-Net based architectures form the backbone of many automated contouring s
 
 ### V-Net for 3D Segmentation
 
-While 2D U-Nets process images slice by slice, medical imaging data in radiation oncology is inherently 3D (CT, MRI volumes). V-Net extends the U-Net concept to fully 3D convolutions, allowing the network to directly leverage spatial context across slices.
+While 2-D U-Nets process images slice by slice, CT and MRI are volumetric. V-Net extends encoder-decoder segmentation to 3-D and introduced a Dice-based objective in its original prostate-MRI evaluation [[3]](https://doi.org/10.1109/3DV.2016.79).
 
 V-Net replaces 2D convolutions, pooling, and up-sampling operations with their 3D counterparts. It often incorporates residual connections within its convolutional blocks. By processing the entire 3D volume (or large 3D patches), V-Net can better capture the complex shapes and relationships of anatomical structures in three dimensions, potentially leading to more accurate and consistent segmentations compared to slice-by-slice 2D approaches.
 
@@ -100,7 +100,7 @@ Variations like Generalized Dice Loss handle multi-class segmentation by weighti
 
 ### Focal Loss
 
-Focal loss, originally proposed for object detection, modifies the standard cross-entropy loss to down-weight the contribution of easy-to-classify examples (often the abundant background voxels) and focus training on harder examples (often foreground voxels or boundary regions):
+Focal loss was proposed for dense object detection to down-weight well-classified examples; its use in segmentation is an adaptation whose value depends on the task and tuning [[4]](https://doi.org/10.1109/ICCV.2017.324):
 
 L_Focal = -α(1-p_t)^γ * log(p_t)
 
@@ -136,7 +136,7 @@ Evaluating the performance of automated contouring models requires metrics that 
 
 ### Geometric Metrics
 
-Dice Similarity Coefficient (DSC) and Intersection over Union (IoU) remain standard metrics for assessing overall overlap.
+Dice Similarity Coefficient (DSC) and Intersection over Union (IoU) measure overlap but do not localize errors or encode their clinical consequence. Metric selection should follow the task's geometry and failure modes rather than convention alone [[5]](https://doi.org/10.1038/s41592-023-02151-z).
 
 Hausdorff Distance (HD) measures the maximum distance between the surfaces of the predicted and ground truth contours, quantifying the largest boundary discrepancy. The 95th percentile HD (HD95) is often preferred as it is less sensitive to outliers.
 
@@ -158,13 +158,13 @@ Rating scales or qualitative assessments by expert clinicians are often used alo
 
 ### Inter-observer Variability
 
-It is crucial to compare the performance of automated contouring models against the inherent variability observed between human experts. A model that achieves performance comparable to inter-observer agreement is often considered clinically acceptable.
+Inter-observer agreement can contextualize model-reference agreement, but matching an average human overlap score is not sufficient to declare a contour clinically acceptable. The reference may contain systematic errors, and small geometric deviations can matter near critical interfaces [[1]](https://doi.org/10.1016/j.radonc.2016.09.019) [[5]](https://doi.org/10.1038/s41592-023-02151-z).
 
 Metrics like DSC, HD, and ASSD can be calculated between contours drawn by different clinicians on the same images to establish a baseline for human variability. The automated model's performance is then compared to this baseline.
 
 Evaluating against multiple expert delineations (e.g., using the STAPLE algorithm to estimate a consensus ground truth) provides a more robust assessment than comparing against a single expert contour.
 
-## Current Research in Auto-contouring
+## Current Research and Recent Advances
 
 Research in deep learning for auto-contouring continues to advance rapidly, addressing remaining challenges and expanding capabilities.
 
@@ -226,12 +226,22 @@ Designing optimal workflows that combine automated contouring with efficient hum
 
 Establishing best practices for commissioning, validating, and monitoring auto-contouring systems in clinical practice.
 
-As deep learning models for auto-contouring continue to improve in accuracy and robustness, their integration into clinical workflows holds the potential to significantly enhance the efficiency and consistency of radiation therapy planning.
+Clinical integration should be evaluated as a human-AI workflow: editing time, consequential misses, downstream dosimetry, inter-user variation, and failures under distribution shift matter in addition to average overlap [[6]](https://doi.org/10.1016/j.radonc.2020.09.019).
 
-## Summary and References
+- **Foundation-model adaptation:** Promptable segmentation models are being adapted to medical images, but performance varies by anatomy, modality, prompt, and adaptation strategy. Radiotherapy use remains benchmark evidence unless target/OAR evaluation and clinical review are reported [[7]](https://doi.org/10.1038/s41467-024-44824-z). _(added: 2026-07)_
+- **Evaluation beyond a single overlap score:** Current validation guidance recommends selecting complementary metrics from the task's domain interest, error type, and properties rather than applying a fixed metric set [[5]](https://doi.org/10.1038/s41592-023-02151-z). _(added: 2026-07)_
+- **Workflow endpoints:** Clinical studies increasingly measure correction burden and acceptability as well as geometry. These findings remain dependent on site, structure set, baseline workflow, and model version [[6]](https://doi.org/10.1016/j.radonc.2020.09.019). _(added: 2026-07)_
 
-This article provides an overview of the application of deep learning, particularly convolutional neural networks and attention-based models, for automating the contouring process in radiation therapy planning. It explains the fundamentals of medical image segmentation, discusses key architectures like U-Net, V-Net, and transformer-based models, and reviews various loss functions and evaluation metrics relevant to clinical practice. The article also highlights current research directions, including organ-at-risk and tumor volume segmentation, adaptive contouring, and quality assurance, emphasizing the challenges and advancements in integrating AI-driven auto-contouring into clinical workflows to improve efficiency, consistency, and accuracy in radiation oncology.
+## Recap
 
-- [U-Net Paper](https://arxiv.org/abs/1505.04597)
-- [V-Net Paper](https://arxiv.org/abs/1606.04797)
-- ...
+Auto-contouring is voxel-wise prediction embedded in a clinical review process. U-Net-family, volumetric, and attention-based models provide candidate contours; loss and metric choices shape what errors are rewarded or exposed. Safe use requires representative external evaluation, structure-level failure analysis, expert review, and monitoring of downstream clinical effects.
+
+## References
+
+1. Vinod SK, Jameson MG, Min M, Holloway LC. Uncertainties in volume delineation in radiation oncology: a systematic review and recommendations for future studies. *Radiotherapy and Oncology*. 2016. [DOI](https://doi.org/10.1016/j.radonc.2016.09.019)
+2. Ronneberger O, Fischer P, Brox T. U-Net: convolutional networks for biomedical image segmentation. *MICCAI*. 2015. [DOI](https://doi.org/10.1007/978-3-319-24574-4_28)
+3. Milletari F, Navab N, Ahmadi SA. V-Net: fully convolutional neural networks for volumetric medical image segmentation. *3DV*. 2016. [DOI](https://doi.org/10.1109/3DV.2016.79)
+4. Lin TY, Goyal P, Girshick R, He K, Dollár P. Focal loss for dense object detection. *ICCV*. 2017. [DOI](https://doi.org/10.1109/ICCV.2017.324)
+5. Maier-Hein L, Reinke A, Godau P, et al. Metrics reloaded: recommendations for image analysis validation. *Nature Methods*. 2024. [DOI](https://doi.org/10.1038/s41592-023-02151-z)
+6. Brouwer CL, Boukerroui D, Oliveira J, et al. Assessment of manual adjustment performed in clinical practice following deep learning contouring for head and neck organs at risk in radiotherapy. *Radiotherapy and Oncology*. 2020. [DOI](https://doi.org/10.1016/j.radonc.2020.09.019)
+7. Ma J, He Y, Li F, Han L, You C, Wang B. Segment anything in medical images. *Nature Communications*. 2024. [DOI](https://doi.org/10.1038/s41467-024-44824-z)

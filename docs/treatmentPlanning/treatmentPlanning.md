@@ -1,6 +1,6 @@
 # 7: AI for Treatment Planning
 
-Treatment planning is a complex, iterative process that aims to deliver an optimal radiation dose to the target volume while minimizing dose to surrounding healthy tissues. This process traditionally requires significant expertise and time from medical physicists and dosimetrists. Deep learning approaches offer the potential to automate aspects of treatment planning, predict optimal dose distributions, and potentially improve plan quality and consistency while reducing planning time.
+Treatment planning is an iterative process that translates a prescription and clinical priorities into a deliverable beam arrangement. There is no single patient-independent definition of an "optimal" plan: target coverage, normal-tissue dose, robustness, delivery complexity, and clinical preferences must be balanced. Machine-learning systems can estimate achievable objectives or candidate dose distributions, but a prediction is not a physics calculation or a deliverable plan [[1]](https://doi.org/10.1259/bjr.20180270).
 
 Planning models depend on correctly linked images, structures, prescriptions, plan versions, dose grids, and delivery records. See the canonical [radiotherapy data and informatics foundations](../medicalImaging/medicalImaging.md) for the object model, geometry and units, dose-grid alignment, cohort construction, and leakage-safe preprocessing used throughout this chapter.
 
@@ -34,7 +34,7 @@ Plan quality evaluation: Comparing achieved DVHs against predicted "optimal" DVH
 
 Treatment technique selection: Predicting DVHs for different modalities (e.g., IMRT vs. proton therapy) to guide the choice of technique.
 
-The accuracy of DVH prediction models depends on the consistency of planning practices in the training data. These models essentially learn to mimic the planning patterns and trade-offs made by the institution that generated the training plans.
+The accuracy and meaning of a DVH prediction depend on the plans used for training. A model can reproduce institutional trade-offs and systematic weaknesses as well as expertise. Early knowledge-based methods therefore framed predicted DVHs as achievable ranges or objectives, not patient outcomes [[2]](https://doi.org/10.1016/j.ijrobp.2012.07.311).
 
 ### Dose Distribution Prediction
 
@@ -55,7 +55,7 @@ Accurately predicting dose in regions with complex tissue heterogeneity or at in
 Capturing the impact of different beam arrangements, which may not be explicitly provided as input.
 Ensuring that predicted dose distributions satisfy physical constraints (e.g., dose cannot increase with depth beyond the build-up region for a single beam).
 
-Despite these challenges, dose prediction models have shown promising results, with many achieving mean absolute errors of less than 5% of the prescription dose in most regions. These models can serve as rapid approximations for plan evaluation, as starting points for optimization, or as components in fully automated planning systems.
+Dose-prediction results are not comparable through a single error threshold unless the normalization, evaluated region, beam information, dataset, and aggregation method are the same. The OpenKBP challenge supplies a fixed head-and-neck dataset and common dose and DVH metrics for benchmark comparison; it does not establish transportability or clinical benefit [[3]](https://doi.org/10.1002/mp.14845). Predictions may serve as feasibility estimates or optimization inputs, but they require a dose engine and deliverability checks before treatment.
 
 ## Plan Quality Assessment
 
@@ -102,7 +102,7 @@ CNNs that process anatomical features to predict achievable dose metrics.
 Recurrent neural networks (RNNs) that model the sequential nature of DVH curves.
 Attention mechanisms that focus on the most relevant historical plans or anatomical features for a new patient.
 
-KBP approaches have shown the ability to reduce planning time and improve plan quality, particularly for less experienced planners or centers. They can also help identify suboptimal plans by comparing achieved dose metrics against predicted achievable values.
+KBP can standardize objectives and identify plans that differ from what its training library predicts. Reported time or quality gains are conditional on the library, disease site, planner baseline, and evaluation design; they should not be generalized to less-experienced centers without direct study [[1]](https://doi.org/10.1259/bjr.20180270).
 
 The effectiveness of KBP models depends on the quality and diversity of the historical plans used for training. These models essentially learn to reproduce the planning patterns in their training data, which may not always represent optimal planning.
 
@@ -165,7 +165,7 @@ Radiation therapy planning inherently involves balancing multiple competing obje
 
 ### Traditional MCO Approaches
 
-Traditional MCO in radiation therapy generates a set of Pareto-optimal plans, where no objective can be improved without worsening another. Planners then navigate this Pareto surface to select a plan that best balances the clinical trade-offs.
+Multi-criteria optimization (MCO) represents trade-offs among objectives with Pareto-optimal plans: improving one represented objective requires worsening at least one other. Navigation exposes trade-offs; it does not determine which trade-off is clinically right [[4]](https://doi.org/10.1118/1.2335486).
 
 Deep learning is enhancing MCO in several ways:
 
@@ -191,7 +191,7 @@ Incorporating non-dosimetric factors (e.g., patient comorbidities, concurrent tr
 
 These approaches recognize that optimal planning involves more than just meeting generic dosimetric constraints—it requires considering the specific clinical context and patient characteristics.
 
-## Current Research in Treatment Planning Prediction
+## Current Research and Recent Advances
 
 Research in deep learning for treatment planning continues to advance rapidly, addressing remaining challenges and expanding capabilities.
 
@@ -225,7 +225,7 @@ These models aim to automate a process that traditionally relies heavily on plan
 
 ### Adaptive Planning
 
-Adaptive radiation therapy, where plans are modified during the treatment course to account for anatomical changes, presents unique challenges and opportunities for deep learning:
+Adaptive radiation therapy modifies a plan or treatment decision in response to anatomical or biological change. Online workflows compress imaging, contouring, replanning, review, and QA into a time-constrained process, so speed cannot be assessed separately from the safety of the complete chain [[5]](https://doi.org/10.1016/j.ijrobp.2020.10.021).
 
 Predicting anatomical changes: Models that forecast how a patient's anatomy might change during treatment based on early observations, enabling proactive plan adaptation.
 
@@ -239,7 +239,7 @@ These applications could help make adaptive radiotherapy more practical and wide
 
 ### Integration with Outcome Prediction
 
-An emerging research direction is the integration of treatment planning with outcome prediction:
+Integrating outcome prediction into planning is a research direction, not an established route to improved outcomes. Normal-tissue complication models require endpoint definitions, appropriate dose summaries, calibration, and validation in the intended population [[6]](https://doi.org/10.1016/j.ijrobp.2009.07.1754):
 
 Outcome-aware planning: Directly optimizing plans to maximize predicted tumor control and minimize predicted toxicity, rather than using generic dosimetric constraints.
 
@@ -249,4 +249,22 @@ Radiomics-guided planning: Using radiomic features extracted from pre-treatment 
 
 These approaches aim to move beyond one-size-fits-all planning to truly personalized radiation therapy that considers the unique characteristics of each patient and tumor.
 
-As deep learning models for treatment planning continue to improve in accuracy, robustness, and clinical relevance, they hold the potential to significantly enhance the efficiency, consistency, and quality of radiation therapy planning. The integration of these models into clinical workflows, combined with appropriate quality assurance and human oversight, could ultimately improve outcomes for cancer patients receiving radiation therapy.
+These approaches remain heterogeneous in inputs, planning technique, normalization, and endpoints. Any claim of improved efficiency, consistency, plan quality, or patient outcome should be tied to a comparative clinical workflow study rather than inferred from dose-prediction error alone.
+
+- **Diffusion-based dose prediction:** A 2025 liver-cancer study conditioned a diffusion model on beam fields as well as anatomy. It is retrospective task-specific evidence; broader clinical value and transportability require external and workflow evaluation [[7]](https://doi.org/10.1002/mp.17989). _(added: 2026-07)_
+- **Common benchmarks:** OpenKBP makes model comparisons more reproducible through a fixed head-and-neck dataset and common metrics, while its selected, preprocessed challenge setting limits clinical generalization [[3]](https://doi.org/10.1002/mp.14845). _(added: 2026-07)_
+- **Online adaptation:** Integrated adaptive platforms increase interest in rapid prediction and optimization, but the validation target is the full time-constrained workflow, including independent checks and failure recovery [[5]](https://doi.org/10.1016/j.ijrobp.2020.10.021). _(added: 2026-07)_
+
+## Recap
+
+Planning AI can estimate achievable objectives, predict candidate dose, tune optimization, or support plan review. These outputs inherit the priorities and limitations of their training data. A clinically usable result must be physically calculated, deliverable, robust, reviewed against the prescription and anatomy, and evaluated in the workflow where it will be used.
+
+## References
+
+1. Hussein M, Heijmen BJM, Verellen D, Nisbet A. Automation in intensity modulated radiotherapy treatment planning—a review of recent innovations. *British Journal of Radiology*. 2018. [DOI](https://doi.org/10.1259/bjr.20180270)
+2. Appenzoller LM, Michalski JM, Thorstad WL, Mutic S, Moore KL. Predicting dose-volume histograms for organs at risk in intensity modulated radiation therapy planning. *International Journal of Radiation Oncology, Biology, Physics*. 2012. [DOI](https://doi.org/10.1016/j.ijrobp.2012.07.311)
+3. Babier A, Zhang B, Mahmood R, et al. OpenKBP: the open-access knowledge-based planning grand challenge and dataset. *Medical Physics*. 2021. [DOI](https://doi.org/10.1002/mp.14845)
+4. Craft DL, Halabi TF, Shih HA, Bortfeld TR. Approximating convex Pareto surfaces in multiobjective radiotherapy planning. *Medical Physics*. 2006. [DOI](https://doi.org/10.1118/1.2335486)
+5. Glide-Hurst CK, Lee P, Yock AD, et al. Adaptive radiation therapy strategies and technical considerations: a state of the ART review from NRG Oncology. *International Journal of Radiation Oncology, Biology, Physics*. 2021. [DOI](https://doi.org/10.1016/j.ijrobp.2020.10.021)
+6. Marks LB, Yorke ED, Jackson A, et al. Use of normal tissue complication probability models in the clinic. *International Journal of Radiation Oncology, Biology, Physics*. 2010. [DOI](https://doi.org/10.1016/j.ijrobp.2009.07.1754)
+7. Cao Y, Zhao W, Li C, Zhang Y, Yang X, Yang B. Beam field guided diffusion model for liver cancer radiotherapy dose distribution prediction. *Medical Physics*. 2025. [DOI](https://doi.org/10.1002/mp.17989)

@@ -36,7 +36,7 @@ The defining feature is not a chat interface. It is learned coupling between the
 
 A dual-encoder model uses one network for images and another for text. Both produce embeddings in a shared space. Training encourages matched image-text pairs to be close and unmatched pairs to be farther apart.
 
-CLIP demonstrated the scale and transfer potential of this contrastive approach using natural-language supervision [[1]](https://arxiv.org/abs/2103.00020). After training, a text prompt such as "an image containing pleural effusion" can be embedded and compared with an image embedding. This enables retrieval and zero-shot classification without a task-specific output class learned in the usual supervised way.
+CLIP demonstrated the scale and transfer potential of this contrastive approach using natural-language supervision [[1]](https://proceedings.mlr.press/v139/radford21a.html). After training, a text prompt such as "an image containing pleural effusion" can be embedded and compared with an image embedding. This enables retrieval and zero-shot classification without a task-specific output class learned in the usual supervised way.
 
 Dual encoders are computationally efficient for search because image and text embeddings can be precomputed. Their global embeddings may, however, miss fine spatial relationships and are not naturally generative.
 
@@ -188,7 +188,7 @@ Vision-language models connect visual and textual representations through contra
 
 ## References
 
-1. Radford A, Kim JW, Hallacy C, et al. Learning transferable visual models from natural language supervision. *Proceedings of the 38th International Conference on Machine Learning*. 2021. [arXiv](https://arxiv.org/abs/2103.00020)
+1. Radford A, Kim JW, Hallacy C, et al. Learning transferable visual models from natural language supervision. *Proceedings of the 38th International Conference on Machine Learning*. 2021. [PMLR](https://proceedings.mlr.press/v139/radford21a.html)
 2. Tanno R, Barrett DGT, Sellergren A, et al. Collaboration between clinicians and vision-language models in radiology report generation. *Nature Medicine*. 2025;31:599-608. [DOI](https://doi.org/10.1038/s41591-024-03302-1)
 3. Hartsock I, Rasool G. Vision-language models for medical report generation and visual question answering: a review. *Frontiers in Artificial Intelligence*. 2024;7:1430984. [DOI](https://doi.org/10.3389/frai.2024.1430984)
 4. Zhang S, Xu Y, Usuyama N, et al. A generalist vision-language foundation model for diverse biomedical tasks. *Nature Medicine*. 2024;30:3129-3141. [DOI](https://doi.org/10.1038/s41591-024-03185-2)

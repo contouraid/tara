@@ -8,7 +8,7 @@ This guide is designed for clinicians, researchers, and students interested in t
 
 ## The Perceptron Model
 
-The perceptron represents the fundamental building block of neural networks and serves as an excellent starting point for understanding how these complex systems function. Developed in the late 1950s by Frank Rosenblatt, the perceptron was one of the earliest models of artificial neurons, inspired by the biological neurons in the human brain.
+The perceptron represents the fundamental building block of neural networks and serves as an excellent starting point for understanding how these complex systems function. Rosenblatt described its probabilistic model and learning system in 1958 [[1]](https://doi.org/10.1037/h0042519).
 
 At its core, a perceptron takes multiple input signals, applies weights to these inputs, sums them together with a bias term, and then passes this sum through an activation function to produce an output. Mathematically, this can be represented as:
 
@@ -32,7 +32,7 @@ Understanding the perceptron model provides a foundation for grasping more compl
 
 ## Feature Engineering and Selection
 
-Feature engineering—the process of creating, transforming, and selecting relevant features from raw data—plays a crucial role in the success of traditional machine learning algorithms. While deep learning can automatically learn useful representations from raw data, feature engineering remains important for many applications, especially when working with structured data or when interpretability is a priority.
+Feature engineering—the process of creating, transforming, and selecting relevant features from raw data—plays a crucial role in the success of traditional machine learning algorithms. While deep learning can learn representations jointly with a task, feature engineering remains important for structured data and interpretable models [[2]](https://www.deeplearningbook.org/).
 
 Common feature engineering techniques include:
 
@@ -54,7 +54,7 @@ In radiation oncology, domain knowledge plays a vital role in feature engineerin
 
 ## Activation Functions
 
-Activation functions introduce non-linearity into neural networks, enabling them to learn complex patterns and relationships in data. Without activation functions, even a multi-layer neural network would behave like a single-layer linear model, regardless of its depth. This non-linearity is crucial for modeling the complex relationships present in medical data, such as the non-linear dose-response curves observed in radiation oncology.
+Activation functions introduce non-linearity into neural networks. Without them, a stack of affine layers collapses to another affine transformation [[2]](https://www.deeplearningbook.org/).
 
 ### Comparison of Common Activation Functions
 
@@ -113,7 +113,7 @@ Understanding the properties of different activation functions helps in designin
 
 ## Feedforward Neural Networks
 
-Feedforward neural networks, also known as multi-layer perceptrons (MLPs), form the foundation of deep learning architectures. These networks consist of multiple layers of neurons, with information flowing in one direction from the input layer through one or more hidden layers to the output layer, without any cycles or loops.
+Feedforward neural networks, also known as multi-layer perceptrons (MLPs), pass information from input to output without recurrent connections [[2]](https://www.deeplearningbook.org/).
 
 ### Architecture and Layers
 
@@ -231,7 +231,7 @@ In radiation oncology applications, the choice of loss function should be guided
 
 ## Gradient-based Learning
 
-Gradient-based learning forms the core of how neural networks are trained. By computing the gradient of the loss function with respect to the model parameters, these methods determine how to adjust the parameters to minimize the error.
+Gradient-based learning uses derivatives of an objective to update trainable parameters. Backpropagation efficiently applies the chain rule through a network and underpins modern multilayer representation learning [[3]](https://doi.org/10.1038/323533a0).
 
 ### Backpropagation Algorithm
 
@@ -281,6 +281,8 @@ Understanding computational graphs also helps in diagnosing and addressing train
 
 ## Initialization Strategies
 
+Initialization affects signal and gradient propagation. Xavier/Glorot initialization was developed for symmetric activations [[4]](https://proceedings.mlr.press/v9/glorot10a.html), while He initialization adapts the variance calculation to rectifiers [[5]](https://doi.org/10.1109/ICCV.2015.123).
+
 ### Summary Table: Initialization Methods
 
 | Method         | Formula/Approach                           | Best For                | Notes                                 |
@@ -328,7 +330,7 @@ In radiation oncology applications, the choice of initialization strategy should
 
 ## Batch Normalization
 
-Batch Normalization (BatchNorm) is a technique that normalizes the inputs to each layer, stabilizing and accelerating training. Introduced by Sergey Ioffe and Christian Szegedy in 2015, it has become a standard component in many deep learning architectures.
+Batch normalization standardizes mini-batch activation statistics and learns a subsequent scale and offset. Ioffe and Szegedy introduced the method and reported faster optimization in the architectures they tested [[6]](https://proceedings.mlr.press/v37/ioffe15.html); benefit in a new task remains empirical rather than guaranteed.
 
 ### How Batch Normalization Works
 
@@ -376,7 +378,7 @@ Despite these considerations, BatchNorm or its variants are commonly used in dee
 
 ## Convolutional Neural Networks (CNNs)
 
-Convolutional Neural Networks (CNNs) have revolutionized the field of computer vision and medical image analysis. These specialized neural network architectures are designed to process data with grid-like topology, such as images, by leveraging spatial relationships between pixels. In radiation oncology, CNNs have become the backbone of many automated contouring and image analysis systems.
+Convolutional neural networks (CNNs) use shared local filters and hierarchical representations for grid-like data such as images [[7]](https://doi.org/10.1038/nature14539). They are commonly used in radiotherapy image analysis, but architecture choice alone does not establish clinical performance.
 
 ### Convolutional Layers and Operations
 
@@ -467,7 +469,7 @@ When properly applied, transfer learning can significantly reduce the amount of 
 
 ## Recurrent Neural Networks (RNNs)
 
-While CNNs excel at processing spatial data like images, Recurrent Neural Networks (RNNs) are designed for sequential data, where the order of elements matters. In radiation oncology, RNNs can be valuable for analyzing temporal data such as treatment response over time, patient monitoring during treatment courses, or even the sequential processing of 3D volumes slice by slice.
+Recurrent neural networks (RNNs) maintain a state while processing sequential inputs. Long short-term memory introduced gated memory to address difficult long-range credit assignment in conventional recurrent networks [[8]](https://doi.org/10.1162/neco.1997.9.8.1735). Proposed radiotherapy uses remain task-specific hypotheses until validated on representative temporal data.
 
 ### Sequential Data Processing
 
@@ -635,7 +637,7 @@ The probabilistic nature of VAEs makes them particularly suitable for medical ap
 
 ## Generative Adversarial Networks (GANs)
 
-Generative Adversarial Networks (GANs) represent a powerful framework for generative modeling, capable of producing remarkably realistic synthetic data. Introduced by Ian Goodfellow in 2014, GANs consist of two neural networks—a generator and a discriminator—trained in an adversarial process that drives both to improve.
+Generative adversarial networks train a generator against a discriminator in a two-player objective, as introduced by Goodfellow and colleagues in 2014 [[9]](https://proceedings.neurips.cc/paper/2014/hash/f033ed80deb0234979a61f95710dbe25-Abstract.html). Visual realism is not evidence that synthetic medical data preserve pathology or are safe for downstream use.
 
 ### Generator and Discriminator
 
@@ -704,7 +706,7 @@ While GANs show tremendous promise for medical image synthesis, their deployment
 
 ## Transformers and Attention Mechanisms
 
-Transformers have revolutionized natural language processing and are increasingly being applied to computer vision and medical image analysis. Unlike CNNs and RNNs, which process data sequentially or locally, transformers process all elements of the input simultaneously through self-attention mechanisms, capturing long-range dependencies more effectively.
+Transformers replace recurrence with attention-based sequence processing. The original encoder-decoder architecture and scaled dot-product multi-head attention were described by Vaswani and colleagues [[10]](https://proceedings.neurips.cc/paper/7181-attention-is-all-you-need). Whether this improves a medical task must be tested against strong task-specific baselines.
 
 ### Self-attention
 
@@ -769,7 +771,7 @@ These transformer-based architectures have shown promising results in radiation 
 
 ## U-Net and Segmentation Architectures
 
-Segmentation—the task of assigning a class label to each pixel or voxel in an image—is fundamental in radiation oncology for delineating tumors, organs at risk, and other anatomical structures. U-Net and its variants have become the dominant architectural paradigm for medical image segmentation due to their effectiveness in preserving both local and global context.
+Segmentation assigns a class label to each pixel or voxel. U-Net's encoder, decoder, and same-scale skip connections established a widely reused biomedical segmentation design [[11]](https://doi.org/10.1007/978-3-319-24574-4_28).
 
 ### Encoder-decoder Structures
 
@@ -808,7 +810,7 @@ V-Net extends U-Net to 3D volumes, using 3D convolutions throughout the network 
 
 Attention U-Net incorporates attention gates that help the model focus on relevant regions, suppressing irrelevant responses in feature maps. This is particularly valuable in medical imaging, where the structures of interest may occupy only a small portion of the image.
 
-nnU-Net (no new U-Net) is not a single architecture but a self-configuring framework that automatically adapts the U-Net design to the specific characteristics of a dataset, including image size, spacing, and modality. It has achieved state-of-the-art results across diverse medical segmentation tasks by optimizing preprocessing, network architecture, training, and post-processing.
+nnU-Net ("no new U-Net") is a self-configuring framework rather than a single architecture. It adapts preprocessing, topology, training, and post-processing rules to a dataset and was evaluated across 23 public biomedical segmentation datasets [[12]](https://doi.org/10.1038/s41592-020-01008-z).
 
 TransUNet combines transformers with U-Net, using a transformer encoder to capture global context and a convolutional decoder with skip connections to generate detailed segmentations. This hybrid approach leverages the strengths of both transformers (global relationships) and CNNs (local patterns).
 
@@ -855,16 +857,34 @@ The choice of architecture depends on factors like the specific segmentation tas
 
 ---
 
-## Further Reading
-
-- [Hello World: Deep Learning in Medical Imaging](https://pmc.ncbi.nlm.nih.gov/articles/PMC5959832)
-- [A Survey on Deep Learning in Medical Image Analysis (2017)](https://www.sciencedirect.com/science/article/pii/S1361841517301130)
-- [nnU-Net: Self-adapting Framework for U-Net-based Medical Image Segmentation (2021)](https://www.nature.com/articles/s41592-020-01008-z)
-- [Attention Is All You Need (Transformer paper)](https://arxiv.org/abs/1706.03762)
-- [Recent Advances in Deep Learning for Medical Image Analysis (2022)](https://www.nature.com/articles/s42256-021-00406-0)
-- [Ethics of AI in Medical Imaging](https://www.nature.com/articles/s41591-019-0447-1)
-
 ```{toctree}
 :maxdepth: 2
 :caption: Contents
 vlm
+```
+
+## Current Research and Recent Advances
+
+- **Self-configuring segmentation pipelines:** nnU-Net showed that systematic configuration of preprocessing, architecture, training, and post-processing can matter as much as a novel network block. Its results are benchmark evidence, not proof of clinical benefit [[12]](https://doi.org/10.1038/s41592-020-01008-z). _(added: 2026-07)_
+- **Attention-based architectures:** Transformers permit global token interactions and parallel sequence processing, but their value in a medical task must be established against strong convolutional baselines on representative data [[10]](https://proceedings.neurips.cc/paper/7181-attention-is-all-you-need). _(added: 2026-07)_
+- **Multimodal learning:** Models that connect images and language broaden the possible task set. Generalist biomedical results remain transfer evidence rather than radiotherapy validation; the dedicated [vision-language model chapter](vlm.md) covers the evidence and limitations [[13]](https://doi.org/10.1038/s41591-024-03185-2). _(added: 2026-07)_
+
+## Recap
+
+Neural-network design combines representations, nonlinearities, objectives, optimization, and task-specific data handling. Architecture names are useful shorthand, but performance depends on the complete pipeline and evaluation design. Clinical use requires evidence beyond a development benchmark.
+
+## References
+
+1. Rosenblatt F. The perceptron: a probabilistic model for information storage and organization in the brain. *Psychological Review*. 1958. [DOI](https://doi.org/10.1037/h0042519)
+2. Goodfellow I, Bengio Y, Courville A. *Deep Learning*. MIT Press; 2016. [Open textbook](https://www.deeplearningbook.org/)
+3. Rumelhart DE, Hinton GE, Williams RJ. Learning representations by back-propagating errors. *Nature*. 1986. [DOI](https://doi.org/10.1038/323533a0)
+4. Glorot X, Bengio Y. Understanding the difficulty of training deep feedforward neural networks. *AISTATS*. 2010. [PMLR](https://proceedings.mlr.press/v9/glorot10a.html)
+5. He K, Zhang X, Ren S, Sun J. Delving deep into rectifiers. *ICCV*. 2015. [DOI](https://doi.org/10.1109/ICCV.2015.123)
+6. Ioffe S, Szegedy C. Batch normalization: accelerating deep network training by reducing internal covariate shift. *ICML*. 2015. [PMLR](https://proceedings.mlr.press/v37/ioffe15.html)
+7. LeCun Y, Bengio Y, Hinton G. Deep learning. *Nature*. 2015. [DOI](https://doi.org/10.1038/nature14539)
+8. Hochreiter S, Schmidhuber J. Long short-term memory. *Neural Computation*. 1997. [DOI](https://doi.org/10.1162/neco.1997.9.8.1735)
+9. Goodfellow IJ, Pouget-Abadie J, Mirza M, et al. Generative adversarial nets. *NeurIPS*. 2014. [Proceedings](https://proceedings.neurips.cc/paper/2014/hash/f033ed80deb0234979a61f95710dbe25-Abstract.html)
+10. Vaswani A, Shazeer N, Parmar N, et al. Attention is all you need. *NeurIPS*. 2017. [Proceedings](https://proceedings.neurips.cc/paper/7181-attention-is-all-you-need)
+11. Ronneberger O, Fischer P, Brox T. U-Net: convolutional networks for biomedical image segmentation. *MICCAI*. 2015. [DOI](https://doi.org/10.1007/978-3-319-24574-4_28)
+12. Isensee F, Jaeger PF, Kohl SAA, Petersen J, Maier-Hein KH. nnU-Net: a self-configuring method for deep learning-based biomedical image segmentation. *Nature Methods*. 2021. [DOI](https://doi.org/10.1038/s41592-020-01008-z)
+13. Tu T, Azizi S, Driess D, et al. Towards generalist biomedical AI. *Nature Medicine*. 2024. [DOI](https://doi.org/10.1038/s41591-024-03185-2)
