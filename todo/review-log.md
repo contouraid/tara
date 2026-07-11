@@ -28,6 +28,27 @@ Append one entry per cycle, in the format below, at the **top** of the log (newe
 
 ## Log
 
+## 2026-07-11 responsible-AI closure
+
+**Chapters reviewed:** new `responsibleAI/` chapter plus cross-links in `fundamentalAI/vlm.md`, `qa/`, `validation/`, and `workflow/`
+**Todos closed:** `p1-consolidate-responsible-ai-regulation-and-security.md` (moved to `todo/done/`)
+**Todos opened:** none
+
+### Searches run
+- US regulation: "HIPAA Security Rule compliance date" (HHS primary pages) — Security Rule effective and compliance dates verified.
+- US FDA guidance: "predetermined change control plan final guidance artificial intelligence-enabled device software functions" (FDA primary pages) — current final-guidance status and August 2025 update verified.
+
+### Added
+- responsibleAI: a canonical novice-accessible treatment of obligation types, the full AI lifecycle, regulation and privacy by jurisdiction, fairness, transparency, cybersecurity, third-party risk, governance checklist, and RACI responsibility map with 14 sources.
+- QA, validation, VLM, and workflow: stable Sphinx-native cross-references to the canonical governance, regulatory, fairness, and security sections.
+
+### Rejected
+- File-plus-fragment Markdown links were not retained for cross-document section references because MyST did not resolve generated heading fragments with `heading_anchors=0`; explicit labels and `{ref}` roles were used instead.
+
+### Notes for next cycle
+- Clean strict build `../.venv/bin/sphinx-build -b html -W -n . _build/strict`: **zero warnings**, all 14 source files.
+- Regulatory summaries remain orientation rather than legal advice. Recheck jurisdiction, effective date, and primary regulator status before relying on them in future cycles.
+
 ## 2026-07-11 strict-build closure
 
 **Chapters reviewed:** all ten numbered chapters, `fundamentalAI/vlm.md` (verification pass only, no content rewrites)

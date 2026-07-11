@@ -94,6 +94,7 @@ Clinical context includes metadata and DICOM-RT objects, not just pixels. RT Str
 
 Planning and adaptive decisions depend on change over time. Comparing planning CT, daily images, prior contours, and delivered dose requires reliable temporal ordering and registration. The model should distinguish an observed change from an apparent difference caused by acquisition or alignment.
 
+(privacy-and-dataset-bias)=
 ### Privacy and Dataset Bias
 
 Image-report pairs contain protected health information. De-identification must address DICOM metadata, burned-in annotations, free text, and linked identifiers. Public datasets are concentrated in selected modalities and institutions; chest radiographs are much more available than radiotherapy planning datasets. A model can therefore appear medically capable while having little relevant experience with radiotherapy.
@@ -168,9 +169,10 @@ Broad prompts invite broad failure. Define supported inputs, questions, outputs,
 
 Record the model and prompt version, visual inputs, text context, retrieved sources, output, edits, approver, and timestamps. Generated text should not be copied into the clinical record without its review state being clear.
 
+(protect-against-prompt-and-retrieval-risks)=
 ### Protect Against Prompt and Retrieval Risks
 
-Clinical text can contain instructions that were never intended to control a model. Systems that retrieve external or internal documents must separate data from executable instructions, restrict tools and permissions, and validate outputs before writing to clinical systems.
+Clinical text can contain instructions that were never intended to control a model. Systems that retrieve external or internal documents must separate data from executable instructions, restrict tools and permissions, and validate outputs before writing to clinical systems. These prompt-injection, data-poisoning, and excessive-agency risks are cataloged and set in the wider cybersecurity and governance context in {ref}`Responsible AI, Regulation, and Security <cybersecurity-for-connected-clinical-ai>`.
 
 ### Monitor the Human-VLM System
 

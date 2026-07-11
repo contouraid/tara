@@ -103,6 +103,7 @@ An AI service needs more than inference code. It needs job submission, queue man
 
 Clinical state must be explicit. A result generated from an earlier contour or image should become stale when its input changes. The workflow should prevent approval of an output whose provenance no longer matches the current case.
 
+(reliability-and-downtime)=
 ### Reliability and Downtime
 
 Define availability and latency requirements from the clinical pathway. An offline research pipeline may tolerate hours; online adaptive radiotherapy may require minutes. Monitor service health, but distinguish technical availability from clinically usable output.
@@ -209,6 +210,7 @@ People assess change through its effect on patient care, professional responsibi
 
 Update standard operating procedures, role descriptions, on-call coverage, audit requirements, and governance records. If staff are expected to review AI carefully but are scheduled as if review takes no time, the process design is internally inconsistent.
 
+(manage-versions-as-clinical-changes)=
 ### Manage Versions as Clinical Changes
 
 A model update is a clinical change, even if the user interface is unchanged. Use change control to document the reason, affected components, validation, training impact, release date, rollback, and monitoring period.
@@ -217,9 +219,10 @@ A model update is a clinical change, even if the user interface is unchanged. Us
 
 Review edit patterns, overrides, downtime, near misses, and incidents. Avoid interpreting every override as user error or every accepted output as model success. Qualitative investigation often reveals issues that aggregate metrics miss.
 
+(governance)=
 ## Governance
 
-An oversight group should have authority to approve deployment, restrict use, require corrective action, and suspend the system. Its review should cover:
+An oversight group should have authority to approve deployment, restrict use, require corrective action, and suspend the system. The reusable governance checklist and RACI responsibility map that operationalize this authority, together with the regulatory, fairness, and security framework behind it, are in {ref}`Responsible AI, Regulation, and Security <a-governance-checklist-and-responsibility-map>`. Its review should cover:
 
 - clinical ownership and intended use;
 - evidence and residual risks;

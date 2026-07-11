@@ -28,6 +28,7 @@ The layers should be diverse. Two checks driven by the same input, algorithm, or
 
 Acceptance testing determines whether a newly installed system meets contractual and specified performance requirements. It should be based on agreed tests, tolerances, and documentation. For software, acceptance includes interfaces, data integrity, configuration, access control, and representative end-to-end workflows—not only whether the application starts.
 
+(commissioning)=
 ### Commissioning
 
 Commissioning establishes how a system behaves in the local clinical environment and creates baseline data for future comparison. A treatment machine is characterized across energies, field sizes, accessories, and delivery modes. A treatment planning system is tested across representative geometries and algorithms. An AI tool should likewise be evaluated across intended anatomical sites, scanners, protocols, populations, and difficult cases before clinical release.
@@ -151,7 +152,10 @@ The deployed model, preprocessing, thresholds, reference data, and software depe
 
 Monitoring should include input drift, missingness, output distributions, failure and override rates, latency, subgroup performance where appropriate, and downstream safety outcomes. Thresholds should trigger defined responses such as investigation, increased manual review, rollback, or suspension.
 
+(regulatory-and-standards-context)=
 ## Regulatory and Standards Context
+
+The canonical treatment of regulation, privacy law, standards, and how they differ by jurisdiction—and the distinction between binding law, regulator guidance, and voluntary standards—is in {ref}`Responsible AI, Regulation, and Security <regulatory-and-privacy-frameworks-by-jurisdiction>`. This section notes only what is specific to QA tools.
 
 Regulation depends on jurisdiction and intended use. In the United States, an AI function that meets the definition of a medical device may require FDA review through an applicable pathway. Clearance or authorization addresses a specified intended use; it does not replace local acceptance, commissioning, training, and QA.
 

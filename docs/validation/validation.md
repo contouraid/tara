@@ -4,6 +4,7 @@ Validation asks whether an AI system is fit for a defined purpose in a defined s
 
 A high benchmark score can coexist with poor clinical value. Performance may fall under distribution shift, a threshold may be poorly chosen, probabilities may be miscalibrated, or the output may arrive too late to affect care. Validation must therefore connect statistical performance to the complete clinical use case.
 
+(start-with-the-intended-use)=
 ## Start with the Intended Use
 
 Before selecting a metric, specify:
@@ -113,6 +114,7 @@ For three-dimensional dose prediction, voxel-wise MAE should be complemented by 
 
 A dose model can have low global voxel error while missing a small serial organ or blurring a steep gradient. Evaluation should stratify by region and clinical objective.
 
+(calibration-and-probabilistic-predictions)=
 ## Calibration and Probabilistic Predictions
 
 Discrimination asks whether higher-risk patients tend to have events more often. Calibration asks whether predicted probabilities correspond to observed frequencies. A model can discriminate well and still predict risks that are systematically too high or low.
@@ -137,11 +139,12 @@ Performance can change with scanner vendor, reconstruction, contouring conventio
 
 Robustness testing is not permission to deploy outside intended use. It identifies boundaries and informs safeguards.
 
+(subgroup-evaluation)=
 ### Subgroup Evaluation
 
 Report performance for clinically relevant subgroups where sample size permits: sex, age, anatomy, disease site, stage, device, institution, and acquisition protocol. Small groups require uncertainty intervals and careful interpretation. Comparing point estimates without adequate precision can create false assurance or false alarms.
 
-Fairness is not achieved by equalizing one metric mechanically. Different error types may carry different clinical harm. The analysis should connect subgroup performance to access, workflow, and outcomes.
+Fairness is not achieved by equalizing one metric mechanically. Different error types may carry different clinical harm. The analysis should connect subgroup performance to access, workflow, and outcomes. The broader treatment of fairness across data, model target, workflow, access, and outcome—beyond the subgroup metrics measured here—is in {ref}`Responsible AI, Regulation, and Security <fairness-and-health-equity>`.
 
 ### Missing and Low-Quality Inputs
 
@@ -177,6 +180,7 @@ Validation protocols should prespecify primary endpoints, acceptable performance
 
 For clustered data—multiple structures, fractions, or plans per patient—analysis must account for within-patient dependence. Comparing multiple models or endpoints also raises multiplicity concerns. A statistically significant difference may be too small to matter clinically, while a clinically important difference may be imprecisely estimated in a small study.
 
+(post-deployment-monitoring)=
 ## Post-Deployment Monitoring
 
 Validation does not end at release. Monitoring should be linked to a response plan and include:
@@ -202,7 +206,7 @@ Possible responses include recalibrating probabilities, adjusting thresholds, re
 
 ### Governance and Stop Rules
 
-Name the owner of the deployed system, the review frequency, escalation pathway, and authority to suspend use. Predetermined stop rules might include severe incidents, sustained metric breach, data-pipeline corruption, or an unvalidated upstream change. A rollback path and downtime workflow should be tested before they are needed.
+Name the owner of the deployed system, the review frequency, escalation pathway, and authority to suspend use. The reusable governance checklist and responsibility (RACI) map that assign these roles are in {ref}`Responsible AI, Regulation, and Security <a-governance-checklist-and-responsibility-map>`. Predetermined stop rules might include severe incidents, sustained metric breach, data-pipeline corruption, or an unvalidated upstream change. A rollback path and downtime workflow should be tested before they are needed.
 
 ## Current Research and Recent Advances
 

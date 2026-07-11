@@ -34,7 +34,8 @@ art101/
 │   ├── treatmentPlanning/treatmentPlanning.md# 7: AI for Treatment Planning
 │   ├── qa/qa.md                              # 8: AI for Quality Assurance and Safety
 │   ├── validation/validation.md              # 9: Validation and Evaluation of AI Models
-│   └── workflow/workflow.md                  # 10: Integration of AI into Clinical Workflow
+│   ├── workflow/workflow.md                  # 10: Integration of AI into Clinical Workflow
+│   └── responsibleAI/responsibleAI.md        # 11: Responsible AI, Regulation, and Security
 │
 └── todo/                         # Open content gaps, completed archive, and review log
     └── done/                    # Completed todos retained as an audit trail

@@ -39,6 +39,10 @@ These chapters follow the treatment pathway in order, each pairing the methods w
 
 **[10: Integration of AI into Clinical Workflow](workflow/workflow.md)** — Workflow analysis, user training and acceptance, and change management. Included because a model only creates value once it is embedded in real clinical practice, and most implementation failures are organizational rather than technical.
 
+### Responsibility across the lifecycle
+
+**[11: Responsible AI, Regulation, and Security](responsibleAI/responsibleAI.md)** — The cross-cutting counterpart to the workflow chapters: accountability, the AI lifecycle from intended use to retirement, fairness and health equity, transparency and liability, cybersecurity for connected clinical systems, and how regulation and privacy law differ by jurisdiction. Included as the canonical home for governance, regulatory, and security concerns that the earlier chapters touch locally and link to here, distinguishing binding law from voluntary standards and professional guidance.
+
 ## Resources and further reading
 
 A companion **[Resources](resources/index.md)** page collects open-source software for working with radiotherapy data (image I/O, visualization, treatment planning systems, and QA tools) along with external courses and workshops on AI in radiation therapy.
@@ -59,5 +63,6 @@ treatmentPlanning/treatmentPlanning
 qa/qa
 validation/validation
 workflow/workflow
+responsibleAI/responsibleAI
 resources/index
 ```
