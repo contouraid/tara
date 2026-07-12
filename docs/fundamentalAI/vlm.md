@@ -1,5 +1,19 @@
 # Vision Language Models
 
+## Before you begin
+
+**Prerequisites:** Read [Chapter 1](../intro/intro.md), the convolutional-network and transformer sections of [Chapter 2](index.md), and the [language-model companion](llm.md). Use the [cross-book glossary](../resources/glossary.md) for shared artificial intelligence (AI) definitions.
+
+**Learning objectives:** After this page, you should be able to:
+
+1. distinguish vision-only, language-only, and vision-language systems;
+2. compare dual-encoder, fusion/cross-attention, and visual-encoder-plus-decoder patterns;
+3. explain how contrastive, matching, captioning, and instruction objectives shape behavior;
+4. identify volumetric, spatial, longitudinal, privacy, grounding, hallucination, and workflow limitations in radiotherapy; and
+5. design task-specific evaluation and provenance, review, abstention, and monitoring controls.
+
+**Reading route:** Read after the Chapter 2 architecture overview and the language-model page. Cases A–C are multimodal, but a vision-language model is justified only for a bounded task where linking visual and textual evidence adds measurable value.
+
 Vision-language models (VLMs) learn relationships between visual information and language. Instead of mapping an image only to a fixed class or segmentation mask, a VLM can connect visual features with free-text concepts, questions, reports, or instructions. This makes VLMs relevant to radiation oncology, where clinical reasoning routinely combines volumetric images with reports, prescriptions, contours, dose distributions, and longitudinal notes.
 
 This page extends [Chapter 2](index.md). It assumes familiarity with convolutional neural networks (CNNs), transformers, attention, and transfer learning.
@@ -14,7 +28,7 @@ These models are powerful when the task is fixed and annotated examples are avai
 
 ### Language Models
 
-A language model learns patterns over text tokens. A large language model can generate, summarize, classify, or reason over text, but a text-only model does not directly observe an image. A textual description inserted into its prompt is an interpretation produced by someone or something else. The companion [Language Models, Generative AI, and Agents](llm.md) page is the canonical home for tokenization, instruction tuning, RAG, tool use, agents, text-specific risks, and clinical evaluation.
+A language model learns patterns over text tokens. A large language model can generate, summarize, classify, or reason over text, but a text-only model does not directly observe an image. A textual description inserted into its prompt is an interpretation produced by someone or something else. The companion [Language Models, Generative AI, and Agents](llm.md) page is the canonical home for tokenization, instruction tuning, retrieval-augmented generation (RAG), tool use, agents, text-specific risks, and clinical evaluation.
 
 ### Vision-Language Models
 
@@ -36,7 +50,7 @@ The defining feature is not a chat interface. It is learned coupling between the
 
 A dual-encoder model uses one network for images and another for text. Both produce embeddings in a shared space. Training encourages matched image-text pairs to be close and unmatched pairs to be farther apart.
 
-CLIP demonstrated the scale and transfer potential of this contrastive approach using natural-language supervision [[1]](https://proceedings.mlr.press/v139/radford21a.html). After training, a text prompt such as "an image containing pleural effusion" can be embedded and compared with an image embedding. This enables retrieval and zero-shot classification without a task-specific output class learned in the usual supervised way.
+Contrastive Language–Image Pre-training (CLIP) demonstrated the scale and transfer potential of this contrastive approach using natural-language supervision [[1]](https://proceedings.mlr.press/v139/radford21a.html). After training, a text prompt such as "an image containing pleural effusion" can be embedded and compared with an image embedding. This enables retrieval and zero-shot classification without a task-specific output class learned in the usual supervised way.
 
 Dual encoders are computationally efficient for search because image and text embeddings can be precomputed. Their global embeddings may, however, miss fine spatial relationships and are not naturally generative.
 
@@ -78,7 +92,7 @@ Instruction tuning trains the model to respond to prompts for tasks such as desc
 
 ### Volumetric and Multiseries Imaging
 
-Many general VLMs assume one or a few two-dimensional images. Radiation oncology uses three-dimensional CT, multiple MRI sequences, PET-CT, 4D-CT phases, daily CBCT, and dose volumes. Flattening these data into selected slices can omit a lesion or spatial relationship.
+Many general VLMs assume one or a few two-dimensional images. Radiation oncology uses three-dimensional computed tomography (CT), multiple magnetic resonance imaging (MRI) sequences, positron emission tomography–CT (PET-CT), four-dimensional CT (4D-CT) phases, daily cone-beam CT (CBCT), and dose volumes. Flattening these data into selected slices can omit a lesion or spatial relationship.
 
 Volumetric approaches must manage far more visual tokens. Strategies include 3D encoders, slice sampling, hierarchical pooling, region selection, and separate encoders for each series. The chosen strategy determines which information the language model can access.
 
@@ -86,9 +100,9 @@ Volumetric approaches must manage far more visual tokens. Strategies include 3D 
 
 Radiotherapy questions are spatial: whether a target overlaps an organ, where a hotspot lies, or how anatomy changed. A VLM must retain patient coordinate systems, orientation, voxel spacing, and relationships between image, contour, and dose grids. A model that sees only rendered screenshots may lose this information.
 
-### DICOM and Structured Objects
+### Digital Imaging and Communications in Medicine (DICOM) and Structured Objects
 
-Clinical context includes metadata and DICOM-RT objects, not just pixels. RT Structure Sets encode contours, RT Plan objects encode beams and prescriptions, and RT Dose objects encode dose grids. A multimodal system may need dedicated encoders or structured representations for these inputs rather than converting everything to prose.
+Clinical context includes metadata and DICOM radiotherapy (DICOM-RT) objects, not just pixels. Radiotherapy (RT) Structure Sets encode contours, RT Plan objects encode beams and prescriptions, and RT Dose objects encode dose grids. A multimodal system may need dedicated encoders or structured representations for these inputs rather than converting everything to prose.
 
 ### Longitudinal Context
 
@@ -186,7 +200,13 @@ Monitor edit distance, factual corrections, rejected outputs, unsupported claims
 
 ## Recap
 
-Vision-language models connect visual and textual representations through contrastive alignment, cross-attention, or generative language decoding. Unlike vision-only CNNs or transformers, they can retrieve with natural-language concepts, answer questions, and generate text. Radiation oncology offers valuable multimodal use cases but also difficult volumetric, spatial, longitudinal, privacy, and safety requirements. Clinical value must be demonstrated through grounded factual evaluation and prospective human-VLM workflow studies, with constrained use and full provenance.
+- **Objective 1:** Vision-only systems map visual data to constrained outputs, language-only systems operate on text representations, and vision-language models connect both modalities.
+- **Objective 2:** Dual encoders align separate embeddings, fusion or cross-attention lets modalities interact, and a visual encoder plus language decoder generates sequences conditioned on images.
+- **Objective 3:** Contrastive, image-text matching, captioning, next-token, and instruction objectives reward different retrieval, alignment, or generation behaviors.
+- **Objective 4:** Radiotherapy adds volumetric series, physical coordinates, structured DICOM objects, longitudinal context, privacy exposure, grounding ambiguity, hallucination, and workflow consequences.
+- **Objective 5:** Evaluation must match retrieval, classification, generation, or grounding and extend to external and prospective use, with provenance, constrained scope, human review, abstention, and monitoring.
+
+**Important limitation and misconception:** Text that plausibly describes an image is not evidence that the model used the correct region, series, time point, or patient context.
 
 ## References
 

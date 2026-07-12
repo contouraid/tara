@@ -1,5 +1,19 @@
 # 12: Responsible AI, Regulation, and Security
 
+## Before you begin
+
+**Prerequisites:** Read Chapters 1, 10, and 11 and the application chapter relevant to the artificial intelligence (AI) system. Legal and regulatory details require current local expertise. Use the [cross-book glossary](../resources/glossary.md).
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. distinguish binding law, regulator guidance, consensus guidance, technical standards, institutional policy, and ethics;
+2. assign evidence, approval, accountability, reversal, and records to each AI lifecycle stage;
+3. identify fairness, transparency, privacy, cybersecurity, third-party, and patient-participation concerns for an intended use;
+4. state regulatory claims with jurisdiction, source, date, product scope, and appropriate uncertainty; and
+5. build a responsibility and governance map with escalation, change, incident, monitoring, and retirement controls.
+
+**Reading route:** Every reader reaches this chapter after validation and workflow because responsibility spans the complete system. Case A raises data equity and transparency, Case B emphasizes safety and regulated use, and Case C exposes cybersecurity, vendor, update, downtime, and accountability dependencies.
+
 Earlier chapters describe how to build, validate, integrate, and quality-assure specific AI tools. This chapter is the cross-cutting counterpart: it names who is accountable, what evidence and approvals a tool needs across its whole life, how patients and their data are protected, how a connected model is defended from attack, and how the answers change with jurisdiction. These concerns appear in fragments throughout the book—fairness in [validation](../validation/validation.md), governance in [workflow](../workflow/workflow.md), the regulatory frame in [quality assurance](../qa/qa.md), and prompt-injection risk in [vision–language models](../fundamentalAI/vlm.md)—but they are one subject and are treated canonically here. Those chapters supply operational detail; this chapter supplies the framework they hang on.
 
 Two cautions apply throughout. First, this is orientation, not legal advice: the applicable law and standards for a specific tool must be determined with institutional regulatory, legal, and information-security expertise. Second, regulation moves, so **every regulatory statement below names its jurisdiction, source, and effective or review date**; a claim without those three is not actionable and should be checked before it is relied on.
@@ -7,6 +21,8 @@ Two cautions apply throughout. First, this is orientation, not legal advice: the
 ## Six Kinds of "Must"
 
 A recurring source of confusion is treating every requirement as if it had the same force. It does not. Six distinct kinds of obligation govern clinical AI, and a responsible program can state, for any given control, which kind it is answering to:
+
+Organization and legal abbreviations used below are expanded here once: European Union (EU), United States (US), General Data Protection Regulation (GDPR), Health Insurance Portability and Accountability Act (HIPAA), US Food and Drug Administration (FDA), World Health Organization (WHO), American Society for Radiation Oncology (ASTRO), European Society for Radiotherapy and Oncology (ESTRO), American Association of Physicists in Medicine (AAPM), International Electrotechnical Commission (IEC), and International Organization for Standardization (ISO).
 
 | Kind | Force | Examples |
 |---|---|---|
@@ -162,7 +178,13 @@ The exact titles vary by institution; the requirement is that each row has a sin
 
 ## Recap
 
-Responsible clinical AI is a single subject with many faces: accountability, evidence, equity, privacy, security, and jurisdiction. Six kinds of obligation—binding law, regulator guidance, consensus guidance, technical standards, institutional policy, and ethics—carry different force and must not be substituted for one another. The AI lifecycle, from intended use through retirement, works only when each stage has a named owner, explicit evidence, an approval, and a reversal path. Regulation is jurisdiction- and date-specific, so every regulatory claim must name its source and effective date and distinguish law from voluntary standards. Fairness spans data, model target, workflow, access, and outcome rather than metric parity alone. Cybersecurity is a clinical-safety property for systems that read from and write to safety-critical databases, covering permissions, auditability, adversarial inputs, third-party dependence, downtime, and recovery. A governance checklist and RACI-style responsibility map turn these principles into named roles and escalation paths—the point at which responsibility stops being an aspiration and becomes an assignment.
+- **Objective 1:** Binding law, regulator guidance, consensus guidance, technical standards, institutional policy, and ethics carry different authority and cannot substitute for one another.
+- **Objective 2:** Every lifecycle stage needs a named activity, evidence, owner, approval, record, and reversal path from intended use through retirement.
+- **Objective 3:** Responsible design treats fairness across access and outcomes, meaningful transparency, privacy, security, third-party dependence, and patient participation as system properties.
+- **Objective 4:** A regulatory statement is usable only with jurisdiction, authoritative source, effective or review date, product and use scope, and a clear distinction between requirements and advice.
+- **Objective 5:** Governance becomes operational through named accountable and responsible roles, consultation and notification paths, escalation, incidents, monitoring, change approval, stop authority, and retirement.
+
+**Important limitation and misconception:** Compliance with a voluntary standard is not regulatory authorization, regulatory authorization is not local clinical validation, and either can coexist with unresolved ethical or equity concerns.
 
 ## References
 

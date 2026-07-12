@@ -1,12 +1,26 @@
 # 5: AI for Image Contouring
 
+## Before you begin
+
+**Prerequisites:** Read Chapters 1–4 or know the artificial intelligence (AI) lifecycle, U-Net concept, target and organ-at-risk roles, Digital Imaging and Communications in Medicine (DICOM) geometry, label provenance, and patient-level splitting. Use the [cross-book glossary](../resources/glossary.md).
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. distinguish binary, multiclass, semantic, and instance segmentation;
+2. explain why U-Net, three-dimensional, attention, and foundation approaches may suit different contouring tasks;
+3. choose loss and evaluation measures that expose overlap, boundary, small-structure, and clinical errors;
+4. design an evaluation that accounts for observer variation, external data, expert editing, and downstream effects; and
+5. specify review, quality-assurance, escalation, and monitoring controls for an autocontouring workflow.
+
+**Reading route:** This is the first application chapter. Clinicians may focus on task definitions, evaluation, and integration; technical readers should include architectures and losses. Follow {ref}`Case A <recurring-cases>` for multimodal head-and-neck autocontouring and Case C for propagated contours in an adaptive workflow.
+
 Target and organ-at-risk (OAR) delineation is a consequential, often time-consuming step in radiotherapy planning. Manual contours vary between observers, especially where boundaries depend on interpretation rather than a clearly visible interface [[1]](https://doi.org/10.1016/j.radonc.2016.09.019). Automated segmentation can reduce editing time for some structures and settings, but geometric agreement alone does not demonstrate clinical acceptability.
 
-Before constructing a contouring dataset, use the canonical [radiotherapy data and informatics foundations](../medicalImaging/medicalImaging.md): it covers RTSTRUCT/SEG provenance, physical geometry, contour rasterization, naming harmonization, patient-level splitting, and leakage-safe preprocessing.
+Before constructing a contouring dataset, use the canonical [radiotherapy data and informatics foundations](../medicalImaging/medicalImaging.md): it covers DICOM RT Structure Set (RTSTRUCT) and Segmentation (SEG) object provenance, physical geometry, contour rasterization, naming harmonization, patient-level splitting, and leakage-safe preprocessing.
 
 ## Contouring Fundamentals
 
-Contouring in radiation oncology is fundamentally a segmentation task—assigning a label (e.g., tumor, specific OAR, background) to each voxel in a 3D medical image (typically CT or MRI). Understanding the different types of segmentation is essential for applying deep learning effectively.
+Contouring in radiation oncology is fundamentally a segmentation task—assigning a label (e.g., tumor, specific OAR, background) to each voxel in a three-dimensional medical image, typically computed tomography (CT) or magnetic resonance imaging (MRI). Understanding the different types of segmentation is essential for applying deep learning effectively.
 
 ### Binary vs. Multi-class Segmentation
 
@@ -234,7 +248,13 @@ Clinical integration should be evaluated as a human-AI workflow: editing time, c
 
 ## Recap
 
-Auto-contouring is voxel-wise prediction embedded in a clinical review process. U-Net-family, volumetric, and attention-based models provide candidate contours; loss and metric choices shape what errors are rewarded or exposed. Safe use requires representative external evaluation, structure-level failure analysis, expert review, and monitoring of downstream clinical effects.
+- **Objective 1:** Binary and multiclass segmentation differ in label count; semantic segmentation labels categories, whereas instance segmentation separates individual objects.
+- **Objective 2:** U-Net preserves multiscale spatial detail, three-dimensional models use volumetric context, attention can connect distant regions, and foundation approaches may transfer broad representations—but suitability remains task-specific.
+- **Objective 3:** Losses determine training incentives; overlap, surface, tail, small-structure, edit, and downstream dose measures expose different failures.
+- **Objective 4:** Credible evaluation represents sites and devices, documents observer-derived labels, freezes the pipeline, measures expert correction and clinical consequence, and tests externally.
+- **Objective 5:** Clinical use needs input checks, accountable expert review, escalation or fallback for failures, version control, and monitoring of edits and downstream effects.
+
+**Important limitation and misconception:** A high Dice score does not prove that a contour is clinically acceptable; a small boundary error near a critical structure may matter more than a larger harmless disagreement elsewhere.
 
 ## References
 

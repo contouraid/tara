@@ -1,8 +1,18 @@
 # 2: Fundamentals of Artificial Intelligence through Deep Learning
 
-## How to Use This Guide
+## Before you begin
 
-This guide is designed for clinicians, researchers, and students interested in the fundamentals of deep learning, with a focus on applications in radiation oncology. Each section builds on the previous, starting from traditional machine learning and progressing to advanced deep learning architectures. The companion pages cover [language models, generative AI, and agents](llm.md) and [vision-language models](vlm.md) without duplicating their text-only and multimodal safety requirements.
+**Prerequisites:** Read [Chapter 1](../intro/intro.md), especially the {ref}`common clinical artificial intelligence (AI) lifecycle <common-ai-lifecycle>`. Complete beginners should also know from Chapters 3 and 4 what a radiotherapy task and its imaging data represent. Use the [cross-book glossary](../resources/glossary.md) for canonical definitions.
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. represent a prediction as features, weights, bias, activation, output, and loss;
+2. explain at a conceptual level how forward propagation, backpropagation, and gradient-based optimization train a network;
+3. compare convolutional, recurrent, autoencoder, generative adversarial, transformer, and U-Net families by the data relationship they encode;
+4. select a plausible architecture and objective for classification, regression, generation, or segmentation; and
+5. explain why architecture choice alone does not establish generalization, clinical utility, or safety.
+
+**Reading route:** Technical readers can study the mathematics in sequence. Clinicians may focus first on the overview, loss functions, convolutional neural networks, transformers, U-Net, and recap. The companion pages cover [language models, generative AI, and agents](llm.md) and [vision-language models](vlm.md). In the recurring cases, this chapter explains the model components behind Case A's autocontour and the prediction or automation systems in Cases B and C.
 
 ---
 
@@ -20,7 +30,7 @@ The perceptron's significance lies in its ability to learn from data through a s
 
 Despite its simplicity, the perceptron can solve linearly separable problems—those where a single straight line (or hyperplane in higher dimensions) can separate the different classes. This capability makes it suitable for basic classification tasks, such as distinguishing between different tissue types based on a few radiological features.
 
-However, the perceptron has significant limitations. As Marvin Minsky and Seymour Papert demonstrated in their 1969 book "Perceptrons," a single perceptron cannot solve problems that are not linearly separable, such as the XOR problem. This limitation arises because a single perceptron can only represent a linear decision boundary.
+However, the perceptron has significant limitations. As Marvin Minsky and Seymour Papert demonstrated in their 1969 book "Perceptrons," a single perceptron cannot solve problems that are not linearly separable, such as the exclusive OR (XOR) problem. This limitation arises because a single perceptron can only represent a linear decision boundary.
 
 In radiation oncology, many problems involve complex, non-linear relationships between features and outcomes. For instance, the relationship between radiation dose and tumor control probability follows a sigmoid curve rather than a straight line. Similarly, the interaction between dose distribution and normal tissue complication probability involves complex, non-linear relationships that a single perceptron cannot capture.
 
@@ -65,7 +75,7 @@ Activation functions introduce non-linearity into neural networks. Without them,
 | ReLU          | $f(x) = \max(0, x)$                    | $[0, \infty)$ | Fast, less vanishing grad.  | Dying ReLU                  | Most hidden layers          |
 | Leaky ReLU    | $f(x) = x$ if $x > 0$ else $\alpha x$ | $(-\infty, \infty)$ | Prevents dying ReLU         | Adds a parameter            | Hidden layers               |
 | PReLU         | $\alpha$ learnable                     | $(-\infty, \infty)$ | Learns negative slope       | Slightly more complex       | Hidden layers               |
-| ELU           | $f(x) = x$ if $x > 0$ else $\alpha(e^{x}-1)$ | $(-\alpha, \infty)$ | Smooth, less bias shift     | More computation            | Hidden layers               |
+| Exponential linear unit (ELU) | $f(x) = x$ if $x > 0$ else $\alpha(e^{x}-1)$ | $(-\alpha, \infty)$ | Smooth, less bias shift | More computation | Hidden layers |
 | Swish         | $f(x) = x \cdot \sigma(x)$             | $(-\infty, \infty)$ | Sometimes better than ReLU  | More computation            | Deep networks               |
 
 ### Sigmoid, Tanh, ReLU and Variants
@@ -261,7 +271,7 @@ Where $\odot$ represents element-wise multiplication, and $f'$ is the derivative
 
 This recursive computation allows the error signal to propagate backward through the network, with each layer's parameters receiving gradients that indicate how they contributed to the final error.
 
-In radiation oncology applications, backpropagation enables models to learn complex relationships between input data (like CT or MRI images) and output targets (like organ contours or dose distributions). The efficiency of backpropagation makes it practical to train deep networks on the large, high-dimensional datasets typical in medical imaging.
+In radiation oncology applications, backpropagation enables models to learn complex relationships between input data such as computed tomography (CT) or magnetic resonance imaging (MRI) and output targets such as organ contours or dose distributions. The efficiency of backpropagation makes it practical to train deep networks on the large, high-dimensional datasets typical in medical imaging.
 
 ### Computational Graphs
 
@@ -518,7 +528,7 @@ Skip connections or residual connections provide shortcuts for gradient flow, si
 
 However, the most effective solution has been the development of specialized RNN architectures like LSTM and GRU, which we'll discuss next.
 
-### LSTM and GRU Architectures
+### Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) Architectures
 
 Long Short-Term Memory (LSTM) networks were designed specifically to address the vanishing gradient problem in RNNs. LSTMs introduce a more complex cell structure with three gates that regulate information flow:
 
@@ -825,38 +835,6 @@ The choice of architecture depends on factors like the specific segmentation tas
 
 ---
 
-## Key Takeaways
-
-- Traditional ML is valuable for small datasets and interpretability, but deep learning is essential for complex, high-dimensional, and unstructured data.
-- Deep learning models (CNNs, RNNs, transformers, etc.) have revolutionized medical image analysis and prediction tasks in radiation oncology.
-- The choice of architecture, loss function, and training strategy should be guided by the clinical problem, data characteristics, and available resources.
-- Understanding the fundamentals enables better model design, troubleshooting, and critical evaluation of AI tools in clinical practice.
-
----
-
-(fundamental-ai-glossary)=
-## Glossary
-
-- **Activation Function:** A mathematical function applied to a neuron's output to introduce non-linearity.
-- **Backpropagation:** The algorithm for computing gradients in neural networks.
-- **Batch Normalization:** A technique to stabilize and accelerate training by normalizing layer inputs.
-- **Convolutional Neural Network (CNN):** A neural network architecture specialized for grid-like data such as images.
-- **Dice Loss:** A loss function for segmentation tasks based on the Dice similarity coefficient.
-- **Epoch:** One complete pass through the training dataset.
-- **Feature Engineering:** The process of creating and selecting input features for a model.
-- **Gradient Descent:** An optimization algorithm for minimizing loss functions.
-- **Initialization:** The method for setting initial model weights.
-- **Learning Rate:** A hyperparameter controlling the step size in gradient descent.
-- **Overfitting:** When a model learns noise in the training data, reducing generalization.
-- **Pooling:** A downsampling operation in CNNs to reduce spatial dimensions.
-- **Recurrent Neural Network (RNN):** A neural network architecture for sequential data.
-- **Skip Connection:** A direct connection between non-adjacent layers, used in architectures like ResNet and U-Net.
-- **Transfer Learning:** Using a model pretrained on one task as a starting point for another.
-- **Transformer:** A neural network architecture based on self-attention, effective for sequence and image data.
-- **U-Net:** A popular encoder-decoder architecture for medical image segmentation.
-
----
-
 ```{toctree}
 :maxdepth: 2
 :caption: Contents
@@ -872,7 +850,13 @@ vlm
 
 ## Recap
 
-Neural-network design combines representations, nonlinearities, objectives, optimization, and task-specific data handling. Architecture names are useful shorthand, but performance depends on the complete pipeline and evaluation design. Clinical use requires evidence beyond a development benchmark.
+- **Objective 1:** A prediction combines input features with learned weights and a bias, then applies activations; a loss measures the discrepancy relevant to training.
+- **Objective 2:** Forward propagation produces outputs, backpropagation computes how parameters affect loss, and an optimizer updates parameters from those gradients.
+- **Objective 3:** Convolutional networks encode local spatial patterns, recurrent models encode order, autoencoders learn compressed representations, generative adversarial networks learn through competing networks, transformers use attention, and U-Net joins multiscale context with spatial detail.
+- **Objective 4:** Output type and data structure guide the architecture and objective: class probabilities, continuous values, generated samples, and spatial masks require different constraints and losses.
+- **Objective 5:** Architecture is one part of a frozen pipeline; representative data, leakage control, comparison, calibration, external validation, workflow evaluation, and monitoring determine whether it generalizes safely.
+
+**Important limitation and misconception:** A more complex or newer architecture is not inherently better, deep learning is not essential for every high-dimensional task, and benchmark superiority is not evidence of patient benefit.
 
 ## References
 

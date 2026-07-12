@@ -1,5 +1,19 @@
 # 7: AI for Treatment Planning
 
+## Before you begin
+
+**Prerequisites:** Read Chapters 1–4 and understand prescription, targets and organs at risk, dose distributions, image geometry, training data, and inference. Use the [cross-book glossary](../resources/glossary.md). Artificial intelligence (AI) refers here to the complete planning support system, not only its model.
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. distinguish dose-volume prediction, spatial dose prediction, plan-quality estimation, optimization support, and automated planning;
+2. explain how training plans encode historical priorities and process variation;
+3. identify the physics, deliverability, robustness, and prescription checks needed after an AI prediction;
+4. compare technical, dosimetric, workflow, and clinical measures for planning evaluation; and
+5. define human approval, fallback, version, and monitoring controls for planning automation.
+
+**Reading route:** Clinical readers may focus on the task distinctions, quality assessment, tradeoffs, and recap; technical readers should include prediction and optimization methods. Cases A and B contrast conventional and stereotactic priorities; Case C tests whether rapid re-planning remains safe under time pressure.
+
 Treatment planning is an iterative process that translates a prescription and clinical priorities into a deliverable beam arrangement. There is no single patient-independent definition of an "optimal" plan: target coverage, normal-tissue dose, robustness, delivery complexity, and clinical preferences must be balanced. Machine-learning systems can estimate achievable objectives or candidate dose distributions, but a prediction is not a physics calculation or a deliverable plan [[1]](https://doi.org/10.1259/bjr.20180270).
 
 Planning models depend on correctly linked images, structures, prescriptions, plan versions, dose grids, and delivery records. See the canonical [radiotherapy data and informatics foundations](../medicalImaging/medicalImaging.md) for the object model, geometry and units, dose-grid alignment, cohort construction, and leakage-safe preprocessing used throughout this chapter.
@@ -8,13 +22,13 @@ Planning models depend on correctly linked images, structures, prescriptions, pl
 
 Dose prediction models use deep learning to estimate the radiation dose distribution that would result from a treatment plan, without performing the full physics-based dose calculation. These models can serve as rapid approximations or as components in automated planning systems.
 
-### DVH Estimation
+### Dose-Volume Histogram (DVH) Estimation
 
-The Dose-Volume Histogram (DVH) is a fundamental tool in radiation therapy planning, summarizing the dose distribution within a structure as a curve showing the volume receiving at least a given dose. DVH-based metrics (e.g., V20 for lung, mean heart dose) are commonly used as plan evaluation criteria and predictors of toxicity risk.
+The dose-volume histogram is a fundamental tool in radiation therapy planning, summarizing the dose distribution within a structure as a curve showing the volume receiving at least a given dose. DVH-based metrics (e.g., V20 for lung, mean heart dose) are commonly used as plan evaluation criteria and predictors of toxicity risk.
 
 Deep learning models for DVH estimation aim to predict these curves or metrics directly from patient anatomy and treatment parameters, without requiring a complete treatment plan. These models typically:
 
-1. Take as input the patient's CT images, contours of target volumes and OARs, and potentially treatment parameters (e.g., prescription dose, treatment technique).
+1. Take as input the patient's computed tomography (CT) images, contours of target volumes and organs at risk (OARs), and potentially treatment parameters (e.g., prescription dose, treatment technique).
 
 2. Output predicted DVH curves or specific DVH metrics for targets and OARs.
 
@@ -32,7 +46,7 @@ Pre-planning feasibility assessment: Quickly estimating whether dosimetric goals
 
 Plan quality evaluation: Comparing achieved DVHs against predicted "optimal" DVHs to identify potential improvements.
 
-Treatment technique selection: Predicting DVHs for different modalities (e.g., IMRT vs. proton therapy) to guide the choice of technique.
+Treatment technique selection: Predicting DVHs for different modalities (e.g., intensity-modulated radiotherapy [IMRT] vs. proton therapy) to guide the choice of technique.
 
 The accuracy and meaning of a DVH prediction depend on the plans used for training. A model can reproduce institutional trade-offs and systematic weaknesses as well as expertise. Early knowledge-based methods therefore framed predicted DVHs as achievable ranges or objectives, not patient outcomes [[2]](https://doi.org/10.1016/j.ijrobp.2012.07.311).
 
@@ -257,7 +271,13 @@ These approaches remain heterogeneous in inputs, planning technique, normalizati
 
 ## Recap
 
-Planning AI can estimate achievable objectives, predict candidate dose, tune optimization, or support plan review. These outputs inherit the priorities and limitations of their training data. A clinically usable result must be physically calculated, deliverable, robust, reviewed against the prescription and anatomy, and evaluated in the workflow where it will be used.
+- **Objective 1:** Planning AI may predict dose-volume goals or spatial dose, estimate quality, tune optimization, or generate candidate plans; these outputs are not interchangeable.
+- **Objective 2:** Models learn what historical plans, planners, protocols, equipment, and approval practices made common, including their omissions and inequities.
+- **Objective 3:** A candidate requires independent dose calculation, deliverability and complexity checks, robustness where relevant, and clinical review against prescription and anatomy.
+- **Objective 4:** Evaluation should connect prediction error and dose-volume measures to plan acceptability, edits, time, consistency, failure tails, and when justified patient or workflow outcomes.
+- **Objective 5:** Automation needs accountable approval, supported-input checks, fallback planning, traceable models and protocols, change control, and monitoring of overrides and quality.
+
+**Important limitation and misconception:** A predicted dose is not a deliverable treatment plan, and reproducing historically approved plans does not prove that those plans are optimal or equitable.
 
 ## References
 

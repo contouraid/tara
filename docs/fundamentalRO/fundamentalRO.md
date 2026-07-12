@@ -1,5 +1,19 @@
 # 3: Fundamentals of Radiation Oncology
 
+## Before you begin
+
+**Prerequisites:** None beyond [Chapter 1](../intro/intro.md). The [cross-book glossary](../resources/glossary.md) defines clinical and technical terms.
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. distinguish treatment intent, prescription, fractionation, dose distribution, modality, and biological response;
+2. trace a patient from consultation and simulation through planning, delivery, follow-up, and possible adaptation;
+3. explain how targets, organs at risk, imaging, dose, motion, and uncertainty constrain a treatment;
+4. compare the purposes of major external-beam, brachytherapy, and radiopharmaceutical modalities; and
+5. identify the responsible roles, handoffs, independent barriers, and stop authority around an artificial intelligence (AI)-supported step.
+
+**Reading route:** Complete beginners and technical readers should read this before the application chapters. Clinicians may scan familiar sections and focus on roles, uncertainty, and AI consequences. {ref}`Cases A–C <recurring-cases>` instantiate the curative, stereotactic, and adaptive pathways described here.
+
 Radiation oncology uses ionizing radiation to control or eradicate cancer, prevent recurrence, or relieve symptoms while limiting injury to normal tissue. It is both a clinical specialty and a tightly coupled technical system. A useful plan must express the right clinical intent, represent the right anatomy, calculate a defensible dose, be deliverable by the commissioned equipment, and remain appropriate as the patient and disease change.
 
 AI applications discussed elsewhere in this book operate inside that system. Their outputs are not abstract labels or arrays: they can alter a target, a dose distribution, a treatment interruption, or a patient conversation. This chapter supplies the clinical mental model needed to understand those consequences.
@@ -14,7 +28,7 @@ Several concepts that are often blurred together answer different questions:
 | **Prescription** | What treatment has the radiation oncologist authorized? | target, total dose, dose per fraction, number and frequency of fractions, technique or modality requirements, and sometimes dose constraints |
 | **Fractionation** | How is the total course divided over time? | 60 Gy in 30 daily fractions or 30 Gy in 10 fractions |
 | **Dose distribution** | Where is absorbed dose expected to go in this patient model? | target coverage and dose-volume values for organs at risk |
-| **Delivery modality and technique** | How will that distribution be produced? | photon VMAT, proton pencil-beam scanning, electron field, brachytherapy applicator |
+| **Delivery modality and technique** | How will that distribution be produced? | photon volumetric modulated arc therapy (VMAT), proton pencil-beam scanning, electron field, brachytherapy applicator |
 | **Biological response** | What happens to tumor and normal tissue over time? | local control, acute mucositis, late fibrosis, symptom relief |
 
 Intent is established from diagnosis, stage, prognosis, competing health risks, patient goals, and alternative treatments. **Definitive** radiotherapy is the primary local treatment; **neoadjuvant** treatment precedes another therapy; **adjuvant** treatment follows it; **salvage** treatment addresses persistent or recurrent disease; and **palliative** treatment prioritizes symptom relief or prevention of morbidity. These categories describe purpose, not automatically dose or quality. Palliative treatment still requires accurate identification, prescription, planning, delivery, and follow-up.
@@ -62,7 +76,7 @@ Photon beams have an entrance dose, a build-up region, and dose beyond a deep ta
 
 Electrons lose energy and scatter over a finite useful depth, which makes them valuable for many superficial targets but less suitable for deep disease. Protons and heavier ions deposit increasing energy near the end of their range. Multiple energies cover a volume, potentially reducing exit dose compared with photons.
 
-That finite range is also a vulnerability. CT-to-stopping-power conversion, setup, anatomical change, implants, gas, and motion can move the distal edge. Robust particle planning tests uncertainty scenarios; a sharp gradient is useful only if its position is reliable.
+That finite range is also a vulnerability. Computed tomography (CT)-to-stopping-power conversion, setup, anatomical change, implants, gas, and motion can move the distal edge. Robust particle planning tests uncertainty scenarios; a sharp gradient is useful only if its position is reliable.
 
 ## Modalities and Delivery Techniques
 
@@ -70,7 +84,7 @@ That finite range is also a vulnerability. CT-to-stopping-power conversion, setu
 
 ### External-Beam Photons and Electrons
 
-A medical linear accelerator can produce megavoltage photons and, on many systems, electrons. Three-dimensional conformal radiotherapy shapes several fields to the target. IMRT varies fluence across fields, while VMAT delivers modulated radiation during gantry rotation. These methods can improve conformality but create steep gradients and many interdependent parameters. They remain sensitive to contouring, calculation, setup, motion, and machine performance. NCI provides a stable introductory comparison of photon, electron, proton, conformal, IMRT, IGRT, and stereotactic external-beam techniques [[4]](https://www.cancer.gov/about-cancer/treatment/types/radiation-therapy).
+A medical linear accelerator can produce megavoltage photons and, on many systems, electrons. Three-dimensional conformal radiotherapy shapes several fields to the target. Intensity-modulated radiotherapy (IMRT) varies fluence across fields, while VMAT delivers modulated radiation during gantry rotation. These methods can improve conformality but create steep gradients and many interdependent parameters. They remain sensitive to contouring, calculation, setup, motion, and machine performance. The National Cancer Institute (NCI) provides a stable introductory comparison of photon, electron, proton, conformal, IMRT, image-guided radiotherapy (IGRT), and stereotactic external-beam techniques [[4]](https://www.cancer.gov/about-cancer/treatment/types/radiation-therapy).
 
 Electrons have a useful finite depth but broad lateral scatter and sensitivity to surface contour and heterogeneity. Bolus may deliberately bring dose toward the surface. Photon/electron selection depends on target depth, shape, nearby structures, energy, field arrangement, and local equipment—not the label “superficial” alone.
 
@@ -78,7 +92,7 @@ Electrons have a useful finite depth but broad lateral scatter and sensitivity t
 
 Protons can reduce integral dose or dose beyond a target in selected geometries. Pencil-beam scanning paints dose spot by spot and layer by layer; passive-scattering techniques shape a broader field. Heavy ions such as carbon have different physical and biological properties and much more limited availability.
 
-Particle therapy is not automatically safer or superior. Range and motion uncertainty, variable biological effectiveness, complex planning and QA, capital cost, access, and the strength of comparative clinical evidence all matter. A favorable dose comparison is a planning result; it is not by itself proof of better patient outcome.
+Particle therapy is not automatically safer or superior. Range and motion uncertainty, variable biological effectiveness, complex planning and quality assurance (QA), capital cost, access, and the strength of comparative clinical evidence all matter. A favorable dose comparison is a planning result; it is not by itself proof of better patient outcome.
 
 ### Brachytherapy
 
@@ -104,7 +118,7 @@ Imaging, activity calibration, pharmacokinetics, organ segmentation, time-activi
 
 Simulation places the patient in a treatment position that is both clinically appropriate and reproducible. The scan must cover the relevant anatomy and include devices, contrast phases, breathing states, and acquisition settings needed for planning. Immobilization may use masks, vacuum cushions, body molds, bite blocks, breast boards, indexed supports, or internal/external markers. Comfort matters because an intolerable position is not reproducible over a course.
 
-Planning CT supplies patient geometry and material information for many external-beam calculations. MRI, PET, diagnostic CT, ultrasound, or pathology may refine target definition but must be linked to the correct patient, time, position, and coordinate system. The imaging/data model is treated in [Chapter 4](../medicalImaging/medicalImaging.md); transformation and fusion are treated in [Chapter 6](../registration/registration.md).
+Planning CT supplies patient geometry and material information for many external-beam calculations. Magnetic resonance imaging (MRI), positron emission tomography (PET), diagnostic CT, ultrasound, or pathology may refine target definition but must be linked to the correct patient, time, position, and coordinate system. The imaging/data model is treated in [Chapter 4](../medicalImaging/medicalImaging.md); transformation and fusion are treated in [Chapter 6](../registration/registration.md).
 
 ### Target Volumes and Organs at Risk
 
@@ -223,7 +237,13 @@ AI should be evaluated at the decision boundary. A segmentation score is incompl
 
 ## Recap
 
-Radiotherapy begins with a clinical indication and intent, not a machine or model. The prescription identifies what is to be treated, with what dose and fractionation; planning estimates a spatial dose distribution; a modality and technique make that distribution deliverable; image guidance and verification manage the real patient and equipment; and follow-up measures tumor response, toxicity, function, and patient experience. Photons, electrons, particles, brachytherapy, stereotactic techniques, and radiopharmaceutical therapy have different advantages, uncertainties, and workflows. Safe care depends on qualified professionals, explicit handoffs, independent barriers, and stop authority. AI can support each step only when its accountable user, plausible failure, clinical consequence, and independent controls are defined.
+- **Objective 1:** Intent states why treatment is given; a prescription authorizes target, dose, fractionation, and constraints; planning estimates spatial dose; modality and technique define delivery; response is observed afterward.
+- **Objective 2:** The pathway links consultation, simulation, contouring, prescription, planning, review, image guidance, delivery, and follow-up, with reassessment and adaptation when appropriate.
+- **Objective 3:** Targets and organs at risk, imaging fidelity, anatomy and motion, calculation and delivery uncertainty, and patient change jointly constrain safe treatment.
+- **Objective 4:** Photons, electrons, charged particles, brachytherapy, stereotactic techniques, and radiopharmaceutical therapy differ in how dose is produced, localized, verified, and managed.
+- **Objective 5:** Safe AI support requires an accountable qualified user, explicit handoffs, plausible-failure analysis, independent barriers, escalation, and stop authority.
+
+**Important limitation and misconception:** A technically deliverable dose distribution is not automatically clinically appropriate, and AI output does not transfer professional accountability to the model.
 
 ## References
 

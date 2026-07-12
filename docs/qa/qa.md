@@ -1,5 +1,19 @@
 # 9: AI for Quality Assurance and Safety
 
+## Before you begin
+
+**Prerequisites:** Read Chapters 1, 3, and 4; know the artificial intelligence (AI) lifecycle, radiotherapy pathway, data objects, intended use, distribution shift, and the distinction between quality assurance and quality control. Use the [cross-book glossary](../resources/glossary.md).
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. distinguish acceptance testing, commissioning, routine quality control, patient-specific verification, and end-to-end testing;
+2. map an AI check to the hazard, process stage, detection opportunity, and independent safety layers it supports;
+3. explain rare-event, shared-dependency, false-alarm, automation-bias, and drift limitations of learned anomaly detection;
+4. define evidence and human-factors evaluation for machine, patient-specific, plan, chart, or workflow QA; and
+5. specify ownership, configuration control, monitoring, escalation, and change controls for an AI QA tool.
+
+**Reading route:** All readers deploying AI should read this chapter. Clinicians may emphasize plan/chart checks and automation bias; physicists and engineers should include commissioning, machine and patient-specific QA, and lifecycle controls. Case B centers the layered checks around stereotactic treatment; Case C tests rapid adaptive checks and safe fallback.
+
 Quality assurance (QA) in radiation oncology is the planned set of activities used to establish confidence that equipment, software, data, and clinical processes will perform as intended. Quality control (QC) is the operational testing within that system. Safety is the outcome sought: preventing, detecting, and mitigating errors before they harm a patient.
 
 AI can increase the reach and speed of QA by learning patterns across images, plans, log files, and workflow events. It can also create new failure modes. A model may share a hidden dependency with the system it checks, fail silently after a software update, or automate a weak surrogate rather than the clinically important hazard. AI-based QA must therefore be one layer in a broader safety architecture, not the sole source of assurance.
@@ -44,7 +58,7 @@ For AI, calendar-based checks should be supplemented by event-based checks after
 - model, operating system, driver, or application updates;
 - scanner or reconstruction changes;
 - treatment planning system upgrades;
-- data-interface or DICOM-routing changes;
+- data-interface or Digital Imaging and Communications in Medicine (DICOM)-routing changes;
 - a new patient population, disease site, or protocol;
 - a safety signal or unexpected output pattern.
 
@@ -78,7 +92,7 @@ Training data present a challenge because serious faults are rare. Synthetic fau
 
 Patient-specific QA asks whether an individual plan is correctly calculated, transferred, and deliverable. The program may include secondary dose calculation, data-transfer checks, measurement-based verification, delivery-log analysis, and structured plan review.
 
-For IMRT measurement-based verification, AAPM Task Group 218 recommends defined tolerance and action limits and discusses standardized use of gamma analysis [[1]](https://doi.org/10.1002/mp.12810). Gamma pass rate combines dose difference and distance-to-agreement, but it is not a direct measure of clinical consequence. Results must be interpreted alongside the delivery technique, detector limitations, spatial failure pattern, and relevant anatomy.
+For intensity-modulated radiotherapy (IMRT) measurement-based verification, American Association of Physicists in Medicine (AAPM) Task Group 218 recommends defined tolerance and action limits and discusses standardized use of gamma analysis [[1]](https://doi.org/10.1002/mp.12810). Gamma pass rate combines dose difference and distance-to-agreement, but it is not a direct measure of clinical consequence. Results must be interpreted alongside the delivery technique, detector limitations, spatial failure pattern, and relevant anatomy.
 
 ### Independent Dose Calculation
 
@@ -177,7 +191,13 @@ An AI system that changes after deployment raises questions about what version i
 
 ## Recap
 
-Radiotherapy QA is a layered system spanning acceptance, commissioning, routine control, patient-specific verification, workflow checks, and incident learning. AI can expand anomaly detection and automate repetitive checks, but rare faults, shared dependencies, automation bias, and distribution shift limit the safety of stand-alone predictions. Every AI QA tool needs a defined intended use, diverse independent controls, traceable configuration, human-factors evaluation, and lifecycle monitoring within the applicable regulatory and standards framework.
+- **Objective 1:** Acceptance verifies acquisition requirements, commissioning establishes supported clinical use, routine control checks continued performance, patient-specific verification tests a treatment, and end-to-end tests exercise the chain.
+- **Objective 2:** A useful AI check names the hazard, where it enters, how the model can detect it, the clinical consequence, and independent prevention, detection, and mitigation layers.
+- **Objective 3:** Rare faults provide few examples, shared data or logic can defeat both system and checker, false alarms change behavior, automation bias weakens review, and drift invalidates assumptions.
+- **Objective 4:** Evaluation must match the QA task and include representative faults, clinically weighted errors, workflow timing, alert response, usability, overrides, and residual risk.
+- **Objective 5:** Safe service needs a named owner, intended use, traceable data/model/configuration versions, thresholds, escalation, monitoring, incident learning, and controlled change.
+
+**Important limitation and misconception:** An AI checker is not independent merely because it is separate software; shared inputs, training labels, calculations, or failure assumptions can create common-mode failure.
 
 ## References
 
