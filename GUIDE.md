@@ -32,10 +32,11 @@ art101/
 │   ├── contouring/contouring.md              # 5: AI for Contouring
 │   ├── registration/registration.md          # 6: AI in Image Registration and Fusion
 │   ├── treatmentPlanning/treatmentPlanning.md# 7: AI for Treatment Planning
-│   ├── qa/qa.md                              # 8: AI for Quality Assurance and Safety
-│   ├── validation/validation.md              # 9: Validation and Evaluation of AI Models
-│   ├── workflow/workflow.md                  # 10: Integration of AI into Clinical Workflow
-│   └── responsibleAI/responsibleAI.md        # 11: Responsible AI, Regulation, and Security
+│   ├── clinicalPrediction/clinicalPrediction.md # 8: Clinical Prediction, Radiomics, and Causal Inference
+│   ├── qa/qa.md                              # 9: AI for Quality Assurance and Safety
+│   ├── validation/validation.md              # 10: Validation and Evaluation of AI Models
+│   ├── workflow/workflow.md                  # 11: Integration of AI into Clinical Workflow
+│   └── responsibleAI/responsibleAI.md        # 12: Responsible AI, Regulation, and Security
 │
 └── todo/                         # Open content gaps, completed archive, and review log
     └── done/                    # Completed todos retained as an audit trail

@@ -1,4 +1,4 @@
-# 10: Integration of AI into Clinical Workflow
+# 11: Integration of AI into Clinical Workflow
 
 Clinical integration is the work required to turn a validated model into a dependable service. It includes process design, interfaces, responsibilities, training, change management, monitoring, and retirement. A model can be technically excellent and still fail because it delivers the wrong output, at the wrong time, to the wrong person, without a safe way to disagree.
 
@@ -156,7 +156,7 @@ A pilot should have a narrow site, trained users, explicit inclusion criteria, h
 
 Expand one dimension at a time: more users, disease sites, scanners, or automation. Each expansion should pass a readiness review. Broad rollout immediately after a small successful pilot makes it difficult to identify which change caused a problem.
 
-[Chapter 9](../validation/validation.md) describes technical, silent, reader, prospective, and post-deployment evaluation in more detail.
+[Chapter 10](../validation/validation.md) describes technical, silent, reader, prospective, and post-deployment evaluation in more detail.
 
 ## User Training and Competency
 

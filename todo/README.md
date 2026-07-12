@@ -83,11 +83,10 @@ When the work is complete, change the title prefix from `TODO` to `DONE`, add `*
 
 Sorted by priority prefix (p0 → p3), then alphabetically within each tier.
 `review-log.md` is a standing log, not a closeable todo — no priority prefix.
-Last reconciled against the working tree on **2026-07-11** (responsible-AI strict-build closure).
+Last reconciled against the working tree on **2026-07-12** (clinical-prediction closure).
 
 | File | Section | Priority | Status |
 |---|---|---|---|
-| [p1-cover-clinical-prediction-radiomics-and-causal-inference.md](p1-cover-clinical-prediction-radiomics-and-causal-inference.md) | Root (cross-cutting) | P1 High | 🔴 Outcome modeling and causal interpretation are largely absent |
 | [p1-cover-language-models-generative-ai-and-agents.md](p1-cover-language-models-generative-ai-and-agents.md) | `fundamentalAI/` | P1 High | 🔴 Text LLM, RAG, and agent foundations are absent |
 | [p1-establish-novice-learning-architecture.md](p1-establish-novice-learning-architecture.md) | Root (cross-cutting) | P1 High | 🔴 No explicit learning routes, outcomes, or shared prerequisite structure |
 | [p1-strengthen-radiotherapy-clinical-foundations.md](p1-strengthen-radiotherapy-clinical-foundations.md) | `fundamentalRO/` | P1 High | 🔴 Clinical foundations are too compressed for non-RT readers |
@@ -112,5 +111,6 @@ Completed work is retained in [`done/`](done/). The archive currently includes:
 - [p0-write-stub-chapters.md](done/p0-write-stub-chapters.md)
 - [p1-add-radiotherapy-data-and-informatics-foundations.md](done/p1-add-radiotherapy-data-and-informatics-foundations.md)
 - [p1-audit-evidence-citations-and-claims.md](done/p1-audit-evidence-citations-and-claims.md)
+- [p1-cover-clinical-prediction-radiomics-and-causal-inference.md](done/p1-cover-clinical-prediction-radiomics-and-causal-inference.md)
 - [p1-consolidate-responsible-ai-regulation-and-security.md](done/p1-consolidate-responsible-ai-regulation-and-security.md)
 - [p1-fix-broken-toc-anchors.md](done/p1-fix-broken-toc-anchors.md)

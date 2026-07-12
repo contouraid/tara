@@ -349,6 +349,8 @@ These systems must address several critical requirements, including long-term ar
 
 An AI dataset is not a folder of unrelated images. It is a selection from a longitudinal clinical record in which objects refer to one another, may be revised, and may describe what was intended rather than what was delivered. Before extracting arrays, define the clinical episode, resolve the object relationships, and retain enough provenance to reconstruct every derived example. DICOM Working Group 7 maintains the radiotherapy objects and their relationships [[6]](https://www.dicomstandard.org/activity/wgs/wg-07); the DICOM Standard remains the authority for the exact information model and attributes [[5]](https://www.dicomstandard.org/).
 
+This section covers the source data, geometry, provenance, and cohort controls. The downstream [radiomics and dosiomics workflow](../clinicalPrediction/clinicalPrediction.md) is treated canonically in the clinical-prediction chapter, including acquisition stability, segmentation sensitivity, standardized feature extraction, longitudinal biomarkers, and external validation.
+
 ### One Patient, Connected Data
 
 The following table is a conceptual object graph for one patient. Arrows mean "references, is derived from, or is linked to," not merely "has the same filename."

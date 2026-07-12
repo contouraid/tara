@@ -1,4 +1,4 @@
-# 8: AI for Quality Assurance and Safety
+# 9: AI for Quality Assurance and Safety
 
 Quality assurance (QA) in radiation oncology is the planned set of activities used to establish confidence that equipment, software, data, and clinical processes will perform as intended. Quality control (QC) is the operational testing within that system. Safety is the outcome sought: preventing, detecting, and mitigating errors before they harm a patient.
 

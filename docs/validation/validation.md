@@ -1,4 +1,4 @@
-# 9: Validation and Evaluation of AI Models
+# 10: Validation and Evaluation of AI Models
 
 Validation asks whether an AI system is fit for a defined purpose in a defined setting. It is not one calculation performed at the end of model development. It begins with the clinical question, continues through data design and technical evaluation, and extends to workflow impact and post-deployment monitoring.
 
@@ -22,7 +22,7 @@ The same model may be suitable for prioritizing review but unsuitable for autono
 
 ## Data for Development and Evaluation
 
-Use [Radiotherapy Data and Informatics Foundations](../medicalImaging/medicalImaging.md) for the canonical RT object model, cohort manifest, longitudinal identity, label provenance, missingness, de-identification, and preprocessing controls. The sections below focus on how those curated data support an unbiased evaluation.
+Use [Radiotherapy Data and Informatics Foundations](../medicalImaging/medicalImaging.md) for the canonical RT object model, cohort manifest, longitudinal identity, label provenance, missingness, de-identification, and preprocessing controls. For endpoint definition, censoring, competing risks, survival metrics, radiomics, calibration at prediction horizons, decision curves, and the boundary between prediction and causal treatment claims, see [Clinical Prediction, Radiomics, and Causal Inference](../clinicalPrediction/clinicalPrediction.md). The sections below focus on principles shared across AI tasks.
 
 ### Separate the Data Splits
 

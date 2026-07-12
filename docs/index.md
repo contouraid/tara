@@ -31,17 +31,19 @@ These chapters follow the treatment pathway in order, each pairing the methods w
 
 **[7: AI for Treatment Planning](treatmentPlanning/treatmentPlanning.md)** — Dose prediction, knowledge-based and automated planning, and optimization for IMRT/VMAT. Included because planning is among the most time-consuming steps in the workflow and one where AI's efficiency gains are most tangible.
 
-**[8: AI for Quality Assurance and Safety](qa/qa.md)** — Automated error detection, plan and contour checking, and the regulatory context for AI tools. Included because QA is where AI both helps *and* introduces new failure modes, making it central to safe deployment.
+**[8: Clinical Prediction, Radiomics, and Causal Inference](clinicalPrediction/clinicalPrediction.md)** — Clinical endpoints, radiomics and dosiomics, toxicity and control modeling, longitudinal and multimodal biomarkers, and the distinction between prognosis, treatment-effect prediction, and causal claims. Included because estimating risk is not the same as knowing which treatment will improve an outcome.
+
+**[9: AI for Quality Assurance and Safety](qa/qa.md)** — Automated error detection, plan and contour checking, and the regulatory context for AI tools. Included because QA is where AI both helps *and* introduces new failure modes, making it central to safe deployment.
 
 ### Getting it into the clinic
 
-**[9: Validation and Evaluation of AI Models](validation/validation.md)** — Performance metrics, clinical validation, subgroup analysis, and post-deployment monitoring. Included as the practical companion to the introduction's evidence framing — the "how do I actually check this?" chapter.
+**[10: Validation and Evaluation of AI Models](validation/validation.md)** — Performance metrics, clinical validation, subgroup analysis, and post-deployment monitoring. Included as the practical companion to the introduction's evidence framing — the "how do I actually check this?" chapter.
 
-**[10: Integration of AI into Clinical Workflow](workflow/workflow.md)** — Workflow analysis, user training and acceptance, and change management. Included because a model only creates value once it is embedded in real clinical practice, and most implementation failures are organizational rather than technical.
+**[11: Integration of AI into Clinical Workflow](workflow/workflow.md)** — Workflow analysis, user training and acceptance, and change management. Included because a model only creates value once it is embedded in real clinical practice, and most implementation failures are organizational rather than technical.
 
 ### Responsibility across the lifecycle
 
-**[11: Responsible AI, Regulation, and Security](responsibleAI/responsibleAI.md)** — The cross-cutting counterpart to the workflow chapters: accountability, the AI lifecycle from intended use to retirement, fairness and health equity, transparency and liability, cybersecurity for connected clinical systems, and how regulation and privacy law differ by jurisdiction. Included as the canonical home for governance, regulatory, and security concerns that the earlier chapters touch locally and link to here, distinguishing binding law from voluntary standards and professional guidance.
+**[12: Responsible AI, Regulation, and Security](responsibleAI/responsibleAI.md)** — The cross-cutting counterpart to the workflow chapters: accountability, the AI lifecycle from intended use to retirement, fairness and health equity, transparency and liability, cybersecurity for connected clinical systems, and how regulation and privacy law differ by jurisdiction. Included as the canonical home for governance, regulatory, and security concerns that the earlier chapters touch locally and link to here, distinguishing binding law from voluntary standards and professional guidance.
 
 ## Resources and further reading
 
@@ -60,6 +62,7 @@ medicalImaging/medicalImaging
 contouring/contouring
 registration/registration
 treatmentPlanning/treatmentPlanning
+clinicalPrediction/clinicalPrediction
 qa/qa
 validation/validation
 workflow/workflow

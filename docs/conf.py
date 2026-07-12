@@ -4,7 +4,8 @@
 
 project = "ART101"
 copyright = "2025-2026, Amith Kamath"
-author = "Amith Kamath"
+# Keep the copyright attribution below, but omit the theme's redundant "By ..." footer line.
+author = ""
 
 release = "0.1"
 version = "0.1.0"

@@ -239,7 +239,7 @@ These applications could help make adaptive radiotherapy more practical and wide
 
 ### Integration with Outcome Prediction
 
-Integrating outcome prediction into planning is a research direction, not an established route to improved outcomes. Normal-tissue complication models require endpoint definitions, appropriate dose summaries, calibration, and validation in the intended population [[6]](https://doi.org/10.1016/j.ijrobp.2009.07.1754):
+Integrating outcome prediction into planning is a research direction, not an established route to improved outcomes. The canonical [clinical-prediction chapter](../clinicalPrediction/clinicalPrediction.md) explains endpoint definitions, TCP/NTCP extensions, radiomics and dosiomics, calibration, decision utility, treatment-effect estimation, and why a prognostic model cannot prescribe treatment. Normal-tissue complication models also require appropriate dose summaries and validation in the intended population [[6]](https://doi.org/10.1016/j.ijrobp.2009.07.1754):
 
 Outcome-aware planning: Directly optimizing plans to maximize predicted tumor control and minimize predicted toxicity, rather than using generic dosimetric constraints.
 

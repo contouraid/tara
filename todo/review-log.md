@@ -28,6 +28,32 @@ Append one entry per cycle, in the format below, at the **top** of the log (newe
 
 ## Log
 
+## 2026-07-12 clinical-prediction closure
+
+**Chapters reviewed:** new `clinicalPrediction/` chapter plus cross-links in `fundamentalRO/`, `medicalImaging/`, `treatmentPlanning/`, and `validation/`
+**Todos closed:** `p1-cover-clinical-prediction-radiomics-and-causal-inference.md` (moved to `todo/done/`)
+**Todos opened:** none
+
+### Searches run
+- radiomics standards: "Image Biomarker Standardisation Initiative radiomics standardized feature calculation" (RSNA, PubMed, and IBSI) — consensus definitions, reference values, and publication metadata verified.
+- radiomics evidence: "Aerts radiomics lung head neck validation" and "Welch vulnerabilities radiomic signature tumor volume" (Nature, PubMed, and publisher pages) — influential external-validation result and later safeguard analysis verified.
+- longitudinal and outcome modeling: "delta-radiomics NSCLC outcomes", "Fine Gray competing risk", "decision curve analysis", and "QUANTEC NTCP" (PubMed and publisher pages) — representative methods and radiotherapy applications verified.
+- causal inference and reporting: "target trial Hernán Robins", "TRIPOD+AI", and "PROBAST+AI" (PubMed and BMJ) — target-trial framework and current prediction-study guidance verified.
+
+### Added
+- clinicalPrediction: canonical novice-oriented chapter covering clinical endpoints, survival and competing-risk outcomes, TCP/NTCP, radiomics/dosiomics, deep and longitudinal biomarkers, multimodal models, calibration, decision utility, causal interpretation, and prospective impact, with ten verified references.
+- clinicalPrediction: worked xerostomia-risk example from endpoint definition through frozen external validation and decision analysis, followed by a counterexample explaining why modality selection requires comparative causal evidence.
+- index and related chapters: new Chapter 8 navigation, renumbered later chapters, and links from radiobiology, imaging, planning, and validation.
+- site configuration: removed the redundant theme-generated author footer line while retaining copyright and licensing attribution.
+
+### Rejected
+- Association-only radiomics results were not presented as evidence for dose escalation, de-escalation, modality selection, or treatment benefit.
+- Preprints and secondary summaries were not used where peer-reviewed primary studies, standards, or reporting guidance were available.
+
+### Notes for next cycle
+- Chapter 8 is the single canonical home for outcome prediction, radiomics/dosiomics, and prediction-versus-causality concepts; other chapters should link rather than duplicate it.
+- Strict Sphinx build completed with zero warnings, and the generated footer retained copyright while omitting the separate author line.
+
 ## 2026-07-11 responsible-AI closure
 
 **Chapters reviewed:** new `responsibleAI/` chapter plus cross-links in `fundamentalAI/vlm.md`, `qa/`, `validation/`, and `workflow/`

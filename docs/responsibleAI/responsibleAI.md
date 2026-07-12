@@ -1,4 +1,4 @@
-# 11: Responsible AI, Regulation, and Security
+# 12: Responsible AI, Regulation, and Security
 
 Earlier chapters describe how to build, validate, integrate, and quality-assure specific AI tools. This chapter is the cross-cutting counterpart: it names who is accountable, what evidence and approvals a tool needs across its whole life, how patients and their data are protected, how a connected model is defended from attack, and how the answers change with jurisdiction. These concerns appear in fragments throughout the book—fairness in [validation](../validation/validation.md), governance in [workflow](../workflow/workflow.md), the regulatory frame in [quality assurance](../qa/qa.md), and prompt-injection risk in [vision–language models](../fundamentalAI/vlm.md)—but they are one subject and are treated canonically here. Those chapters supply operational detail; this chapter supplies the framework they hang on.
 

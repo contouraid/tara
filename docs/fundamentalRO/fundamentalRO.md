@@ -110,7 +110,7 @@ These mechanisms help explain why changing fraction size or overall treatment ti
 
 Tumor control probability (TCP) and normal-tissue complication probability (NTCP) models summarize relationships among dose, volume, and outcome. They can support comparison and optimization, but they inherit limitations from their datasets and assumptions. A model trained on one technique, contouring convention, population, or follow-up pattern may not transport reliably to another.
 
-AI outcome models face the same issue at greater dimensionality. Their validation must include calibration, external evaluation, subgroup performance, and clinical utility, as discussed in [Chapter 9](../validation/validation.md).
+AI outcome models face the same issue at greater dimensionality. [Clinical Prediction, Radiomics, and Causal Inference](../clinicalPrediction/clinicalPrediction.md) is the canonical treatment of TCP/NTCP extensions, clinical endpoints, prognosis, treatment-effect questions, and causal limits; the general validation framework follows in [Chapter 10](../validation/validation.md).
 
 ## A Brief Evolution of the Field
 
