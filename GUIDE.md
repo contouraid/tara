@@ -83,6 +83,47 @@ These rules govern how the monthly agent finds and adds content. They exist to p
 
 ---
 
+## Research Synthesis and Evidence Maturity
+
+The recency scan identifies candidates; it does not by itself establish the state of a field. The six AI application chapters—contouring, registration, treatment planning, clinical prediction, QA, and workflow—must maintain a compact `Evidence Synthesis` section before `Current Research and Recent Advances`. Vision-language models and language models retain task-specific maturity tables in their fundamental-AI pages; they link to the relevant application chapter rather than duplicating an application synthesis.
+
+### Reproducible review protocol
+
+For each application area, the reviewer must use and record this protocol:
+
+1. **Fix the boundary before searching.** Record the review date, databases searched, date range, application tasks, populations, modalities, and intended clinical roles. The routine currency window is the last 18 months; older systematic reviews, consensus statements, benchmarks, and pivotal validation or negative studies may be included when needed to interpret maturity.
+2. **Run query families, not one preferred phrase.** Combine the chapter's task and section terms with `radiotherapy` or a relevant disease/site and each of: method synonyms; `systematic review` or `consensus`; `benchmark`, `challenge`, `dataset`, or `code`; `external validation` or `multi-institution`; `prospective`, `silent`, `workflow`, or `human factors`; `clinical impact` or `patient outcome`; `negative`, `failure`, `bias`, `generalization`, or `distribution shift`; and `regulatory` or `adoption`. Search at least two discovery databases from the Sourcing Rules and verify included records against a primary publisher, DOI, PubMed, arXiv, regulator, standards body, or professional-society page.
+3. **Apply explicit eligibility rules.** Include sources that define the field or materially change a maturity judgment: systematic reviews, consensus or reporting guidance, recognized benchmarks/challenges, verified open datasets or code, comparative validation, prospective studies, workflow/human-factors studies, clinical-impact studies, regulatory records, adoption studies, and informative negative or non-generalizing results. Exclude unverifiable records, marketing claims, duplicates, off-task populations or endpoints, papers outside the date window that add no foundational value, and isolated preprints without code or independent support. A preprint that is retained must be labeled as such.
+4. **Deduplicate and verify.** Deduplicate by DOI or PMID first, then normalized title and study cohort. Link secondary analyses of the same cohort rather than counting them as independent validation. Verify title, authorship, venue, year, study design, population/site, scale, comparator, endpoint, and source URL before extraction.
+5. **Extract comparable fields.** Every evidence table uses: task; population/site; data scale; validation design; comparator; endpoint; principal limitation; and maturity. Use `not reported` rather than guessing. Record whether data and code are open in the surrounding synthesis when that fact affects reproducibility.
+6. **Use a reproducible stopping rule.** Stop only after every planned query family has been run, backward/forward checks of included reviews or consensus sources add no new eligible evidence, and two consecutive result pages per discovery database add no study that changes the synthesis or maturity rating. A search can stop earlier when the database reports no further results. Record the stopping reason.
+7. **Keep the audit trail.** At the top of `todo/review-log.md`, record search dates, databases, exact query families, candidate counts when available, inclusion decisions, rejected sources with reasons, deduplication or cohort links, the stopping decision, and todos opened or closed. Chapter-specific literature-currency todos remain the search work queue; do not repeat their searches in a cross-cutting todo.
+
+### Evidence-maturity vocabulary
+
+Assign the highest level directly supported for the stated system, population, site, and endpoint. Do not promote a study because the underlying model or a different product is more mature.
+
+| Label | Evidence required |
+|---|---|
+| **Proof of concept** | Technical feasibility on development data, a benchmark, simulation, phantom, or narrowly selected retrospective sample; no independent clinical validation. |
+| **Internal retrospective validation** | A frozen method evaluated on held-out retrospective data from the development institution or an equivalent single-system setting. |
+| **External/multi-institution validation** | Evaluation on meaningfully independent institutions, scanners, populations, or a multi-institution cohort, with transportability assessed rather than assumed. |
+| **Silent prospective testing** | Prospectively collected cases processed in the intended workflow without the AI output changing care; failures and operational reliability are measured. |
+| **Human-factors/workflow evaluation** | Intended users and interfaces are evaluated on endpoints such as time, edits, overrides, workload, trust, or consequential error in a representative workflow. |
+| **Clinical impact** | Prospective comparative evidence shows an effect on clinical decisions, safety, quality of care, toxicity, disease control, survival, or another patient-relevant endpoint. |
+| **Regulatory status** | A named product has a verified authorization or clearance for a specified jurisdiction, version, and intended use. This is a parallel status, not proof of superiority, local validity, or patient benefit. |
+| **Routine adoption** | Representative usage evidence shows sustained use in ordinary practice, with the jurisdiction, denominator, workflow, and monitoring context stated. Adoption does not establish effectiveness. |
+
+### Writing the synthesis
+
+Each evidence synthesis must explicitly separate six questions: (1) model or component performance, (2) external validity, (3) effect on the human workflow, (4) patient outcome or clinical impact, (5) regulatory clearance for a named intended use, and (6) real-world adoption. A favorable geometric, accuracy, dose, or benchmark endpoint must not be described as workflow or patient benefit.
+
+The prose around the table must state where evidence agrees, where methods, populations, comparators, or endpoints are heterogeneous, what the result means clinically, whether important data or code are open, and which questions remain unanswered. Include contradictory, null, harmful, or non-generalizing evidence when available; if none was found, say that the search found none rather than implying it does not exist. Build conclusions from the evidence set, prioritizing systematic reviews, consensus statements, benchmarks, prospective studies, and informative negative findings over isolated high-performing papers.
+
+`Current Research and Recent Advances` remains the dated intake ledger. During each substantive review, compare its entries with the main body. When multiple entries support a stable conclusion, revise the durable `Evidence Synthesis` prose and table, but retain the dated entries as the audit history. If an entry is superseded or contradicted, add a dated update and explain the decision in `todo/review-log.md`; never erase the historical record silently.
+
+---
+
 ## The Monthly Update Process
 
 When the agent is run to update this book, it must, in order:

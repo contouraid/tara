@@ -1,5 +1,19 @@
 # 9: AI for Quality Assurance and Safety
 
+## Before you begin
+
+**Prerequisites:** Read Chapters 1, 3, and 4; know the artificial intelligence (AI) lifecycle, radiotherapy pathway, data objects, intended use, distribution shift, and the distinction between quality assurance and quality control. Use the [cross-book glossary](../resources/glossary.md).
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. distinguish acceptance testing, commissioning, routine quality control, patient-specific verification, and end-to-end testing;
+2. map an AI check to the hazard, process stage, detection opportunity, and independent safety layers it supports;
+3. explain rare-event, shared-dependency, false-alarm, automation-bias, and drift limitations of learned anomaly detection;
+4. define evidence and human-factors evaluation for machine, patient-specific, plan, chart, or workflow QA; and
+5. specify ownership, configuration control, monitoring, escalation, and change controls for an AI QA tool.
+
+**Reading route:** All readers deploying AI should read this chapter. Clinicians may emphasize plan/chart checks and automation bias; physicists and engineers should include commissioning, machine and patient-specific QA, and lifecycle controls. Case B centers the layered checks around stereotactic treatment; Case C tests rapid adaptive checks and safe fallback.
+
 Quality assurance (QA) in radiation oncology is the planned set of activities used to establish confidence that equipment, software, data, and clinical processes will perform as intended. Quality control (QC) is the operational testing within that system. Safety is the outcome sought: preventing, detecting, and mitigating errors before they harm a patient.
 
 AI can increase the reach and speed of QA by learning patterns across images, plans, log files, and workflow events. It can also create new failure modes. A model may share a hidden dependency with the system it checks, fail silently after a software update, or automate a weak surrogate rather than the clinically important hazard. AI-based QA must therefore be one layer in a broader safety architecture, not the sole source of assurance.
@@ -44,7 +58,7 @@ For AI, calendar-based checks should be supplemented by event-based checks after
 - model, operating system, driver, or application updates;
 - scanner or reconstruction changes;
 - treatment planning system upgrades;
-- data-interface or DICOM-routing changes;
+- data-interface or Digital Imaging and Communications in Medicine (DICOM)-routing changes;
 - a new patient population, disease site, or protocol;
 - a safety signal or unexpected output pattern.
 
@@ -78,7 +92,7 @@ Training data present a challenge because serious faults are rare. Synthetic fau
 
 Patient-specific QA asks whether an individual plan is correctly calculated, transferred, and deliverable. The program may include secondary dose calculation, data-transfer checks, measurement-based verification, delivery-log analysis, and structured plan review.
 
-For IMRT measurement-based verification, AAPM Task Group 218 recommends defined tolerance and action limits and discusses standardized use of gamma analysis [[1]](https://doi.org/10.1002/mp.12810). Gamma pass rate combines dose difference and distance-to-agreement, but it is not a direct measure of clinical consequence. Results must be interpreted alongside the delivery technique, detector limitations, spatial failure pattern, and relevant anatomy.
+For intensity-modulated radiotherapy (IMRT) measurement-based verification, American Association of Physicists in Medicine (AAPM) Task Group 218 recommends defined tolerance and action limits and discusses standardized use of gamma analysis [[1]](https://doi.org/10.1002/mp.12810). Gamma pass rate combines dose difference and distance-to-agreement, but it is not a direct measure of clinical consequence. Results must be interpreted alongside the delivery technique, detector limitations, spatial failure pattern, and relevant anatomy.
 
 ### Independent Dose Calculation
 
@@ -169,6 +183,16 @@ Other relevant lifecycle concepts include quality management, risk management, u
 
 An AI system that changes after deployment raises questions about what version is authorized, how modifications are bounded, and what evidence is required. FDA's 2025 final guidance on predetermined change control plans recommends describing planned modifications, the protocol for development, validation and implementation, and an impact assessment [[4]](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence). A local department should still know when a model has changed and whether local revalidation is required.
 
+## Evidence Synthesis
+
+The cited evidence agrees that QA should target clinically meaningful faults and use independent safety layers. A model that reproduces a conventional pass/fail label or explains its own classification has demonstrated component behavior, not that it detects the errors most likely to harm a patient. Evidence is heterogeneous across machine QA, measurement-based patient-specific QA, plan checking, chart checking, sites, injected faults, and institutional policies, so a high score in one setting cannot be generalized to the QA programme as a whole.
+
+| Task | Population / site | Data scale | Validation design | Comparator | Endpoint | Principal limitation | Maturity |
+|---|---|---|---|---|---|---|---|
+| Explainable automated plan QA [[2]](https://pubmed.ncbi.nlm.nih.gov/34844219/) | Prostate and breast planning datasets from one center | Two retrospective site-specific datasets | Internal retrospective analysis of two existing classifiers | LIME versus team-based Shapley explanations; expert interpretation | Explanation consistency and classifier rationale | Explanations can rationalize a wrong classifier; no prospective user-decision or safety endpoint | **Internal retrospective validation** |
+
+The evidence supports retrospective classifier analysis and cross-institution consensus principles, but not silent prospective performance, improved human decisions, fewer incidents, or patient outcomes for an AI QA system. FDA guidance defines a possible regulatory process; this chapter makes no claim that a named system is cleared. Representative routine-adoption evidence is absent. The cited explainability study explicitly concludes that its classifiers should confirm rather than replace expert QA, which is an informative limit on stronger automation claims. Data and code openness are not established for the clinical classifiers. Unanswered questions are sensitivity to rare consequential faults, common-mode failure with the primary system, prospective alert burden and automation bias, safe drift thresholds, and whether AI changes incident rates rather than only surrogate labels.
+
 ## Current Research and Recent Advances
 
 - **Explainable automated QA:** Research is moving beyond binary plan flags toward explanations that identify influential regions or features. Early work shows feasibility, but explanation quality and the effect on reviewer decisions need direct evaluation [[2]](https://pubmed.ncbi.nlm.nih.gov/34844219/). _(added: 2026-07)_
@@ -177,11 +201,17 @@ An AI system that changes after deployment raises questions about what version i
 
 ## Recap
 
-Radiotherapy QA is a layered system spanning acceptance, commissioning, routine control, patient-specific verification, workflow checks, and incident learning. AI can expand anomaly detection and automate repetitive checks, but rare faults, shared dependencies, automation bias, and distribution shift limit the safety of stand-alone predictions. Every AI QA tool needs a defined intended use, diverse independent controls, traceable configuration, human-factors evaluation, and lifecycle monitoring within the applicable regulatory and standards framework.
+- **Objective 1:** Acceptance verifies acquisition requirements, commissioning establishes supported clinical use, routine control checks continued performance, patient-specific verification tests a treatment, and end-to-end tests exercise the chain.
+- **Objective 2:** A useful AI check names the hazard, where it enters, how the model can detect it, the clinical consequence, and independent prevention, detection, and mitigation layers.
+- **Objective 3:** Rare faults provide few examples, shared data or logic can defeat both system and checker, false alarms change behavior, automation bias weakens review, and drift invalidates assumptions.
+- **Objective 4:** Evaluation must match the QA task and include representative faults, clinically weighted errors, workflow timing, alert response, usability, overrides, and residual risk.
+- **Objective 5:** Safe service needs a named owner, intended use, traceable data/model/configuration versions, thresholds, escalation, monitoring, incident learning, and controlled change.
+
+**Important limitation and misconception:** An AI checker is not independent merely because it is separate software; shared inputs, training labels, calculations, or failure assumptions can create common-mode failure.
 
 ## References
 
 1. Miften M, Olch A, Mihailidis D, et al. Tolerance limits and methodologies for IMRT measurement-based verification QA: Recommendations of AAPM Task Group No. 218. *Medical Physics*. 2018;45(4):e53-e83. [DOI](https://doi.org/10.1002/mp.12810)
-2. Nyflot MJ, et al. Understanding machine learning classifier decisions in automated radiotherapy quality assurance. *Medical Physics*. 2022;49(1):370-382. [PubMed](https://pubmed.ncbi.nlm.nih.gov/34844219/)
+2. Chen Y, Aleman DM, Purdie TG, McIntosh C. Understanding machine learning classifier decisions in automated radiotherapy quality assurance. *Physics in Medicine & Biology*. 2022;67(2). [PubMed](https://pubmed.ncbi.nlm.nih.gov/34844219/)
 3. International Electrotechnical Commission. IEC 62304:2006+A1:2015, Medical device software—Software life cycle processes. [IEC publication](https://webstore.iec.ch/en/publication/22794)
 4. U.S. Food and Drug Administration. *Marketing Submission Recommendations for a Predetermined Change Control Plan for Artificial Intelligence-Enabled Device Software Functions*. Final guidance; 2025. [FDA guidance](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence)

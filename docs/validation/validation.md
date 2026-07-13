@@ -1,5 +1,19 @@
 # 10: Validation and Evaluation of AI Models
 
+## Before you begin
+
+**Prerequisites:** Read Chapter 1's {ref}`common clinical artificial intelligence (AI) lifecycle <common-ai-lifecycle>` and Chapter 4's data foundations, plus the application chapter for the system being evaluated. Use the [cross-book glossary](../resources/glossary.md), especially its two meanings of validation.
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. write a testable intended-use statement with population, users, inputs, output, task, setting, and consequence;
+2. distinguish development validation, internal evaluation, external validation, silent prospective evaluation, and interventional impact evaluation;
+3. select and interpret task-appropriate discrimination, calibration, segmentation, regression, robustness, and clinical-impact measures;
+4. design data separation, reference standards, subgroup analyses, uncertainty estimates, and statistical plans that match the claim; and
+5. define monitoring, drift, update, stop, rollback, and revalidation rules before deployment.
+
+**Reading route:** Every route should read this before accepting a clinical AI claim. Application-specific readers can pair it directly with Chapters 5–9. Apply the same framework to all recurring cases, changing metrics and failure costs rather than lowering the evidence standard.
+
 Validation asks whether an AI system is fit for a defined purpose in a defined setting. It is not one calculation performed at the end of model development. It begins with the clinical question, continues through data design and technical evaluation, and extends to workflow impact and post-deployment monitoring.
 
 A high benchmark score can coexist with poor clinical value. Performance may fall under distribution shift, a threshold may be poorly chosen, probabilities may be miscalibrated, or the output may arrive too late to affect care. Validation must therefore connect statistical performance to the complete clinical use case.
@@ -22,7 +36,7 @@ The same model may be suitable for prioritizing review but unsuitable for autono
 
 ## Data for Development and Evaluation
 
-Use [Radiotherapy Data and Informatics Foundations](../medicalImaging/medicalImaging.md) for the canonical RT object model, cohort manifest, longitudinal identity, label provenance, missingness, de-identification, and preprocessing controls. For endpoint definition, censoring, competing risks, survival metrics, radiomics, calibration at prediction horizons, decision curves, and the boundary between prediction and causal treatment claims, see [Clinical Prediction, Radiomics, and Causal Inference](../clinicalPrediction/clinicalPrediction.md). The sections below focus on principles shared across AI tasks.
+Use [Radiotherapy Data and Informatics Foundations](../medicalImaging/medicalImaging.md) for the canonical radiotherapy (RT) object model, cohort manifest, longitudinal identity, label provenance, missingness, de-identification, and preprocessing controls. For endpoint definition, censoring, competing risks, survival metrics, radiomics, calibration at prediction horizons, decision curves, and the boundary between prediction and causal treatment claims, see [Clinical Prediction, Radiomics, and Causal Inference](../clinicalPrediction/clinicalPrediction.md). The sections below focus on principles shared across AI tasks.
 
 ### Separate the Data Splits
 
@@ -64,11 +78,13 @@ Sensitivity measures the fraction of positive cases detected; specificity measur
 
 ### Predictive Values
 
+Positive predictive value (PPV) and negative predictive value (NPV) are:
+
 $$PPV = \frac{TP}{TP + FP}, \qquad NPV = \frac{TN}{TN + FN}$$
 
 Positive and negative predictive values depend on prevalence. A model can retain sensitivity and specificity yet produce a different PPV when deployed in a population with a different event rate.
 
-### ROC and Precision-Recall Curves
+### Receiver Operating Characteristic (ROC) and Precision–Recall Curves
 
 The receiver operating characteristic (ROC) curve plots sensitivity against false-positive rate across thresholds. Area under the ROC curve summarizes discrimination but does not select a threshold and can look favorable for rare events.
 
@@ -216,7 +232,13 @@ Name the owner of the deployed system, the review frequency, escalation pathway,
 
 ## Recap
 
-AI validation begins with a precise intended use and follows the system from data design through technical performance, human-AI workflow, prospective impact, and post-deployment monitoring. Accuracy alone is rarely adequate. Classification requires threshold-aware and prevalence-aware measures; segmentation needs overlap, boundary, tail, and clinical-impact evaluation; probabilistic outputs require calibration; and every task requires external validity, robustness, subgroup analysis, uncertainty, and governance for change.
+- **Objective 1:** Intended use specifies population, exclusions, users, setting, inputs, output, task, automation, and the consequences of correct and incorrect use.
+- **Objective 2:** Development validation guides model choices; internal evaluation estimates same-source behavior; external validation tests transport; silent prospective evaluation observes local live data; interventional evaluation tests impact on care or work.
+- **Objective 3:** Classification needs threshold- and prevalence-aware measures, segmentation needs overlap, surface, tail, and clinical consequences, regression needs error distributions, and probabilities need calibration; all need robustness and impact context.
+- **Objective 4:** The claim determines separation across patients, sites, and time, reference-standard design, subgroup and missing-input tests, uncertainty intervals, sample size, and multiplicity control.
+- **Objective 5:** Deployment criteria must already include monitored indicators, drift thresholds, update evidence, responsible decisions, stop rules, rollback, and revalidation.
+
+**Important limitation and misconception:** A held-out random test split is not synonymous with external validation, and statistically precise average performance can conceal unsafe subgroups or rare catastrophic failures.
 
 ## References
 

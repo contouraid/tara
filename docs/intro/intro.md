@@ -1,5 +1,19 @@
 # 1: Introduction
 
+## Before you begin
+
+**Prerequisites:** None. New readers may keep the [cross-book glossary](../resources/glossary.md) open; it is the canonical source for artificial intelligence (AI) and other terms used throughout ART101.
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. outline the radiotherapy pathway and identify where AI can affect it;
+2. distinguish artificial intelligence, machine learning, and deep learning;
+3. trace a clinical AI system from question and data through retirement;
+4. distinguish training, validation, and inference and explain why patients must be separated across data splits; and
+5. separate technical performance, clinical validity, clinical utility, and lifecycle safety when reading a claim.
+
+**Reading route:** Everyone should read this chapter first. Complete beginners should next read Chapters 3 and 4 before Chapter 2; clinicians may continue to Chapter 2 or their application of interest; technical readers should continue to Chapters 3 and 4. {ref}`Cases A–C <recurring-cases>` establish the clinical threads used later.
+
 ## What Radiation Oncology Does
 
 Radiotherapy uses ionizing radiation to damage cellular targets while limiting injury to surrounding normal tissue. It may be delivered from outside the body, with external-beam techniques, or from sources placed in or near a target, as in brachytherapy. Population-based estimates indicate that roughly half of people with cancer have an evidence-based indication for radiotherapy at some point in their care, although access and actual use vary by health system [[1]](https://doi.org/10.1016/S1470-2045%2815%2900222-3).
@@ -33,6 +47,27 @@ AI methods have been studied across imaging, contouring, registration, treatment
 - estimating risks to support, but not replace, a clinical decision.
 
 Each task has a dedicated chapter. This introduction establishes the shared vocabulary and the standard of evidence used to read those chapters.
+
+(common-ai-lifecycle)=
+## The Common Clinical AI Lifecycle
+
+An AI system begins before a model architecture is chosen and continues after the model stops being used. The same lifecycle applies to {ref}`Case A's autocontour <recurring-cases>`, Case B's quality-assurance alert, and Case C's adaptive-workflow service.
+
+| Stage | Novice question | Required output before moving on |
+|---|---|---|
+| **1. Clinical question and intended use** | Who will use what output, for which patients, to support which decision? | a bounded claim, accountable user, expected benefit, and unacceptable harms |
+| **2. Data and labels** | What observations become inputs, and how was the reference output created? | cohort definition, provenance, label protocol, missingness analysis, and data-governance basis |
+| **3. Development split** | Which cases may influence fitting and choices, and which remain untouched? | patient-level training, validation, and test sets; when needed, external, temporal, or site-separated evaluation |
+| **4. Training** | What does the model learn from examples? | frozen preprocessing, parameters, software and data versions, and reproducible training record |
+| **5. Validation** | Does the frozen system work for its intended use and failure costs? | technical, clinical, subgroup, robustness, human-factors, and workflow evidence proportionate to risk |
+| **6. Inference** | How does a new case become an output? | specified inputs, quality checks, uncertainty or abstention behavior, review, and audit trail |
+| **7. Deployment** | How does the tested system enter real work? | local commissioning, integration, training, downtime path, escalation, approval, and version control |
+| **8. Monitoring and change** | Does benefit persist as patients, users, equipment, and software change? | performance and safety indicators, drift thresholds, incident review, revalidation, and change control |
+| **9. Retirement** | When and how is use stopped? | stop criteria, removal and fallback plan, record retention, communication, and successor validation |
+
+**Data** are recorded observations such as images, dose, notes, or outcomes. A **label** is the reference target used for learning or evaluation, such as a clinician contour or observed toxicity; it may be uncertain or biased rather than ground truth. A **feature** is a model input derived from the data. **Training** estimates model parameters. **Validation** can mean both the development set used to choose a model and the broader evidence that a frozen system is fit for use; the context must make clear which meaning applies. **Inference** applies the frozen pipeline to a new case.
+
+The lifecycle is not a one-way permission slip. Failure at validation returns the team to the question, data, or design; monitoring can trigger restriction, retraining, rollback, or retirement. A model is only one component inside a clinical AI system that also includes data pipelines, interfaces, people, policies, and safety barriers.
 
 ## Learning Paradigms
 
@@ -84,7 +119,13 @@ Clinical responsibility remains with appropriately qualified people and organiza
 
 ## Recap
 
-Radiotherapy is a linked clinical and technical process in which AI may support perception, prediction, optimization, and quality control. A model's technical score is not evidence of clinical benefit. Interpret every claim in light of intended use, reference-standard quality, data separation, external validity, human interaction, and lifecycle monitoring.
+- **Objective 1:** Radiotherapy is a linked clinical and technical process in which AI may support perception, prediction, optimization, or quality control.
+- **Objective 2:** AI is the umbrella field, machine learning estimates behavior from data, and deep learning uses multilayer neural networks.
+- **Objective 3:** A clinical AI system moves from an intended question through data, splitting, training, validation, inference, deployment, monitoring, change, and retirement; failed evidence can send it backward.
+- **Objective 4:** Training fits parameters, development validation guides choices, a held-out test estimates frozen performance, and inference applies the pipeline to a new case. Patient separation prevents one person's information leaking between those roles.
+- **Objective 5:** A technical score is not clinical benefit. Claims must separately support technical performance, clinical validity, clinical utility, and lifecycle safety.
+
+**Important limitation and misconception:** A label is not automatically truth, a test set is not automatically external validation, and a high retrospective score does not authorize clinical use.
 
 ## References
 

@@ -1,5 +1,19 @@
 # Language Models, Generative AI, and Agents
 
+## Before you begin
+
+**Prerequisites:** Read [Chapter 1](../intro/intro.md) and the transformer section of [Chapter 2](index.md). Use the [cross-book glossary](../resources/glossary.md) for shared artificial intelligence (AI) definitions.
+
+**Learning objectives:** After this page, you should be able to:
+
+1. distinguish natural language processing, large language models, chatbots, retrieval-augmented generation, tools, and agents;
+2. trace clinical text through tokenization, adaptation, prompting, retrieval, inference, structured output, and review;
+3. identify hallucination, omission, provenance, prompt-injection, privacy, drift, and automation-bias failure modes;
+4. match task-constrained, generated, and human-workflow evaluations to a stated intended use; and
+5. define a bounded, source-grounded, permission-limited deployment with abstention and escalation.
+
+**Reading route:** Read this after the Chapter 2 transformer material. Clinicians may focus on system types, clinical workflow, failure modes, and evaluation; technical readers should include retrieval, tools, and agents. The recurring cases can use language systems for extraction or drafting, but none treats fluent text as a treatment decision.
+
 Natural language processing (NLP) turns free text into information or produces text for a defined purpose. In radiation oncology, the text may be a consultation note, pathology report, prescription, treatment summary, guideline, patient message, incident report, or research paper. Language systems range from narrow extractors to generative assistants that retrieve documents and call software tools.
 
 Fluent output is not evidence of clinical reasoning. A language model predicts text; a clinically integrated product adds data sources, prompts, retrieval, tools, permissions, validation, user interfaces, and human accountability. The safety and evidence claim belongs to that complete system for one intended use—not to the model name or chat demonstration.
@@ -192,7 +206,13 @@ Prespecify acceptance thresholds by error severity. A system can have excellent 
 
 ## Recap
 
-NLP is the broad field; an LLM is a model; a chatbot is an interface; RAG adds retrieved context; tools expose defined functions; and an agent chooses actions over multiple steps. Tokens, embeddings, pretraining, instruction tuning, prompts, context, and decoding shape language-model behavior, but the clinical product also includes sources, permissions, validators, interfaces, and reviewers. RAG and structured output improve controllability without guaranteeing truth. Radiotherapy applications should begin with narrow, source-grounded, read-only roles and task-specific evaluation. Clinical deployment requires claim-level factuality and attribution, clinically weighted omissions and harms, calibrated abstention where used, subgroup and drift testing, and prospective evaluation of the complete human–AI workflow.
+- **Objective 1:** Natural language processing is the field; a large language model is a model; a chatbot is an interface; retrieval-augmented generation supplies retrieved context; tools expose functions; and an agent chooses actions over steps.
+- **Objective 2:** Tokens and embeddings enter a pretrained or adapted model under prompts and context; retrieval and tools add external state; decoding or structured output produces a candidate that still needs validation and review.
+- **Objective 3:** Fluent systems can hallucinate, omit, lose provenance, follow injected instructions, expose data, drift, and encourage overreliance.
+- **Objective 4:** Constrained tasks need field-level errors; generated answers need claim-level factuality, attribution, and clinically weighted harms; deployment claims need prospective human-workflow evidence.
+- **Objective 5:** Safer roles are narrow, source-grounded, least-privilege, auditable, and read-only where possible, with validation, abstention, escalation, and accountable review.
+
+**Important limitation and misconception:** Retrieval and structured output improve control but do not guarantee truth, and a language model's apparent explanation or confidence is not a calibrated account of clinical reasoning.
 
 ## References
 

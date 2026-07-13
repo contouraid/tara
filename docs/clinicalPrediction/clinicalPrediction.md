@@ -1,5 +1,19 @@
 # 8: Clinical Prediction, Radiomics, and Causal Inference
 
+## Before you begin
+
+**Prerequisites:** Read Chapters 1, 3, 4, and 10's intended-use framing; know classification, regression, data splitting, clinical endpoints, dose, and follow-up. Use the [cross-book glossary](../resources/glossary.md) for shared artificial intelligence (AI), statistical, and clinical terms.
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. distinguish diagnostic, prognostic, treatment-predictive, and causal questions;
+2. specify an endpoint, index time, prediction horizon, follow-up process, and intended decision;
+3. design a leakage-safe radiomics or dosiomics pipeline with stability and external evaluation;
+4. assess discrimination, calibration, clinical utility, censoring, competing risks, missingness, and subgroup behavior; and
+5. explain what additional design and assumptions are required before a prediction can guide treatment choice.
+
+**Reading route:** Clinicians should emphasize question type, endpoints, calibration, decisions, and causal limits; technical readers should also study the full feature pipeline and time-to-event design. Case A uses toxicity prediction, while Cases B and C test whether longitudinal changes support prognosis or adaptation rather than causal treatment claims.
+
 Clinical prediction models estimate an outcome for a defined patient at a defined time. In radiation oncology, the outcome might be two-year local control, grade 2 or worse xerostomia by 12 months, pathological complete response, or survival after treatment. Images, dose, clinical variables, laboratory measurements, and molecular data may all contribute.
 
 Prediction is not the same as choosing treatment. A model can identify patients with poor outcomes while being unable to say whether escalation, de-escalation, another modality, or no change would help them. This chapter is the canonical home for outcome-modeling questions: what is predicted, how radiomic and multimodal predictors are constructed, how time and competing events are handled, and what additional assumptions are required before a prediction supports a causal or prescriptive claim.
@@ -148,6 +162,18 @@ Later stress testing exposed why external performance alone is not enough. Welch
 
 The field has responded with standardization and reporting frameworks. IBSI addresses feature definitions and reference values [[3]](https://doi.org/10.1148/radiol.2020191145); TRIPOD+AI specifies transparent reporting for regression and machine-learning prediction studies [[9]](https://doi.org/10.1136/bmj-2023-078378); and PROBAST+AI assesses development quality, evaluation bias, and applicability [[10]](https://doi.org/10.1136/bmj-2024-082505). Reporting compliance is not proof of low bias, reproducibility, utility, or causality, but it makes those properties more inspectable.
 
+## Evidence Synthesis
+
+The cited evidence agrees that radiomic calculations can be standardized and that image-derived features may carry prognostic signal across cohorts. It also documents substantial heterogeneity and failure risk from acquisition, segmentation, preprocessing, feature selection, missingness, endpoint definition, and leakage. Prognostic association, calibration, and decision utility are different endpoints; none alone identifies an individual treatment effect.
+
+| Task | Population / site | Data scale | Validation design | Comparator | Endpoint | Principal limitation | Maturity |
+|---|---|---|---|---|---|---|---|
+| Standardized radiomic feature calculation [[3]](https://doi.org/10.1148/radiol.2020191145) | Phantom, lung CT, and multimodality soft-tissue-sarcoma imaging | 25 teams; 169 standardized features; validation images from 51 patients | International implementation consensus plus prospective reproducibility test | Independent software implementations | Agreement and reproducibility of feature values | Computation reproducibility does not establish biomarker validity or clinical utility | **External/multi-institution validation** |
+| CT radiomic prognostic signature [[7]](https://doi.org/10.1038/ncomms5006) | Lung and head-and-neck cancer | 1,019 patients in seven cohorts | Retrospective development and independent-cohort validation | Clinical variables and cross-cohort feature/signature tests | Prognostic association and survival stratification | Historical cohorts, observational association, and no model-guided treatment comparison | **External/multi-institution validation** |
+| Delta-radiomics outcome prediction [[4]](https://doi.org/10.1038/s41598-017-00665-z) | Non-small-cell lung cancer treated with RT | Single retrospective cohort | Internal retrospective feature and outcome analysis | Pre-treatment versus longitudinal feature information | Outcome prediction/association | Small, site-specific observational analysis with no prospective decision evaluation | **Internal retrospective validation** |
+
+These studies support component reproducibility and retrospective external prognostic validity, not workflow benefit, patient benefit from model-guided care, or causal treatment selection. The cited set contains no named-product regulatory determination or representative routine-adoption estimate. IBSI provides open reference material and test data, but most clinical cohorts and complete pipelines are not equivalently open. Negative evidence is structural as well as empirical: initial cross-team feature agreement was poor before standardization, and vulnerability analyses show that plausible signatures can encode acquisition or pipeline choices [[8]](https://doi.org/10.1016/j.radonc.2018.10.027). The unanswered questions are prospective calibration under current treatments, fairness and transportability, useful abstention, effect on clinician decisions, and whether model-guided decisions improve outcomes compared with standard care.
+
 ## Current Research and Recent Advances
 
 - **Standardized quantitative imaging:** IBSI consensus definitions and reference values make feature calculations testable across software implementations, while acquisition and clinical transportability remain separate validation problems [[3]](https://doi.org/10.1148/radiol.2020191145). _(added: 2026-07)_
@@ -156,7 +182,13 @@ The field has responded with standardization and reporting frameworks. IBSI addr
 
 ## Recap
 
-Clinical outcome modeling begins with a precise endpoint, prediction time, horizon, follow-up process, and intended decision. Censoring, competing risks, repeated measurements, and missing outcomes determine what can be learned. Radiomics and dosiomics require a frozen, leakage-safe chain from acquisition and segmentation through standardized calculation, stability testing, dimension reduction, fitting, and true external validation. Discrimination must be accompanied by calibration, decision utility, subgroup evaluation, and prospective impact. Most importantly, diagnostic or prognostic association does not estimate treatment benefit: prescribing treatment requires a valid comparative causal question and evidence design.
+- **Objective 1:** Diagnostic questions concern a present state, prognostic questions a future outcome, treatment-predictive questions outcome differences by treatment, and causal questions outcomes under explicit alternatives.
+- **Objective 2:** A usable target names the endpoint, index time, horizon, ascertainment and follow-up, exclusions, and decision the output may support.
+- **Objective 3:** Radiomics and dosiomics require frozen acquisition-to-feature definitions, stability screening, patient-level splitting before fitted processing or selection, dimension control, and external evaluation of the complete pipeline.
+- **Objective 4:** Evaluation addresses censoring, competing events, repeated and missing observations, discrimination, calibration, decision utility, subgroup behavior, and prospective impact.
+- **Objective 5:** Treatment guidance requires valid comparison of alternatives and causal assumptions or design; prognosis under observed care does not identify the effect of changing care.
+
+**Important limitation and misconception:** A variable associated with poor outcome is not necessarily a useful intervention target, and calling a biomarker "predictive" does not establish that it predicts treatment benefit.
 
 ## References
 

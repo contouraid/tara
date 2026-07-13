@@ -1,6 +1,18 @@
 # 4: Medical Imaging in Radiation Oncology
 
-## How to Use This Guide
+## Before you begin
+
+**Prerequisites:** Read [Chapter 1](../intro/intro.md); technical readers new to radiotherapy should also read Chapter 3. The [cross-book glossary](../resources/glossary.md) defines artificial intelligence (AI), imaging, Digital Imaging and Communications in Medicine (DICOM), and radiotherapy terms. Major modalities introduced below include computed tomography (CT), magnetic resonance imaging (MRI), positron emission tomography (PET), and single-photon emission computed tomography (SPECT).
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. compare the physical signal, common radiotherapy role, and principal limitation of major imaging modalities;
+2. connect one patient's images, structures, registrations, prescription, plan, dose, delivery record, clinical variables, and outcomes;
+3. convert between array and physical-space reasoning using orientation, spacing, frame of reference, transforms, and units;
+4. design cohort construction, splitting, preprocessing, naming, provenance, and version controls that prevent common leakage and identity errors; and
+5. identify privacy, access, documentation, and representativeness limitations of a radiotherapy dataset.
+
+**Reading route:** All routes should read the data-foundations section before an application chapter. Complete beginners may read modality overviews first; experienced imaging readers may start at {ref}`Radiotherapy Data and Informatics Foundations <rt-data-foundations>`. Cases A–C use different combinations of multimodal, motion, and longitudinal imaging.
 
 This guide introduces imaging modalities used in radiation oncology and the formats used to store and exchange their data. Acquisition time, availability, image quality, and risk vary by protocol and institution, so the summary table is illustrative rather than a universal operational specification [[2]](https://doi.org/10.1155/2022/5164970).
 
@@ -345,6 +357,7 @@ These systems must address several critical requirements, including long-term ar
 
 ---
 
+(rt-data-foundations)=
 ## Radiotherapy Data and Informatics Foundations
 
 An AI dataset is not a folder of unrelated images. It is a selection from a longitudinal clinical record in which objects refer to one another, may be revised, and may describe what was intended rather than what was delivered. Before extracting arrays, define the clinical episode, resolve the object relationships, and retain enough provenance to reconstruct every derived example. DICOM Working Group 7 maintains the radiotherapy objects and their relationships [[6]](https://www.dicomstandard.org/activity/wgs/wg-07); the DICOM Standard remains the authority for the exact information model and attributes [[5]](https://www.dicomstandard.org/).
@@ -458,7 +471,13 @@ Federated or distributed learning moves computation to institutional data and ag
 
 ## Recap
 
-Medical imaging supports target delineation, planning, guidance, and response assessment, but an RT-AI example is meaningful only when its images, structures, prescription, plan, dose, registration, delivery, clinical variables, and outcomes are linked to the correct patient and time point. Physical coordinates, frames of reference, transforms, units, rasterization, and dose-grid geometry must be verified before arrays are compared. Reproducible development also requires explicit cohort rules, patient-level and temporal splits, training-only preprocessing, label and version provenance, privacy controls across metadata and content, and documentation of access conditions and limitations.
+- **Objective 1:** X-ray, computed tomography, magnetic resonance, ultrasound, positron emission tomography, and nuclear-medicine imaging measure different physical signals and trade spatial, temporal, functional, safety, and access properties.
+- **Objective 2:** A meaningful case links images, structures, registrations, prescription, plan, dose, delivery, clinical variables, and outcomes to the correct patient and time point.
+- **Objective 3:** Arrays acquire physical meaning only through orientation, spacing, frame of reference, transforms, units, rasterization, interpolation, and grid alignment.
+- **Objective 4:** Reproducible development needs explicit cohort rules, patient-level and temporal splits, training-only fitted preprocessing, naming harmonization, and label and version provenance.
+- **Objective 5:** Privacy controls must cover metadata and content, while dataset documentation must state consent or governance, access terms, missingness, selection, and limits on reuse and representation.
+
+**Important limitation and misconception:** Matching array shapes do not prove that anatomy or dose is spatially aligned, and de-identifying ordinary metadata does not guarantee that pixels, free text, dates, or linked records cannot identify a person.
 
 ---
 

@@ -1,5 +1,19 @@
 # 11: Integration of AI into Clinical Workflow
 
+## Before you begin
+
+**Prerequisites:** Read Chapters 1, 3, 4, 9, and 10 or know the artificial intelligence (AI) lifecycle, radiotherapy process, connected data, layered safety, and validation of the intended use. Use the [cross-book glossary](../resources/glossary.md).
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. describe a measurable clinical problem and map its current workflow, roles, handoffs, delays, and failure paths;
+2. design a future workflow with triggers, interfaces, provenance, review, exceptions, downtime, and independent checks;
+3. choose phased local evaluation and deployment gates proportionate to risk;
+4. define role-specific training, competency, support, feedback, and change-management measures; and
+5. assign governance and monitor clinical, safety, workflow, human-factors, and operational outcomes through retirement.
+
+**Reading route:** All implementation teams should read this chapter together rather than delegating it to one discipline. Cases A and B illustrate adding bounded tools to an existing path; Case C is the full adaptive example, where orchestration, time pressure, exception handling, and downtime are central.
+
 Clinical integration is the work required to turn a validated model into a dependable service. It includes process design, interfaces, responsibilities, training, change management, monitoring, and retirement. A model can be technically excellent and still fail because it delivers the wrong output, at the wrong time, to the wrong person, without a safe way to disagree.
 
 Radiation oncology is especially sensitive to integration quality. Each treatment depends on a chain of images, structures, prescriptions, plans, approvals, machine parameters, and delivery records. AI should be introduced as a controlled change to that chain, with measurable benefit and explicit ownership.
@@ -87,17 +101,17 @@ Manual transcription and ambiguous status labels create avoidable risk.
 
 ### Preserve Accountability
 
-For every output, define who reviews it, who may edit it, who approves it, and who owns the system. "The team" is not a role. A RACI matrix—responsible, accountable, consulted, informed—can clarify ownership across clinicians, physicists, therapists, informatics, IT, cybersecurity, vendors, and governance groups.
+For every output, define who reviews it, who may edit it, who approves it, and who owns the system. "The team" is not a role. A responsible, accountable, consulted, and informed (RACI) matrix can clarify ownership across clinicians, physicists, therapists, informatics, information technology (IT), cybersecurity, vendors, and governance groups.
 
 ## Technical Integration
 
 ### Data Interfaces
 
-Radiotherapy systems exchange DICOM images and DICOM-RT objects, but implementation details vary. Integration testing should verify patient identity, frame of reference, orientation, units, structure names, dose scaling, transfer completeness, and behavior with unsupported objects.
+Radiotherapy systems exchange Digital Imaging and Communications in Medicine (DICOM) images and DICOM radiotherapy (DICOM-RT) objects, but implementation details vary. Integration testing should verify patient identity, frame of reference, orientation, units, structure names, dose scaling, transfer completeness, and behavior with unsupported objects.
 
 The complete object relationships, geometry checks, provenance requirements, de-identification surfaces, and dataset controls are defined once in [Radiotherapy Data and Informatics Foundations](../medicalImaging/medicalImaging.md). A deployed interface should preserve those relationships rather than flattening each case into unrelated files.
 
-APIs and messaging interfaces should use authenticated connections, least-privilege access, encryption, audit logs, timeouts, and explicit error responses. A partial transfer must not be displayed as a completed result.
+Application programming interfaces (APIs) and messaging interfaces should use authenticated connections, least-privilege access, encryption, audit logs, timeouts, and explicit error responses. A partial transfer must not be displayed as a completed result.
 
 ### Orchestration and State
 
@@ -272,6 +286,16 @@ Use a balanced set of measures:
 
 Measure the full pathway. A model that shortens one task but increases downstream correction has not created the claimed value.
 
+## Evidence Synthesis
+
+The cited evidence agrees that deployment depends on governance, workforce, data infrastructure, interfaces, local validation, and feedback—not model availability alone. The implementation literature is heterogeneous across health systems and tasks, while the strongest adoption estimate here is a national cross-sectional survey rather than a longitudinal effectiveness study. Availability, reported use, and organizational readiness therefore should not be conflated with safer care or better outcomes.
+
+| Task | Population / site | Data scale | Validation design | Comparator | Endpoint | Principal limitation | Maturity |
+|---|---|---|---|---|---|---|---|
+| RT automation and adaptive-RT adoption [[3]](https://doi.org/10.1016/j.ejmp.2026.105867) | Italian radiotherapy and medical-physics departments | 61 of 133 departments responded (46%) | National cross-sectional survey | Adoption across tasks and center characteristics | Reported routine use, maturity, QA, and barriers | Nonresponse, self-report, one country, and no effectiveness or patient endpoint | **Routine adoption** |
+
+The survey supports routine adoption for some tasks among responding centers: autosegmentation was reported more often than autoplanning, while formal automation-specific FMEA was uncommon. That combination is informative negative evidence against treating availability as end-to-end maturity. WHO's cross-national readiness assessment and governance guidance add system and human-centered context, but they are not evaluations of a named RT system [[1]](https://www.who.int/publications/i/item/9789240029200) [[2]](https://www.who.int/europe/publications/i/item/WHO-EURO-2025-12707-52481-81028). The cited set does not supply system-level model performance, external clinical validity, causal workflow improvement, patient benefit, or a named-product regulatory determination. Survey instruments and policy reports support auditability, but patient-level datasets and implementation code are not the object of these sources. Unanswered questions are whether adoption persists over time, how it changes staffing and error recovery, which local controls prevent harm, whether benefits reach resource-constrained settings, and whether any workflow change improves patient outcomes or equity.
+
 ## Current Research and Recent Advances
 
 - **Readiness and workforce capacity:** WHO's 2025 assessment across 50 European-region Member States highlights governance, workforce readiness, data governance, and stakeholder engagement as health-system prerequisites for AI integration [[2]](https://www.who.int/europe/publications/i/item/WHO-EURO-2025-12707-52481-81028). _(added: 2026-07)_
@@ -280,7 +304,13 @@ Measure the full pathway. A model that shortens one task but increases downstrea
 
 ## Recap
 
-Successful AI integration starts with a measured clinical problem and a map of real work. The future workflow must define triggers, interfaces, provenance, review, exceptions, downtime, ownership, and independent safety checks. Phased deployment, role-specific competency, calibrated trust, change control, and balanced monitoring turn a model into a clinical service. The relevant unit of evaluation is the complete human-AI system and its effect on patients and staff.
+- **Objective 1:** Integration starts with a measured clinical problem and a map of real work, including roles, handoffs, queues, workarounds, delays, and failures.
+- **Objective 2:** The future state defines triggers, data and interfaces, provenance, accountable review, disagreement, exceptions, escalation, downtime, and independent checks.
+- **Objective 3:** Technical testing, silent operation, limited pilot, and controlled scale-up use explicit entry, success, stop, and rollback gates proportionate to risk.
+- **Objective 4:** Role-specific training covers task and failure response; observed competency, go-live support, usable feedback, and aligned policy sustain safe adoption.
+- **Objective 5:** Named governance monitors patient and technical quality, safety, workflow, human factors, equity, and operations, controls changes, and plans retirement.
+
+**Important limitation and misconception:** Deployment is not a software installation event. A model can retain its offline score while the human-AI service fails through timing, interface, workload, accountability, or downtime design.
 
 ## References
 

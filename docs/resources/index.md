@@ -1,5 +1,7 @@
 # Resources: Software and Further Reading
 
+Start with the **[Cross-book Glossary](glossary.md)** for canonical definitions spanning artificial intelligence, statistics, imaging, DICOM-RT, radiotherapy, validation, safety, deployment, and regulation.
+
 This appendix collects practical resources referenced throughout ART101: open-source software for working with radiotherapy data, and external courses and workshops for readers who want to go deeper. It is not exhaustive, and inclusion here is not an endorsement — always validate any tool against your own clinical and research requirements before relying on it.
 
 ## Open-source software tools

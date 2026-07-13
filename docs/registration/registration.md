@@ -1,10 +1,24 @@
 # 6: AI in Image Registration and Fusion
 
+## Before you begin
+
+**Prerequisites:** Read Chapters 1, 3, and 4; know image geometry, frames of reference, interpolation, and task-specific validation. Chapter 2 supplies artificial intelligence (AI) model architecture background. Use the [cross-book glossary](../resources/glossary.md).
+
+**Learning objectives:** After this chapter, you should be able to:
+
+1. distinguish image fusion from the transformation estimated by registration;
+2. compare rigid, affine, and deformable transformation assumptions and monomodal versus multimodal similarity;
+3. outline conventional and learning-based registration pipelines;
+4. choose complementary geometric, physical, and clinical validation methods for a stated use; and
+5. define commissioning and patient-specific review controls for contour transfer, dose accumulation, or guidance.
+
+**Reading route:** Clinicians may focus on purpose, failure modes, applications, and review; technical readers should include objectives and learning strategies. Case A uses magnetic resonance imaging (MRI)–computed tomography alignment, Case B uses motion phases, and Case C uses longitudinal deformable propagation.
+
 Image registration estimates a spatial relationship between images. In radiation oncology, that relationship may connect different modalities acquired for planning, daily images acquired for positioning, or images collected across a treatment course. Registration makes image fusion possible, but the transformation—not the blended display—is the clinically consequential output.
 
 A registration result is always used for a purpose: transferring a contour, comparing anatomy, accumulating dose, positioning a patient, or guiding a decision. Its suitability must therefore be judged for that specific task and anatomical region. A visually convincing overlay is not, by itself, proof that the transformation is accurate where it matters [[1]](https://doi.org/10.1002/mp.12256).
 
-The shared prerequisites for DICOM object linkage, frames of reference, world and voxel coordinates, resampling provenance, cohort construction, and patient-level splitting are defined in [Radiotherapy Data and Informatics Foundations](../medicalImaging/medicalImaging.md). This chapter focuses on estimating and validating spatial transformations.
+The shared prerequisites for Digital Imaging and Communications in Medicine (DICOM) object linkage, frames of reference, world and voxel coordinates, resampling provenance, cohort construction, and patient-level splitting are defined in [Radiotherapy Data and Informatics Foundations](../medicalImaging/medicalImaging.md). This chapter focuses on estimating and validating spatial transformations.
 
 ## The Registration Problem
 
@@ -18,7 +32,7 @@ Every registration has a defined direction. If $T$ maps fixed-image coordinates 
 
 ### Fixed and Moving Images
 
-The **fixed image** defines the output coordinate system. The **moving image** is resampled into that system. Selection is task dependent. For example, an MRI may be moved to planning CT for target delineation, while a planning CT may be moved to a daily CBCT to propagate prior contours.
+The **fixed image** defines the output coordinate system. The **moving image** is resampled into that system. Selection is task dependent. For example, an MRI may be moved to planning computed tomography (CT) for target delineation, while a planning CT may be moved to daily cone-beam CT (CBCT) to propagate prior contours.
 
 Resampling creates new voxel values. Linear or spline interpolation may be suitable for intensity images, while label maps generally require nearest-neighbor or specialized label interpolation to avoid inventing fractional class identifiers. Dose interpolation requires particular care because the physical meaning of accumulated dose also depends on how anatomy and mass are mapped.
 
@@ -146,6 +160,18 @@ Dice can remain high for a large organ despite a clinically important focal erro
 
 Before a transformation drives care, the user should inspect alignment at the relevant anatomy, review known failure regions, and confirm that the transformation is appropriate for the intended use. A registration accepted for image viewing may be unsuitable for contour propagation, and one accepted for contour propagation may be unsuitable for dose accumulation.
 
+## Evidence Synthesis
+
+The literature cited here agrees that learned registration can reduce inference time and improve selected similarity, contour, or landmark endpoints, but the result is conditional on anatomy, modality, motion range, and downstream task. Comparisons are heterogeneous: iterative and learned baselines differ between papers, public 4D-CT benchmarks emphasize landmarks, and longitudinal CT-CBCT studies emphasize propagated contours. A smooth or fast deformation is therefore model performance, not evidence that accumulated dose or an adaptive decision is correct.
+
+| Task | Population / site | Data scale | Validation design | Comparator | Endpoint | Principal limitation | Maturity |
+|---|---|---|---|---|---|---|---|
+| General deformable registration [[2]](https://doi.org/10.1109/TMI.2019.2897538) | Brain MRI and other retrospective benchmark tasks; not RT-specific clinical use | Multiple research datasets | Held-out retrospective benchmark | Classical registration and learning baselines | Image similarity and anatomical overlap | Benchmark anatomy and endpoints do not validate an RT downstream task | **Proof of concept** |
+| Longitudinal planning CT-to-CBCT registration [[3]](https://pubmed.ncbi.nlm.nih.gov/36303270/) | Lung RT at one institution | 50 patients, each with planning CT and six weekly CBCTs | Internal retrospective cross-validation | VoxelMorph and LDDMM | Tumor/esophagus Dice, Hausdorff distance, inverse consistency, runtime | No independent institution, prospective workflow, or dose endpoint | **Internal retrospective validation** |
+| Respiratory 4D-CT/4D-CBCT registration [[4]](https://pubmed.ncbi.nlm.nih.gov/38023695/) | Abdominal and respiratory imaging datasets | Internal 4D-CT plus public DIRLAB 4D-CT and 4D-CBCT datasets | Retrospective multi-dataset benchmark | Demons, VoxelMorph, and recursive cascade baselines | Landmark/contour alignment and deformation behavior | Dataset diversity is not a prospective clinical or dose-accumulation validation | **External/multi-institution validation** |
+
+The cited set supports technical and retrospective external-dataset validity, but it contains no silent prospective deployment, human-factors comparison, patient outcome, named-product regulatory determination, or representative adoption estimate. Public benchmark data improve reproducibility, while code and trained-model availability must still be checked per paper and version. TG-132 also cautions that no single metric proves registration validity for every task [[1]](https://doi.org/10.1002/mp.12256); this limits apparently contradictory claims of superiority across different endpoints. Unanswered questions are whether failures can be detected per patient, whether accumulated dose and propagated targets remain clinically valid, and whether performance and latency transport across scanners, protocols, disease sites, and model updates. No comparative harmful or null clinical-impact study is in the current cited set, so the next currency review should search for negative prospective and downstream-task evidence explicitly.
+
 ## Current Research and Recent Advances
 
 - **Longitudinal learning:** Sequence-aware registration models are beginning to use the ordered anatomy of a radiotherapy course, rather than treating every image pair independently. Seq2Morph demonstrated this approach for planning CT and weekly CBCT registration, while emphasizing the need for broader validation [[3]](https://pubmed.ncbi.nlm.nih.gov/36303270/). _(added: 2026-07)_
@@ -154,7 +180,13 @@ Before a transformation drives care, the user should inspect alignment at the re
 
 ## Recap
 
-Image registration estimates spatial correspondence; fusion merely displays information using that estimate. Rigid, affine, and deformable models serve different anatomical assumptions, while monomodal and multimodal problems require different similarity strategies. Learning-based registration can greatly reduce inference time and learn useful features, but it does not remove ambiguity, artifacts, or the need for commissioning and patient-specific review. Validation must be task-specific and use complementary geometric, physical, and clinical measures.
+- **Objective 1:** Registration estimates spatial correspondence; fusion is a display or combination that uses the estimated transformation.
+- **Objective 2:** Rigid, affine, and deformable models allow progressively broader changes, while monomodal and multimodal data support different similarity evidence.
+- **Objective 3:** Conventional pipelines optimize similarity and regularization per case; learning-based methods estimate transformations from learned examples or objectives and can be faster at inference.
+- **Objective 4:** Validation must match the use and combine landmarks or contours, transformation plausibility, image evidence, uncertainty, and the clinical effect of transferred information.
+- **Objective 5:** Commissioning defines supported data and tasks; patient-specific review checks the anatomy that matters before contour transfer, dose accumulation, or guidance can affect care.
+
+**Important limitation and misconception:** A visually smooth or convincing overlay does not prove anatomically correct correspondence, and an invertible-looking deformation does not make dose accumulation biologically valid.
 
 ## References
 

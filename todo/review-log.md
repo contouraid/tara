@@ -28,6 +28,37 @@ Append one entry per cycle, in the format below, at the **top** of the log (newe
 
 ## Log
 
+## 2026-07-12 research-synthesis-and-evidence-grading closure
+
+**Chapters reviewed:** `contouring/`, `registration/`, `treatmentPlanning/`, `clinicalPrediction/`, `qa/`, and `workflow/`
+**Todos closed:** `p2-establish-research-synthesis-and-evidence-grading.md` (moved to `todo/done/`)
+**Todos opened:** none
+
+### Searches run
+- scope and existing evidence: chapter-by-chapter searches for `Current Research and Recent Advances`, application evidence claims, table fields, maturity terms, limitations, and reference records across all six source files — all currently cited synthesis candidates reviewed.
+- contouring: `"Assessment of manual adjustment" patients Brouwer 2020`, exact-title/DOI checks for the contour-editing study, and `MedSAM modalities image-mask pairs` (PubMed Central / publisher / DOI) — two table studies included; metric-consensus guidance retained as context.
+- registration: `Seq2Morph planning CT weekly CBCT radiotherapy`, `4D-CT deformable image registration unsupervised recursive cascaded patients`, and exact PMID checks (PubMed) — three table studies included.
+- treatment planning: `OpenKBP 340 patients challenge`, `Beam field guided diffusion model liver cancer dose prediction patients dataset`, and exact DOI checks (publisher / DOI) — two table studies included; adaptive-planning review retained as context.
+- clinical prediction: `Decoding tumour phenotype 1019 patients seven cohorts`, `IBSI standardized radiomics 169 features 51 patients`, and exact DOI checks (PubMed Central / publisher / DOI) — three table studies included.
+- QA: `Understanding machine learning classifier decisions automated radiotherapy QA dataset` and exact PMID checks (PubMed) — one system study included; TG-218 and FDA change-control guidance retained as context.
+- workflow: exact-title and DOI checks for `Adoption of AI-driven automation and adaptive radiotherapy national survey Italy departments 2026`, plus WHO readiness/governance source checks (PubMed / WHO / DOI) — one adoption study included; two WHO reports retained as context.
+
+### Added
+- `GUIDE.md`: reproducible search, selection, deduplication, verification, extraction, stopping, audit, maturity-grading, and durable-synthesis rules.
+- all six application chapters: a common eight-field evidence table and durable synthesis distinguishing performance, external validity, workflow, outcomes, regulatory status, and adoption.
+- contouring and QA: corrected the verified bibliographic record for the Brouwer contour-editing study and Chen et al. explainable-QA study, respectively.
+
+### Rejected
+- FDA predetermined-change-control-plan guidance was not graded as `Regulatory status`: it is a framework, not authorization of a named product for a specified intended use.
+- WHO readiness and ethics reports, TG-218, metric-selection consensus, and the adaptive-planning narrative review were not assigned system maturity labels: they inform interpretation but do not validate a specific application system at that level.
+- The BeamDiff patient count was not inferred because it was not reported in the accessible abstract; the table records that limitation instead of guessing.
+- Search results for unrelated CBCT dose calculation, newer uncited planning or QA models, vendor pages, patents, secondary books, and preprints were not added because this closure synthesized the verified in-book evidence set; new literature belongs to the open chapter-specific currency todos.
+- No duplicate cohorts were counted as independent validations in the table rows.
+
+### Notes for next cycle
+- Stopping rule for this cross-cutting closure: every application chapter and every source already cited in its durable/recent synthesis was reviewed, exact bibliographic uncertainties were resolved where possible, and no unresolved item changed a maturity rating. No broad currency search was run, to avoid duplicating the open chapter-specific todos.
+- Future currency cycles must run the new query families and saturation rule, record rejected and cohort-linked studies, and promote stable conclusions into `Evidence Synthesis` without deleting dated recent-advances entries.
+
 ## 2026-07-12 radiotherapy-clinical-foundations closure
 
 **Chapters reviewed:** `fundamentalRO/`
