@@ -198,6 +198,19 @@ Monitor edit distance, factual corrections, rejected outputs, unsupported claims
 - **Clinician-VLM collaboration:** Expert evaluation of Flamingo-CXR reports showed that comparative quality varied across clinical settings and that both model and clinician reports contained consequential errors. This supports evaluating collaboration and correction workflows rather than model fluency alone [[2]](https://doi.org/10.1038/s41591-024-03302-1). _(added: 2026-07)_
 - **Evaluation is lagging capability:** Recent medical VLM reviews consistently identify limited dataset diversity, weak standardized clinical metrics, privacy constraints, and insufficient external validation as major barriers [[3]](https://doi.org/10.3389/frai.2024.1430984). _(added: 2026-07)_
 
+## Knowledge Check
+
+1. **Recall:** How does a dual-encoder VLM differ from an image-conditioned text generator?
+   - **Answer and reasoning:** A dual encoder maps images and text into comparable representations, often for retrieval; a generator produces text conditioned on visual input. A good retrieval score does not establish safe generation. Review [Core Architectural Patterns](#core-architectural-patterns).
+2. **Interpretation:** Why is a two-dimensional image-caption benchmark weak evidence for a three-dimensional RT task?
+   - **Answer and reasoning:** RT uses volumetric series, geometry, multiple objects, and longitudinal context absent from a single image-caption pair. Scale alone cannot replace task-matched data. Review [Medical and Radiotherapy Data Challenges](#medical-and-radiotherapy-data-challenges).
+3. **Application:** A VLM names the correct organ but highlights the wrong side. Which evaluation failed?
+   - **Answer and reasoning:** Spatial grounding and laterality failed even if text accuracy passed. Language correctness is the tempting but insufficient endpoint. Review [Grounding](#grounding).
+4. **Safety:** How should a VLM handle missing evidence needed for an answer?
+   - **Answer and reasoning:** It should abstain or explicitly identify the missing evidence and route to a safe fallback. Guessing from visual plausibility creates an unsupported clinical claim. Review [Hallucination and Abstention](#hallucination-and-abstention).
+5. **Case application:** In synthetic Case A, orientation metadata conflict while the displayed MRI looks normal. Should a VLM-generated laterality statement be accepted?
+   - **Answer and reasoning:** No. Geometry and provenance must be resolved before spatial claims. Human visual comfort and fluent text cannot validate a conflicting coordinate record. Review [DICOM and Structured Objects](#digital-imaging-and-communications-in-medicine-dicom-and-structured-objects) and {ref}`Case A <case-a>`.
+
 ## Recap
 
 - **Objective 1:** Vision-only systems map visual data to constrained outputs, language-only systems operate on text representations, and vision-language models connect both modalities.

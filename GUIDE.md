@@ -55,10 +55,19 @@ Every chapter file (`docs/<folder>/<name>.md`) must contain, in this order:
 1. **Numbered title** matching `docs/index.md` (e.g., `# 5: AI for Contouring`).
 2. **Body sections** using MyST Markdown headers (`##`, `###`). No manual "table of contents" block of hand-written `[text](#anchor)` links at the top of the file — see Rule 3 below for why this is forbidden, not just discouraged.
 3. **`## Current Research and Recent Advances`** — the section the monthly literature-review process maintains. Each entry is one bullet or short paragraph, ends with a citation, and is tagged with the review cycle that added it: `_(added: 2026-07)_`. Never delete an entry here without moving its claim into the main body first or confirming (via a todo, see below) that it's been superseded.
-4. **`## Recap`** — a short summary paragraph.
-5. **`## References`** — numbered list, one entry per source cited anywhere in the chapter, each with a resolvable Markdown link (DOI, PubMed, arXiv, or publisher link). Numbered in-text citations must also be clickable, using the visible form `[[1]](https://...)`; do not leave citation markers such as `[1]` or reference URLs as plain text.
+4. **`## Knowledge Check`** — at least five formative questions spanning recall, interpretation, and application, each followed by a reasoned answer and a link to the relevant section. Explanations must identify why a plausible shortcut, alternative, or unsafe interpretation fails.
+5. **`## Recap`** — a short summary paragraph.
+6. **`## References`** — numbered list, one entry per source cited anywhere in the chapter, each with a resolvable Markdown link (DOI, PubMed, arXiv, or publisher link). Numbered in-text citations must also be clickable, using the visible form `[[1]](https://...)`; do not leave citation markers such as `[1]` or reference URLs as plain text.
 
 A chapter that has only a title and no body is a **Critical** gap, not a Medium one. The original six-stub gap and its resolution are retained in `todo/done/p0-write-stub-chapters.md`.
+
+### Cases and formative assessment
+
+`docs/resources/cases.md` is the canonical record for the synthetic recurring cases and capstone. Chapter worked steps must link to that record rather than changing anatomy, identifiers, geometry, task, role ownership, or clinical context locally. All case content must say it is synthetic and educational, avoid patient-specific advice, expose missing or conflicting information rather than silently repair it, and identify the accountable decision maker and safe fallback.
+
+At least two cases must recur across three or more chapters. Contouring and treatment planning must contain explicit worked-case sections. At least one case must show why a favorable aggregate metric, confidence score, or smooth output can coexist with poor clinical utility or safety. When a clinical parameter is included for realism, label it as part of the fixed synthetic record—not a recommendation.
+
+Knowledge checks are formative, not certification. Questions should mix terminology, interpretation, calculation where appropriate, paper or claim critique, and clinical-safety application. Do not ask for trivia available only by memorizing a citation. Answers should state the reasoning, name the tempting but wrong alternative, and link back to the teaching section. The capstone must assess intended use, data, evidence, human factors, governance, and monitoring; its score never authorizes clinical use.
 
 ---
 

@@ -176,6 +176,19 @@ The exact titles vary by institution; the requirement is that each row has a sin
 - **Management-system standards for AI:** ISO/IEC 42001:2023, the first AI-management-system standard, and the NIST AI Risk Management Framework (2023) give organizations voluntary, auditable structures for the governance, fairness, and security activities that clinical deployment requires—useful scaffolding, but not a substitute for device law or local validation [[8]](https://www.iso.org/standard/42001) [[9]](https://www.nist.gov/itl/ai-risk-management-framework). _(added: 2026-07)_
 - **A named threat taxonomy for language-model systems:** The OWASP Top 10 for LLM Applications (2025) formalizes risks—prompt injection, sensitive-information disclosure, supply-chain and model poisoning, and excessive agency—that are directly relevant as retrieval- and agent-based tools reach into clinical systems [[12]](https://genai.owasp.org/llm-top-10/). _(added: 2026-07)_
 
+## Knowledge Check
+
+1. **Recall:** Why distinguish law, regulator guidance, standards, professional guidance, institutional policy, and contracts?
+   - **Answer and reasoning:** They have different authority, scope, enforcement, and update mechanisms. Calling every document a legal requirement creates false certainty. Review [Six Kinds of “Must”](#six-kinds-of-must).
+2. **Interpretation:** Does regulatory clearance prove a tool is effective for every local population and workflow?
+   - **Answer and reasoning:** No. It applies to a specified jurisdiction and intended use; local acceptance, validation, training, monitoring, and professional responsibility remain. Clearance is not universal superiority. Review [Regulatory and Privacy Frameworks by Jurisdiction](#regulatory-and-privacy-frameworks-by-jurisdiction).
+3. **Application:** A model has equal overall accuracy across two groups but far worse false-negative severity in one. Is it fair?
+   - **Answer and reasoning:** The aggregate equality does not resolve clinically meaningful error distribution or access consequences. Examine subgroup endpoints, uncertainty, causes, and mitigations; one fairness number is insufficient. Review [Fairness and Health Equity](#fairness-and-health-equity).
+4. **Security:** Why is a vendor security questionnaire alone insufficient for a connected clinical AI service?
+   - **Answer and reasoning:** The institution must verify architecture, access, data flows, incident duties, updates, downtime, recovery, and evidence. Attestation without tested controls and contract responsibilities leaves operational gaps. Review [Third-Party, Cloud, and Vendor Risk](#third-party-cloud-and-vendor-risk).
+5. **Governance:** Who owns a residual risk after all practical controls are applied?
+   - **Answer and reasoning:** A named authority with the competence and mandate to accept, reduce, transfer, or reject it; “the committee” or “the AI” is not accountable enough. Review [A Governance Checklist and Responsibility Map](#a-governance-checklist-and-responsibility-map).
+
 ## Recap
 
 - **Objective 1:** Binding law, regulator guidance, consensus guidance, technical standards, institutional policy, and ethics carry different authority and cannot substitute for one another.

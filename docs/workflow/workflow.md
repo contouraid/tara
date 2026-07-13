@@ -286,6 +286,18 @@ Use a balanced set of measures:
 
 Measure the full pathway. A model that shortens one task but increases downstream correction has not created the claimed value.
 
+## Worked Case: Map Case C's Exception Path
+
+This is a synthetic educational workflow from the [casebook](../resources/cases.md), not a local operating procedure.
+
+1. **Trigger:** the system or reviewer detects field-edge uncertainty or an omitted bowel loop.
+2. **State change:** adapted-plan approval is blocked; the interface removes the preselected approval and preserves the scheduled option.
+3. **Ownership:** the radiation oncologist resolves contours and clinical choice, the physicist repeats technical plan/QA review, and radiation therapists maintain identity/setup/delivery readiness.
+4. **Recovery:** correct contours, re-optimize, repeat independent checks, and resume only if time and safety conditions are met.
+5. **Fallback and learning:** use the locally approved scheduled-plan or defer-treatment route, log the near miss, investigate the software-version shift, and update monitoring, training, and change control.
+
+A workflow diagram that shows only the successful automated path is incomplete. The exception state, communication route, timeout, downtime behavior, and authority to stop are part of the clinical system.
+
 ## Evidence Synthesis
 
 The cited evidence agrees that deployment depends on governance, workforce, data infrastructure, interfaces, local validation, and feedback—not model availability alone. The implementation literature is heterogeneous across health systems and tasks, while the strongest adoption estimate here is a national cross-sectional survey rather than a longitudinal effectiveness study. Availability, reported use, and organizational readiness therefore should not be conflated with safer care or better outcomes.
@@ -301,6 +313,19 @@ The survey supports routine adoption for some tasks among responding centers: au
 - **Readiness and workforce capacity:** WHO's 2025 assessment across 50 European-region Member States highlights governance, workforce readiness, data governance, and stakeholder engagement as health-system prerequisites for AI integration [[2]](https://www.who.int/europe/publications/i/item/WHO-EURO-2025-12707-52481-81028). _(added: 2026-07)_
 - **Clinical adoption is uneven across tasks:** A 2026 national survey of Italian radiotherapy departments reported more routine use of autosegmentation than autoplanning, illustrating that integration maturity depends on use case, infrastructure, and workflow—not AI availability alone [[3]](https://doi.org/10.1016/j.ejmp.2026.105867). _(added: 2026-07)_
 - **Human-centered governance:** Current guidance continues to emphasize human autonomy, transparent limitations, accountability, and continuous evaluation in actual use. These are workflow design requirements, not abstract ethical additions [[1]](https://www.who.int/publications/i/item/9789240029200). _(added: 2026-07)_
+
+## Knowledge Check
+
+1. **Recall:** What should be defined before selecting an AI tool?
+   - **Answer and reasoning:** Define the current clinical problem, affected people, frequency/consequence, and desired outcome. Starting with a model invites an unbounded solution looking for a task. Review [Begin with the Clinical Problem](#begin-with-the-clinical-problem).
+2. **Interpretation:** Why measure the baseline workflow before deployment?
+   - **Answer and reasoning:** Without baseline time, errors, variation, exceptions, and workload, change cannot be attributed or valued. User enthusiasm after launch is not a comparator. Review [Map the Existing Workflow](#map-the-existing-workflow).
+3. **Application:** Where should an AI output appear?
+   - **Answer and reasoning:** At a defined decision point with source evidence, accountable action, state, escalation, and fallback. A separate dashboard can create duplicate work and missed handoffs. Review [Select the Integration Point](#select-the-integration-point).
+4. **Case application:** In synthetic Case C, what must happen after the field-edge bowel omission?
+   - **Answer and reasoning:** Block approval, assign contour and technical owners, recover through corrected contours and repeated checks, use the approved fallback if needed, and open a change investigation. Quiet manual correction would lose the system-level learning. Review [Worked Case](#worked-case-map-case-cs-exception-path).
+5. **Interpretation:** A tool saves two minutes in contouring but adds five minutes of downstream correction. Has it improved efficiency?
+   - **Answer and reasoning:** No at the pathway level. Measure total time, correction, exceptions, safety, human factors, and cost; optimizing one local step can worsen the system. Review [Measuring Success](#measuring-success).
 
 ## Recap
 

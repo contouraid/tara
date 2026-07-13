@@ -117,6 +117,19 @@ Clinical responsibility remains with appropriately qualified people and organiza
 - **AI-specific reporting guidance:** TRIPOD+AI and PROBAST+AI make reporting, risk of bias, fairness, and applicability more explicit for prediction models, shifting attention from headline performance to evidence quality [[8]](https://doi.org/10.1136/bmj-2023-078378) [[11]](https://doi.org/10.1136/bmj-2024-082505). _(added: 2026-07)_
 - **Lifecycle governance:** International good-machine-learning-practice principles emphasize representative data, human-AI team performance, clear user information, and monitoring of deployed models rather than one-time validation alone [[12]](https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles). _(added: 2026-07)_
 
+## Knowledge Check
+
+1. **Recall:** What is the difference between a trained model and a clinical AI system?
+   - **Answer and reasoning:** A model maps inputs to outputs; the clinical system also includes data sources, preprocessing, interface, users, policy, monitoring, and fallback. Calling the model the system hides failure points and accountability. Review [What AI Means in This Book](#what-ai-means-in-this-book).
+2. **Interpretation:** A paper randomly splits images from the same patient between training and testing. Why is the reported test score optimistic?
+   - **Answer and reasoning:** Patient-specific anatomy can leak across the split, so the test set is not independent. More images do not fix this; splitting by image is the tempting but wrong shortcut. Review [Training and Evaluation Basics](#training-and-evaluation-basics).
+3. **Application:** An autocontouring model has excellent Dice but no workflow study. What claim is justified?
+   - **Answer and reasoning:** Only task-specific technical performance in the evaluated data is supported. Time savings, safer care, or patient benefit require separate evidence; inferring them from Dice is unsafe. Review [Reading Claims About Clinical AI](#reading-claims-about-clinical-ai).
+4. **Safety:** Where should a team start when proposing AI for a radiotherapy step?
+   - **Answer and reasoning:** Start with a bounded clinical problem and intended use: user, input, output, supported decision, population, and consequence. Starting with an available model encourages solution-first scope creep. Review [The Common Clinical AI Lifecycle](#the-common-clinical-ai-lifecycle).
+5. **Lifecycle:** A deployed system's input distribution shifts after a scanner update. Is retraining the automatic next step?
+   - **Answer and reasoning:** No. First contain risk, investigate the change, assess performance and workflow impact, and decide whether rollback, recalibration, revalidation, or retirement is appropriate. Blind retraining can hide the cause and introduce new failure. Review [Limitations and Responsible Use](#limitations-and-responsible-use).
+
 ## Recap
 
 - **Objective 1:** Radiotherapy is a linked clinical and technical process in which AI may support perception, prediction, optimization, or quality control.

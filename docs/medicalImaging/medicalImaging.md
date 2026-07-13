@@ -463,11 +463,34 @@ Representative public or research-access RT datasets illustrate why the access t
 
 Federated or distributed learning moves computation to institutional data and aggregates model updates or statistics instead of pooling raw records. It can broaden collaboration where central sharing is impractical, but it does not remove the need for contracts, privacy/security analysis, common definitions, data-quality checks, site-level evaluation, or protection against update leakage and attacks. Non-identically distributed institutional data can produce unstable or unfair performance, and model updates may disclose information. Federated learning should therefore be documented as a governed data flow, not described as automatic anonymization [[15]](https://doi.org/10.1038/s41598-020-69250-1).
 
+## Worked Cases: Trust the Record Before the Pixels
+
+These are synthetic educational steps from the [casebook](../resources/cases.md), not patient-specific advice.
+
+**Case A:** The imported MRI looks anatomically plausible, but its orientation metadata conflicts with the planning CT. The correct sequence is to verify patient/study/series identity, frame of reference, image orientation and position, spacing, and completeness before registration or contouring. Visual similarity is not a substitute for geometry. Until the conflict is resolved, quarantine MRI-derived outputs and continue only through the locally approved fallback.
+
+**Case B:** Duplicate four-dimensional CT phase labels reduce the apparent motion from 9 mm to 4 mm. A learner should reconcile image timestamps and phase identifiers with the respiratory trace, then require reconstruction or reacquisition according to local policy. Averaging the duplicated phases would create a neat but false motion label.
+
+**Case C:** A CBCT software update leaves voxel spacing unchanged while intensity and field of view shift. Version-tag the acquisition and preprocessing chain, compare the new distribution with the commissioned baseline, and stratify failures at the field edge. Passing a spacing check alone cannot establish input equivalence.
+
 ## Current Research and Recent Advances
 
 - **Second-generation radiotherapy objects:** DICOM is separating prescriptions, radiation sets, and radiation records more explicitly than legacy RT objects. Adoption remains system-dependent, so datasets must declare which object generation and implementation they use [[16]](https://www.dicomstandard.org/news/supplements/view/rt-radiation-records). _(added: 2026-07)_
 - **Distributed learning:** Federated learning supports multi-institution analysis without centralizing raw records, but heterogeneous sites, privacy leakage, security, and governance remain active constraints rather than solved properties [[15]](https://doi.org/10.1038/s41598-020-69250-1). _(added: 2026-07)_
 - **Dataset documentation:** Datasheets make provenance, composition, intended use, and known limitations inspectable. For radiotherapy, this documentation must also cover linked DICOM objects, coordinate handling, plan versions, and whether dose was planned or delivered [[13]](https://doi.org/10.1145/3458723). _(added: 2026-07)_
+
+## Knowledge Check
+
+1. **Recall:** Why is CT central to conventional photon treatment planning?
+   - **Answer and reasoning:** CT provides patient geometry and calibrated attenuation information used for dose calculation. MRI contrast is valuable but does not automatically replace CT electron-density information. Review [Computed Tomography](#computed-tomography-ct).
+2. **Interpretation:** Two DICOM images display correctly but have different frames of reference. Can their pixels be overlaid safely?
+   - **Answer and reasoning:** Not without a verified spatial relationship. Display similarity ignores patient coordinates; manual visual alignment is the tempting but unsafe shortcut. Review [Radiotherapy Data and Informatics Foundations](#radiotherapy-data-and-informatics-foundations).
+3. **Application:** Synthetic Case B contains duplicate phase labels. What records should be reconciled?
+   - **Answer and reasoning:** Compare image timestamps, phase identifiers, series/object relationships, and the respiratory trace, then reconstruct or reacquire under local policy. Averaging phases would conceal the metadata failure. Review [Worked Cases](#worked-cases-trust-the-record-before-the-pixels).
+4. **Interpretation:** Does converting DICOM to an array preserve all information needed for RT AI?
+   - **Answer and reasoning:** No. Arrays can lose identity, orientation, spacing, frame, object relationships, revisions, and provenance. Saving pixel values alone cannot reconstruct the clinical episode. Review [Medical Imaging Storage File Types](#medical-imaging-storage-file-types).
+5. **Safety:** After a scanner software update, voxel size is unchanged. Is revalidation unnecessary?
+   - **Answer and reasoning:** No. Reconstruction, intensity, field of view, artifacts, and metadata can change while spacing remains constant. A single unchanged field is not evidence of distribution equivalence. Review [Worked Cases](#worked-cases-trust-the-record-before-the-pixels).
 
 ## Recap
 

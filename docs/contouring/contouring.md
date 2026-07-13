@@ -178,6 +178,36 @@ Metrics like DSC, HD, and ASSD can be calculated between contours drawn by diffe
 
 Evaluating against multiple expert delineations (e.g., using the STAPLE algorithm to estimate a consensus ground truth) provides a more robust assessment than comparing against a single expert contour.
 
+## Worked Cases: Review the Error That Changes the Plan
+
+These worked steps use the fixed [synthetic educational records](../resources/cases.md); they are not contouring instructions for a real patient.
+
+### Case A — High Mean Dice, Unsafe Local Errors
+
+The validation headline is mean Dice 0.91 across 20 structures. The correct review does not stop there:
+
+1. **Check geometry first:** the MRI orientation conflict means MRI-derived laterality cannot yet be trusted.
+2. **Stratify by structure and consequence:** a cord discontinuity near high dose and a wrong-sided optic structure matter more than strong overlap for large structures.
+3. **Inspect locally:** review slices, boundaries, discontinuities, laterality, and downstream dose rather than inferring safety from the mean.
+4. **Act safely:** quarantine affected outputs, correct or redraw them under the accountable clinician, then recalculate the plan.
+
+The aggregate score is mathematically compatible with failure because large, easy structures dominate the average. “Most contours are good” is therefore not a safe approval rule.
+
+### Case C — Distribution Shift at the Field Edge
+
+Mean propagated-structure Dice remains 0.90 after a CBCT update, but a bowel loop entering the superior field edge is absent. The reviewer should reject the default approval, inspect field-edge anatomy and metadata, correct the contour, and repeat optimization and independent checks. Monitoring must be stratified by software version, anatomy, field location, and consequence; a stable mean can hide a new failure mode.
+
+## Evidence Synthesis
+
+The cited evidence agrees that geometric overlap alone is inadequate: boundary errors, editing patterns, anatomy, imaging quality, and the downstream use all change the clinical meaning of a score. Results are heterogeneous across structure sets, modalities, prompts, institutions, and reference contours, so performance for a common organ cannot be transferred to a tumor target or a new site without validation. MedSAM supplies an unusually large, diverse research resource, but its public benchmark performance remains proof of concept for radiotherapy until the exact target/OAR task and workflow are evaluated [[7]](https://doi.org/10.1038/s41467-024-44824-z).
+
+| Task | Population / site | Data scale | Validation design | Comparator | Endpoint | Principal limitation | Maturity |
+|---|---|---|---|---|---|---|---|
+| Promptable medical-image segmentation [[7]](https://doi.org/10.1038/s41467-024-44824-z) | Multiple modalities and anatomical sites; not a dedicated RT cohort | 1,570,263 image-mask pairs across 10 modalities | Multi-dataset retrospective benchmark | Specialist segmentation methods and prompt settings | Segmentation geometry | Broad benchmark does not establish target/OAR acceptability, dosimetric safety, or RT workflow benefit | **Proof of concept** |
+| Deep-learning OAR contour review [[6]](https://doi.org/10.1016/j.phro.2020.10.001) | Head-and-neck OARs at one clinical center | Single-center clinical cohort | Retrospective analysis of contours edited in routine practice | AI contour before versus after expert adjustment | Edit magnitude and location | No concurrent manual-only workflow comparator, patient endpoint, or external site | **Human-factors/workflow evaluation** |
+
+Current citations support technical performance and a single-center editing analysis, but not general external validity, patient benefit, or a causal reduction in workload. No named-product regulatory claim is made here, and the cited set does not quantify representative routine adoption. Open research assets improve reproducibility, yet expert labels and clinical acceptance rules remain site-dependent. The main unanswered questions are which errors alter planning decisions or dose, how reliably prospective QA catches consequential failures, whether time savings persist without automation bias, and whether benefits transport across institutions and model updates. The cited evidence includes variable and occasionally large edits in difficult cases rather than a comparative harmful or null patient-outcome study; the next currency review should search explicitly for negative external and prospective workflow results.
+
 ## Current Research and Recent Advances
 
 Research in deep learning for auto-contouring continues to advance rapidly, addressing remaining challenges and expanding capabilities.
@@ -242,20 +272,22 @@ Establishing best practices for commissioning, validating, and monitoring auto-c
 
 Clinical integration should be evaluated as a human-AI workflow: editing time, consequential misses, downstream dosimetry, inter-user variation, and failures under distribution shift matter in addition to average overlap [[6]](https://doi.org/10.1016/j.phro.2020.10.001).
 
-## Evidence Synthesis
-
-The cited evidence agrees that geometric overlap alone is inadequate: boundary errors, editing patterns, anatomy, imaging quality, and the downstream use all change the clinical meaning of a score. Results are heterogeneous across structure sets, modalities, prompts, institutions, and reference contours, so performance for a common organ cannot be transferred to a tumor target or a new site without validation. MedSAM supplies an unusually large, diverse research resource, but its public benchmark performance remains proof of concept for radiotherapy until the exact target/OAR task and workflow are evaluated [[7]](https://doi.org/10.1038/s41467-024-44824-z).
-
-| Task | Population / site | Data scale | Validation design | Comparator | Endpoint | Principal limitation | Maturity |
-|---|---|---|---|---|---|---|---|
-| Promptable medical-image segmentation [[7]](https://doi.org/10.1038/s41467-024-44824-z) | Multiple modalities and anatomical sites; not a dedicated RT cohort | 1,570,263 image-mask pairs across 10 modalities | Multi-dataset retrospective benchmark | Specialist segmentation methods and prompt settings | Segmentation geometry | Broad benchmark does not establish target/OAR acceptability, dosimetric safety, or RT workflow benefit | **Proof of concept** |
-| Deep-learning OAR contour review [[6]](https://doi.org/10.1016/j.phro.2020.10.001) | Head-and-neck OARs at one clinical center | Single-center clinical cohort | Retrospective analysis of contours edited in routine practice | AI contour before versus after expert adjustment | Edit magnitude and location | No concurrent manual-only workflow comparator, patient endpoint, or external site | **Human-factors/workflow evaluation** |
-
-Current citations support technical performance and a single-center editing analysis, but not general external validity, patient benefit, or a causal reduction in workload. No named-product regulatory claim is made here, and the cited set does not quantify representative routine adoption. Open research assets improve reproducibility, yet expert labels and clinical acceptance rules remain site-dependent. The main unanswered questions are which errors alter planning decisions or dose, how reliably prospective QA catches consequential failures, whether time savings persist without automation bias, and whether benefits transport across institutions and model updates. The cited evidence includes variable and occasionally large edits in difficult cases rather than a comparative harmful or null patient-outcome study; the next currency review should search explicitly for negative external and prospective workflow results.
-
 - **Foundation-model adaptation:** Promptable segmentation models are being adapted to medical images, but performance varies by anatomy, modality, prompt, and adaptation strategy. Radiotherapy use remains benchmark evidence unless target/OAR evaluation and clinical review are reported [[7]](https://doi.org/10.1038/s41467-024-44824-z). _(added: 2026-07)_
 - **Evaluation beyond a single overlap score:** Current validation guidance recommends selecting complementary metrics from the task's domain interest, error type, and properties rather than applying a fixed metric set [[5]](https://doi.org/10.1038/s41592-023-02151-z). _(added: 2026-07)_
 - **Workflow endpoints:** Clinical studies increasingly measure correction burden and acceptability as well as geometry. These findings remain dependent on site, structure set, baseline workflow, and model version [[6]](https://doi.org/10.1016/j.phro.2020.10.001). _(added: 2026-07)_
+
+## Knowledge Check
+
+1. **Recall:** How does semantic segmentation differ from instance segmentation?
+   - **Answer and reasoning:** Semantic segmentation assigns a class to pixels or voxels; instance segmentation separates distinct objects of the same class. Treating two lesions as one class may be acceptable for one task and wrong for another. Review [Contouring Fundamentals](#contouring-fundamentals).
+2. **Calculation:** A reference has 100 voxels, a prediction 80, and their intersection 70. What is Dice?
+   - **Answer and reasoning:** Dice is 2 × 70 ÷ (100 + 80) = 140 ÷ 180 ≈ 0.78. The number summarizes overlap; it does not reveal laterality, a focal boundary miss, or downstream dose. Review [Evaluation Metrics for Contouring](#evaluation-metrics-for-contouring).
+3. **Interpretation:** Why can synthetic Case A's mean Dice 0.91 coexist with unsafe utility?
+   - **Answer and reasoning:** Large easy structures dominate the mean while a cord discontinuity and wrong-sided optic structure carry disproportionate consequence. Approving from the mean alone is unsafe. Review [Worked Cases](#worked-cases-review-the-error-that-changes-the-plan).
+4. **Application:** Why compare an autocontour with more than one expert or an uncertainty-aware reference when feasible?
+   - **Answer and reasoning:** Delineation varies between experts, so one contour can make reasonable alternatives look wrong or encode one observer's bias. Calling a single contour unquestionable ground truth overstates certainty. Review [Inter-observer Variability](#inter-observer-variability).
+5. **Safety:** A promptable foundation model performs well on a broad medical benchmark. What is still required for RT use?
+   - **Answer and reasoning:** Validate the exact target/OAR task, modalities, site, prompts, geometry, clinical review, failures, and workflow. Broad benchmark performance is not permission for clinical transfer. Review [Evidence Synthesis](#evidence-synthesis).
 
 ## Recap
 

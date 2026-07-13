@@ -2,6 +2,8 @@
 
 Start with the **[Cross-book Glossary](glossary.md)** for canonical definitions spanning artificial intelligence, statistics, imaging, DICOM-RT, radiotherapy, validation, safety, deployment, and regulation.
 
+Use the **[Synthetic Casebook and Capstone](cases.md)** to follow three fixed educational cases across the workflow, practise failure analysis, and design a complete local evaluation using the six-domain rubric.
+
 This appendix collects practical resources referenced throughout ART101: open-source software for working with radiotherapy data, and external courses and workshops for readers who want to go deeper. It is not exhaustive, and inclusion here is not an endorsement — always validate any tool against your own clinical and research requirements before relying on it.
 
 ## Open-source software tools

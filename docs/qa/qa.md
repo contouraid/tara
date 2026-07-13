@@ -183,6 +183,14 @@ Other relevant lifecycle concepts include quality management, risk management, u
 
 An AI system that changes after deployment raises questions about what version is authorized, how modifications are bounded, and what evidence is required. FDA's 2025 final guidance on predetermined change control plans recommends describing planned modifications, the protocol for development, validation and implementation, and an impact assessment [[4]](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence). A local department should still know when a model has changed and whether local revalidation is required.
 
+## Worked Cases: Test the Failure and the Fallback
+
+These synthetic educational checks use the fixed [casebook](../resources/cases.md).
+
+**Case B end-to-end test:** Inject a duplicated phase label and verify that the chain rejects motion propagation before contouring or planning. The expected result is not merely an alert; it is a blocked transition, visible reason, traceable escalation, and tested reconstruction/reacquisition fallback. A virtual-QA “pass” on the resulting plan is irrelevant because the upstream temporal input is invalid.
+
+**Case C human-factors test:** Present reviewers with the omitted field-edge bowel loop once with no default and once with “approve adapted plan” preselected. Measure detection, inappropriate approval, time, overrides, and recovery—not model accuracy alone. If the default increases unsafe approval, remove it and retrain/retest the workflow. “A clinician remains responsible” does not control automation bias by itself.
+
 ## Evidence Synthesis
 
 The cited evidence agrees that QA should target clinically meaningful faults and use independent safety layers. A model that reproduces a conventional pass/fail label or explains its own classification has demonstrated component behavior, not that it detects the errors most likely to harm a patient. Evidence is heterogeneous across machine QA, measurement-based patient-specific QA, plan checking, chart checking, sites, injected faults, and institutional policies, so a high score in one setting cannot be generalized to the QA programme as a whole.
@@ -198,6 +206,19 @@ The evidence supports retrospective classifier analysis and cross-institution co
 - **Explainable automated QA:** Research is moving beyond binary plan flags toward explanations that identify influential regions or features. Early work shows feasibility, but explanation quality and the effect on reviewer decisions need direct evaluation [[2]](https://pubmed.ncbi.nlm.nih.gov/34844219/). _(added: 2026-07)_
 - **Lifecycle regulation for evolving AI:** FDA's final predetermined-change-control-plan guidance formalizes a route for certain planned AI device modifications while retaining evidence and risk controls across the lifecycle [[4]](https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence). _(added: 2026-07)_
 - **From pass-rate prediction to risk-based QA:** Current work increasingly combines plan complexity, log data, dose reconstruction, and clinical context. The important validation target is sensitivity to meaningful faults and downstream dose impact, not reproduction of a conventional QA label [[1]](https://doi.org/10.1002/mp.12810). _(added: 2026-07)_
+
+## Knowledge Check
+
+1. **Recall:** How does commissioning differ from routine quality control?
+   - **Answer and reasoning:** Commissioning characterizes supported behavior locally and establishes baselines; routine control checks continued performance against them. A one-time acceptance test cannot replace either. Review [The QA Lifecycle](#the-qa-lifecycle).
+2. **Interpretation:** Why is an AI checker not automatically independent from the system it checks?
+   - **Answer and reasoning:** It may share inputs, labels, calculations, assumptions, or software dependencies, creating common-mode failure. Separate branding or code is not evidence of independence. Review [Why Radiotherapy Requires Layered QA](#why-radiotherapy-requires-layered-qa).
+3. **Application:** A virtual-QA classifier predicts a conventional gamma pass label accurately. What remains unknown?
+   - **Answer and reasoning:** Whether it detects clinically meaningful faults, downstream dose consequences, rare hazards, and failures outside the label distribution. Reproducing a surrogate is not the same as preventing harm. Review [Patient-Specific QA](#patient-specific-qa).
+4. **Human factors:** Why can a preselected “approve” button be unsafe even with mandatory clinician review?
+   - **Answer and reasoning:** Defaults anchor decisions and can convert review into confirmation under time pressure. Accountability language alone does not control automation bias; interface behavior must be tested. Review [Human Factors and Automation Bias](#human-factors-and-automation-bias).
+5. **Case application:** What should the synthetic Case B end-to-end test prove when phase labels are duplicated?
+   - **Answer and reasoning:** It should prove the invalid transition is blocked, the reason and escalation are visible, and reconstruction/reacquisition fallback works. A downstream plan-QA pass cannot rescue invalid upstream timing. Review [Worked Cases](#worked-cases-test-the-failure-and-the-fallback).
 
 ## Recap
 

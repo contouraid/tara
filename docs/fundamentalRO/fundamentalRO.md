@@ -235,6 +235,19 @@ AI should be evaluated at the decision boundary. A segmentation score is incompl
 - **Online adaptive radiotherapy:** Integrated imaging, automated contour propagation or segmentation, rapid replanning, and on-couch review are turning adaptation into a fraction-level workflow. The opportunity is tighter personalization; the safety challenge is validating every compressed step under time pressure [[3]](https://doi.org/10.1016/j.ijrobp.2020.10.021). _(added: 2026-07)_
 - **Automation as a sociotechnical system:** Contemporary radiation oncology AI guidance emphasizes data quality, representative evaluation, human factors, and lifecycle monitoring rather than benchmark performance alone [[2]](https://doi.org/10.1038/s41571-020-0417-8). _(added: 2026-07)_
 
+## Knowledge Check
+
+1. **Recall:** What does one gray measure?
+   - **Answer and reasoning:** One gray is one joule of absorbed energy per kilogram. It is a physical dose unit, not a complete prediction of biological effect or outcome. Review [Ionizing Radiation and Absorbed Dose](#ionizing-radiation-and-absorbed-dose).
+2. **Interpretation:** Why are treatment intent, prescription, and delivery technique not interchangeable?
+   - **Answer and reasoning:** Intent states the clinical goal, prescription defines the planned dose/fractionation and targets, and technique describes how it is delivered. Naming IMRT does not reveal intent or prescription. Review [Intent, Prescription, Technique, and Response](#intent-prescription-technique-and-response).
+3. **Application:** Synthetic Case B shows 9 mm respiratory motion. Is adding 9 mm uniformly to every boundary automatically correct?
+   - **Answer and reasoning:** No. Motion management and margins depend on acquisition validity, motion direction, target definition, technique, uncertainty, and local protocol. A single isotropic number is an unsafe shortcut. Review [Simulation, Immobilization, and Motion](#simulation-immobilization-and-motion).
+4. **Safety:** Can an AI vendor assume the radiation oncologist's approval responsibility because its model produced the contour?
+   - **Answer and reasoning:** No. Tools can support tasks but do not silently reassign professional accountability, and technical owners still retain their own duties. Review [Professional Roles, Handoffs, and Safety Barriers](#professional-roles-handoffs-and-safety-barriers).
+5. **Workflow:** In synthetic Case C, who owns the contour, technical plan state, and delivery readiness?
+   - **Answer and reasoning:** The radiation oncologist owns clinical contour/treatment approval, the physicist owns technical plan/QA approval, and radiation therapists verify identity, setup, and delivery readiness. “Human oversight” without role-specific ownership is too vague. Review [AI Roles in Their Clinical Context](#ai-roles-in-their-clinical-context) and {ref}`Case C <case-c>`.
+
 ## Recap
 
 - **Objective 1:** Intent states why treatment is given; a prescription authorizes target, dose, fractionation, and constraints; planning estimates spatial dose; modality and technique define delivery; response is observed afterward.

@@ -204,6 +204,19 @@ Prespecify acceptance thresholds by error severity. A system can have excellent 
 - **Radiation-oncology evidence is task-specific:** Peer-reviewed patient-question and examination studies demonstrate useful domain behavior alongside harmful answers, readability problems, and substantial model/domain variation; they do not establish clinical workflow benefit [[9]](https://doi.org/10.1001/jamanetworkopen.2024.4630) [[11]](https://doi.org/10.1089/aipo.2023.0007). _(added: 2026-07)_
 - **Tools increase capability and attack surface:** Language models can learn to call external tools, but retrieved content can also inject instructions into an application. Clinical agents therefore require system-enforced permissions and validation rather than prompt-only controls [[5]](https://proceedings.neurips.cc/paper/2023/hash/d842425e4bf79ba039352da0f658a906-Abstract-Conference.html) [[6]](https://doi.org/10.1145/3605764.3623985). _(added: 2026-07)_
 
+## Knowledge Check
+
+1. **Recall:** What does retrieval-augmented generation add to a language model?
+   - **Answer and reasoning:** It retrieves selected source material and supplies it as context for generation; it does not guarantee that retrieval is complete or the answer faithful. Treating retrieval as an automatic truth filter is wrong. Review [Retrieval-Augmented Generation and Provenance](#retrieval-augmented-generation-and-provenance).
+2. **Interpretation:** A generated treatment summary cites the correct chart but states the wrong fraction number. Has provenance solved the problem?
+   - **Answer and reasoning:** No. Provenance makes checking possible, but the claim is still incorrect and requires field-level validation and human review. A source link beside a false claim is not safety. Review [From Source Document to Reviewed Clinical Output](#from-source-document-to-reviewed-clinical-output).
+3. **Security:** Why should retrieved text be treated as untrusted data?
+   - **Answer and reasoning:** It can contain malicious or accidental instructions that redirect model behavior or tools. Asking the model to ignore attacks is weaker than enforcing permissions and data/tool isolation outside it. Review [Failure Modes and Security](#failure-modes-and-security).
+4. **Application:** What endpoint should evaluate an LLM that drafts notes for clinician approval?
+   - **Answer and reasoning:** Measure claim correctness, omissions, attribution, clinically weighted errors, edit burden, review behavior, and workflow effects. Fluency or user preference alone can reward persuasive errors and automation bias. Review [Evaluation for the Intended Task](#evaluation-for-the-intended-task).
+5. **Governance:** An agent may read charts and send messages. Is a final “Are you sure?” prompt an adequate control?
+   - **Answer and reasoning:** No. Use least privilege, explicit destinations, deterministic validation, audit logs, approval boundaries, and safe failure states. A confirmation prompt can be habituated or manipulated. Review [Structured Outputs, Tools, Memory, and Agents](#structured-outputs-tools-memory-and-agents).
+
 ## Recap
 
 - **Objective 1:** Natural language processing is the field; a large language model is a model; a chatbot is an interface; retrieval-augmented generation supplies retrieved context; tools expose functions; and an agent chooses actions over steps.

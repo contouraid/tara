@@ -205,6 +205,22 @@ Incorporating non-dosimetric factors (e.g., patient comorbidities, concurrent tr
 
 These approaches recognize that optimal planning involves more than just meeting generic dosimetric constraints—it requires considering the specific clinical context and patient characteristics.
 
+## Worked Cases: A Feasible Dose Is Not Yet a Safe Plan
+
+These are synthetic educational planning exercises from the [casebook](../resources/cases.md), not prescriptions or patient-specific advice.
+
+### Case A — Recalculate After Consequential Contour Correction
+
+The predicted plan satisfies aggregate dose–volume goals, but the cord contour is discontinuous and an optic structure has incorrect laterality. The plan cannot be approved against invalid geometry. Correct and approve the structures first, regenerate or re-optimize as required, recalculate dose, and repeat plan and independent checks. Preserving the original plan because its score is high would treat a derived metric as more trustworthy than the anatomy it summarizes.
+
+### Case B — Reject Optimization Built on Invalid Motion
+
+Duplicated four-dimensional CT phases shrink the apparent target motion from 9 mm to 4 mm. Even if target coverage and organ-at-risk goals pass on the corrupted dataset, the motion envelope and resulting optimization are not valid for the intended treatment. Stop, repair or reacquire the motion dataset, reconstruct the target definition, and replan. Adding an arbitrary margin after the fact is not an evidence-based repair.
+
+### Case C — Compare Complete Scheduled and Adapted Options
+
+The adapted plan is considered only after field-edge bowel is corrected and independent checks are repeated. Compare scheduled and adapted options using the approved contours, target coverage, organ-at-risk dose, deliverability, uncertainty, time, and exception status. If the adaptive chain cannot finish safely, use the approved scheduled-plan or defer-treatment fallback defined locally; speed is not a substitute for completion of safety-critical steps.
+
 ## Evidence Synthesis
 
 The cited evidence agrees that dose or DVH prediction and automated optimization can reproduce aspects of prior planning practice and that common benchmarks make technical comparisons more reproducible. It does not show that a lower voxel-dose error automatically yields a deliverable, safer, or clinically preferable plan. Studies vary in disease site, beam geometry, prescription normalization, planning system, comparator quality, and endpoint; these differences can reverse method rankings and limit transportability.
@@ -279,6 +295,19 @@ These approaches remain heterogeneous in inputs, planning technique, normalizati
 - **Diffusion-based dose prediction:** A 2025 liver-cancer study conditioned a diffusion model on beam fields as well as anatomy. It is retrospective task-specific evidence; broader clinical value and transportability require external and workflow evaluation [[7]](https://doi.org/10.1002/mp.17989). _(added: 2026-07)_
 - **Common benchmarks:** OpenKBP makes model comparisons more reproducible through a fixed head-and-neck dataset and common metrics, while its selected, preprocessed challenge setting limits clinical generalization [[3]](https://doi.org/10.1002/mp.14845). _(added: 2026-07)_
 - **Online adaptation:** Integrated adaptive platforms increase interest in rapid prediction and optimization, but the validation target is the full time-constrained workflow, including independent checks and failure recovery [[5]](https://doi.org/10.1016/j.ijrobp.2020.10.021). _(added: 2026-07)_
+
+## Knowledge Check
+
+1. **Recall:** How does DVH prediction differ from three-dimensional dose prediction?
+   - **Answer and reasoning:** A DVH summarizes dose-volume distribution without spatial location; a 3D prediction estimates voxel-level dose. A matching DVH can hide a spatial hot spot. Review [Dose Prediction Models](#dose-prediction-models).
+2. **Interpretation:** Why must an automated plan be compared with a strong, defined baseline?
+   - **Answer and reasoning:** A weak or inconsistent comparator can make automation look superior without improving accepted practice. Historical acceptance alone is not an adequate benchmark. Review [Plan Quality Assessment](#plan-quality-assessment).
+3. **Application:** What does a Pareto surface represent in multi-criteria optimization?
+   - **Answer and reasoning:** It represents plans where improving one objective requires worsening another. It supports transparent tradeoffs; it does not choose clinical values or remove clinician accountability. Review [Multi-criteria Optimization](#multi-criteria-optimization).
+4. **Case application:** Synthetic Case B's plan meets dose goals on duplicated motion phases. Should it proceed?
+   - **Answer and reasoning:** No. The target geometry and motion envelope are invalid, so favorable dosimetry is calculated for the wrong problem. Adding an arbitrary margin is not a validated repair. Review [Worked Cases](#worked-cases-a-feasible-dose-is-not-yet-a-safe-plan).
+5. **Safety:** In synthetic Case C, the adapted plan is faster and scores slightly better, but independent checks cannot finish within the window. Which plan wins?
+   - **Answer and reasoning:** Neither score nor speed decides alone. Follow the predefined safe fallback—scheduled plan or deferral—because an incomplete adaptive safety chain cannot be approved. Review [Worked Cases](#worked-cases-a-feasible-dose-is-not-yet-a-safe-plan).
 
 ## Recap
 

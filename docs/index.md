@@ -33,7 +33,7 @@ Readers evaluating a single application may read Chapters 1, 3, 4, the relevant 
 (recurring-cases)=
 ## Recurring cases
 
-Three deliberately simplified cases recur throughout the book. They give every role the same patient and system context while the chapter-specific question changes.
+Three deliberately simplified cases recur throughout the book. They give every role the same patient and system context while the chapter-specific question changes. Their fixed anatomy, metadata, failure injections, safe responses, and capstone are in the [Synthetic Casebook and Capstone](resources/cases.md).
 
 | Case | Clinical thread | Questions to carry forward |
 |---|---|---|
@@ -41,7 +41,7 @@ Three deliberately simplified cases recur throughout the book. They give every r
 | **Case B — Lung stereotactic treatment** | Four-dimensional CT, respiratory motion, a small target, stereotactic planning, pretreatment checks, and on-treatment anatomy | How do motion and geometry affect labels, uncertainty, dose, quality assurance, and stop rules? |
 | **Case C — Pelvic adaptive workflow** | Daily imaging, anatomy change, propagated contours, re-optimization, rapid review, delivery, and longitudinal monitoring | Which steps may be automated, who approves each transition, and what happens when inputs drift or the service is unavailable? |
 
-These are learning devices, not protocols or patient-specific recommendations. Each chapter's opening route note points to the cases it develops.
+These are synthetic learning devices, not protocols or patient-specific recommendations. Each chapter's opening route note points to the cases it develops, and each chapter ends with a five-question knowledge check with reasoned answers.
 
 ## How this book is organized
 
@@ -89,6 +89,8 @@ A companion **[Resources](resources/index.md)** page collects open-source softwa
 
 The **[Cross-book Glossary](resources/glossary.md)** is the canonical vocabulary for AI, statistics, imaging, DICOM-RT, radiotherapy, validation, safety, deployment, and regulation. Chapters expand abbreviations at first use and link there instead of maintaining local glossaries.
 
+The **[Synthetic Casebook and Capstone](resources/cases.md)** preserves the fixed facts for Cases A–C, injects clinically consequential failures, and provides a six-domain capstone rubric for planning a responsible local evaluation.
+
 Each chapter closes with its own numbered **References** section, with a weblink to every cited source.
 
 ```{toctree}
@@ -109,4 +111,5 @@ workflow/workflow
 responsibleAI/responsibleAI
 resources/index
 resources/glossary
+resources/cases
 ```

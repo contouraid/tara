@@ -144,6 +144,8 @@ Randomized trials address treatment assignment most directly, although subgroup 
 (worked-example-outcome-to-decision)=
 ## Worked Example: From Endpoint to a Treatment Decision
 
+This is a synthetic educational extension of {ref}`Case A <case-a>`, not a patient-specific risk estimate or treatment recommendation.
+
 Suppose a team wants to use baseline CT, planned dose, and clinical variables to identify head-and-neck patients for an intensified xerostomia-prevention program.
 
 1. **Intended use:** before treatment, estimate 12-month grade 2 or worse xerostomia to offer extra supportive care—not to reduce tumor dose. The endpoint uses a named grading scale, baseline symptom rule, scheduled assessments, death as a competing event, and registry linkage for follow-up.
@@ -179,6 +181,19 @@ These studies support component reproducibility and retrospective external progn
 - **Standardized quantitative imaging:** IBSI consensus definitions and reference values make feature calculations testable across software implementations, while acquisition and clinical transportability remain separate validation problems [[3]](https://doi.org/10.1148/radiol.2020191145). _(added: 2026-07)_
 - **Longitudinal and multimodal modeling:** Delta-radiomics, spatial dose, deep representations, and clinical or molecular data broaden the signal available to models, but add timing, missingness, harmonization, and sample-size failure modes [[4]](https://doi.org/10.1038/s41598-017-00665-z). _(added: 2026-07)_
 - **Prediction-study governance:** TRIPOD+AI and PROBAST+AI strengthen expectations for transparent development, evaluation, fairness, risk-of-bias assessment, and applicability across classical and machine-learning models [[9]](https://doi.org/10.1136/bmj-2023-078378) [[10]](https://doi.org/10.1136/bmj-2024-082505). _(added: 2026-07)_
+
+## Knowledge Check
+
+1. **Recall:** How does a prognostic question differ from a treatment-predictive question?
+   - **Answer and reasoning:** Prognosis estimates an outcome under observed or specified care; treatment prediction estimates how outcomes differ between treatment alternatives. High risk does not identify which treatment helps. Review [Four Different Clinical Questions](#four-different-clinical-questions).
+2. **Interpretation:** Why can simply censoring death overstate late-toxicity probability?
+   - **Answer and reasoning:** Death prevents later toxicity and is a competing event; treating it like noninformative loss to follow-up can misstate absolute risk. A standard survival shortcut may answer a different estimand. Review [Time-to-Event Outcomes, Censoring, and Competing Risks](#time-to-event-outcomes-censoring-and-competing-risks).
+3. **Application:** A feature-selection step uses the full dataset before cross-validation. What is wrong?
+   - **Answer and reasoning:** Outcome information from evaluation folds influences the selected features, producing leakage and optimistic performance. Feature selection must occur inside each training fold or be frozen beforehand. Review [Reduce Dimension and Fit Without Leakage](#6-reduce-dimension-and-fit-without-leakage).
+4. **Interpretation:** A model has good discrimination but systematically predicts 30% risk when observed risk is 15%. Is it ready for threshold decisions?
+   - **Answer and reasoning:** No. Ranking may be good while calibration is poor; decision thresholds would misrepresent absolute risk. A high area under the curve cannot substitute for calibration. Review [Calibration](#calibration).
+5. **Case application:** Synthetic Case A predicts high xerostomia risk. Can that alone justify changing photon to proton therapy?
+   - **Answer and reasoning:** No. Prognostic risk does not estimate the counterfactual benefit of one modality over another. Treatment selection requires a defined causal/treatment-effect question and suitable evidence. Review [Association Is Not a Treatment Recommendation](#association-is-not-a-treatment-recommendation).
 
 ## Recap
 

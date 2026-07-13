@@ -160,6 +160,14 @@ Dice can remain high for a large organ despite a clinically important focal erro
 
 Before a transformation drives care, the user should inspect alignment at the relevant anatomy, review known failure regions, and confirm that the transformation is appropriate for the intended use. A registration accepted for image viewing may be unsuitable for contour propagation, and one accepted for contour propagation may be unsuitable for dose accumulation.
 
+## Worked Cases: Registration Is Valid Only for a Task
+
+These synthetic educational steps use the fixed records in the [casebook](../resources/cases.md).
+
+**Case A:** Do not use the MRI-to-CT transformation for target transfer while orientation metadata are inconsistent. First resolve identity and geometry, then evaluate alignment at targets and high-consequence organs. A transform acceptable for viewing may still be unacceptable for contour propagation. The safe fallback is CT-based review or reacquisition/import correction under local policy.
+
+**Case C:** A propagated contour misses bowel at the CBCT field edge after a software update. Even if global overlap is high and the deformation is smooth, the transformation has failed the adaptive-contouring task. Trigger the exception path, correct the contour, repeat plan checks, and investigate performance by version and field location before restoring automation.
+
 ## Evidence Synthesis
 
 The literature cited here agrees that learned registration can reduce inference time and improve selected similarity, contour, or landmark endpoints, but the result is conditional on anatomy, modality, motion range, and downstream task. Comparisons are heterogeneous: iterative and learned baselines differ between papers, public 4D-CT benchmarks emphasize landmarks, and longitudinal CT-CBCT studies emphasize propagated contours. A smooth or fast deformation is therefore model performance, not evidence that accumulated dose or an adaptive decision is correct.
@@ -177,6 +185,19 @@ The cited set supports technical and retrospective external-dataset validity, bu
 - **Longitudinal learning:** Sequence-aware registration models are beginning to use the ordered anatomy of a radiotherapy course, rather than treating every image pair independently. Seq2Morph demonstrated this approach for planning CT and weekly CBCT registration, while emphasizing the need for broader validation [[3]](https://pubmed.ncbi.nlm.nih.gov/36303270/). _(added: 2026-07)_
 - **Coarse-to-fine learned deformation:** Cascaded and transformer-based architectures seek larger capture ranges and finer local correspondence. Recent 4D-CT work reports gains over selected iterative and learning-based baselines, but most evidence remains dataset-specific [[4]](https://pubmed.ncbi.nlm.nih.gov/38023695/). _(added: 2026-07)_
 - **Clinical emphasis on uncertainty and task validity:** The central research problem is shifting from producing a visually smooth warp to showing that a transformation is plausible, generalizes across sites, and is safe for a defined downstream task. TG-132's task-specific QA principles remain directly relevant to learned methods [[1]](https://doi.org/10.1002/mp.12256). _(added: 2026-07)_
+
+## Knowledge Check
+
+1. **Recall:** What are the fixed and moving images?
+   - **Answer and reasoning:** The fixed image defines the target coordinate space; the moving image is transformed toward it. Reversing them changes the transformation's meaning and downstream object mapping. Review [The Registration Problem](#the-registration-problem).
+2. **Interpretation:** When is rigid registration preferable to deformable registration?
+   - **Answer and reasoning:** Use rigid alignment when the relevant relationship is adequately represented by rotation/translation or when deformation cannot be validated safely. More flexible is not automatically more truthful. Review [Transformation Models](#transformation-models).
+3. **Application:** A registration has high image similarity but folds anatomy. Is it valid?
+   - **Answer and reasoning:** No. Similarity can improve under nonphysical correspondence; inspect Jacobians, landmarks/contours, inverse consistency, and task impact. Optimizing one similarity metric is insufficient. Review [Validation and Quality Assurance](#validation-and-quality-assurance).
+4. **Interpretation:** Why might one transformation be acceptable for viewing but not dose accumulation?
+   - **Answer and reasoning:** Dose accumulation is sensitive to voxel correspondence and deformation uncertainty in ways qualitative viewing may not be. Acceptance belongs to the intended task, not the algorithm name. Review [Patient-Specific Review](#patient-specific-review).
+5. **Case application:** Synthetic Case C has a smooth deformation and mean Dice 0.90 but misses field-edge bowel. What is the decision?
+   - **Answer and reasoning:** Reject it for adaptive contour propagation, correct the contour, repeat downstream checks, and investigate the version/field-edge shift. Smoothness and global overlap cannot override a consequential local failure. Review [Worked Cases](#worked-cases-registration-is-valid-only-for-a-task).
 
 ## Recap
 

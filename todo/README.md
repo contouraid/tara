@@ -83,7 +83,7 @@ When the work is complete, change the title prefix from `TODO` to `DONE`, add `*
 
 Sorted by priority prefix (p0 → p3), then alphabetically within each tier.
 `review-log.md` is a standing log, not a closeable todo — no priority prefix.
-Last reconciled against the working tree on **2026-07-12** (research-synthesis-and-evidence-grading closure).
+Last reconciled against the working tree on **2026-07-13** (worked-cases-and-formative-assessment closure).
 
 | File | Section | Priority | Status |
 |---|---|---|---|
@@ -98,7 +98,6 @@ Last reconciled against the working tree on **2026-07-12** (research-synthesis-a
 | [p2-literature-currency-validation.md](p2-literature-currency-validation.md) | `validation/` | P2 Medium | 🔴 Initial chapter needs ongoing standards and monitoring review |
 | [p2-literature-currency-vlm.md](p2-literature-currency-vlm.md) | `fundamentalAI/vlm.md` | P2 Medium | 🔴 Fast-moving VLM evidence needs a dedicated currency review |
 | [p2-literature-currency-workflow.md](p2-literature-currency-workflow.md) | `workflow/` | P2 Medium | 🔴 Initial chapter needs current real-world implementation evidence |
-| [p3-add-worked-cases-and-formative-assessment.md](p3-add-worked-cases-and-formative-assessment.md) | Root (cross-cutting) | P3 Low | 🔴 Few worked cases or opportunities to test applied understanding |
 
 ## Completed Todos
 
@@ -114,3 +113,4 @@ Completed work is retained in [`done/`](done/). The archive currently includes:
 - [p1-fix-broken-toc-anchors.md](done/p1-fix-broken-toc-anchors.md)
 - [p1-strengthen-radiotherapy-clinical-foundations.md](done/p1-strengthen-radiotherapy-clinical-foundations.md)
 - [p2-establish-research-synthesis-and-evidence-grading.md](done/p2-establish-research-synthesis-and-evidence-grading.md)
+- [p3-add-worked-cases-and-formative-assessment.md](done/p3-add-worked-cases-and-formative-assessment.md)

@@ -848,6 +848,19 @@ vlm
 - **Attention-based architectures:** Transformers permit global token interactions and parallel sequence processing, but their value in a medical task must be established against strong convolutional baselines on representative data [[10]](https://proceedings.neurips.cc/paper/7181-attention-is-all-you-need). _(added: 2026-07)_
 - **Multimodal learning:** Models that connect images and language broaden the possible task set. Generalist biomedical results remain transfer evidence rather than radiotherapy validation; the dedicated [vision-language model chapter](vlm.md) covers the evidence and limitations [[13]](https://doi.org/10.1038/s41591-024-03185-2). _(added: 2026-07)_
 
+## Knowledge Check
+
+1. **Recall:** Why does a multilayer network need nonlinear activation functions?
+   - **Answer and reasoning:** Without nonlinear activations, stacked linear layers collapse to one linear transformation and cannot represent nonlinear decision boundaries. Adding depth alone is therefore not enough. Review [Activation Functions](#activation-functions).
+2. **Interpretation:** A segmentation team optimizes pixel accuracy for a tiny target surrounded by background. What can go wrong?
+   - **Answer and reasoning:** Predicting mostly background can yield high accuracy while missing the target. A task-matched loss and structure/boundary metrics are needed; aggregate accuracy is the plausible but misleading alternative. Review [Loss Functions](#loss-functions).
+3. **Application:** When should model architecture choices be frozen relative to the final test set?
+   - **Answer and reasoning:** Freeze them before inspecting the final test results, using training and development data for selection. Repeatedly tuning after test inspection turns the test set into development data. Review [Gradient-based Learning](#gradient-based-learning).
+4. **Interpretation:** Does attention make a transformer inherently more clinically reliable than a convolutional network?
+   - **Answer and reasoning:** No. Attention changes how information is represented; reliability still depends on data, task, validation, uncertainty, and workflow controls. Newer architecture is not evidence of clinical benefit. Review [Transformers and Attention Mechanisms](#transformers-and-attention-mechanisms).
+5. **Safety:** In synthetic Case B, duplicated motion phases produce a smooth, confident output. Can a more powerful network rescue it?
+   - **Answer and reasoning:** No architecture can recover missing temporal truth from mislabeled inputs without additional valid information. The safe action is to reject and repair the data chain, not trust confidence or complexity. Review [Recurrent Neural Networks](#recurrent-neural-networks-rnns) and {ref}`Case B <case-b>`.
+
 ## Recap
 
 - **Objective 1:** A prediction combines input features with learned weights and a bias, then applies activations; a loss measures the discrepancy relevant to training.

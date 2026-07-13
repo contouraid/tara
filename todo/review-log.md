@@ -28,6 +28,32 @@ Append one entry per cycle, in the format below, at the **top** of the log (newe
 
 ## Log
 
+## 2026-07-13 worked-cases-and-formative-assessment closure
+
+**Chapters reviewed:** all 12 numbered chapters; `fundamentalAI/llm.md`; `fundamentalAI/vlm.md`; and the new `resources/cases.md`
+**Todos closed:** `p3-add-worked-cases-and-formative-assessment.md` (moved to `todo/done/`)
+**Todos opened:** none
+
+### Searches run
+- No literature search was run. This was a synthetic educational-design cycle using the book's already verified clinical pathway, AI lifecycle, evidence, validation, workflow, and governance content.
+- Repository structure checks located all chapter `Recap`, case-route, worked-example, learning-objective, and assessment headings before editing — 14 chapter/companion pages were in scope.
+
+### Added
+- resources: canonical synthetic Case A–C records, failure injections, safe responses, cross-chapter trace, capstone specification, and six-domain rubric.
+- imaging through workflow: worked applications preserving the same anatomy, metadata, tasks, role ownership, and fallback across chapters.
+- every chapter and companion page: five formative questions with reasoned, section-linked answers — 70 questions total.
+- guide/navigation: durable case and assessment authoring rules, casebook links, and generated heading anchors for verified section backlinks.
+
+### Rejected
+- No real or quasi-real patient vignette was used; every identifier, measurement, plan, and failure is explicitly synthetic.
+- Paper-title or citation-memory trivia was excluded because it does not demonstrate transferable understanding.
+- Answer-only questions, unexplained true/false items, and aggregate-metric approval rules were rejected because they hide reasoning or encourage unsafe shortcuts.
+- The capstone score was not presented as certification or deployment permission.
+
+### Notes for next cycle
+- Keep `docs/resources/cases.md` as the only canonical case record. Chapters may add a worked decision but must not change fixed case facts locally.
+- Future chapter changes must retain at least five varied knowledge-check questions, update answers when teaching content changes, and keep all section backlinks warning-free.
+
 ## 2026-07-12 research-synthesis-and-evidence-grading closure
 
 **Chapters reviewed:** `contouring/`, `registration/`, `treatmentPlanning/`, `clinicalPrediction/`, `qa/`, and `workflow/`

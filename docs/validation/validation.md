@@ -224,11 +224,32 @@ Possible responses include recalibrating probabilities, adjusting thresholds, re
 
 Name the owner of the deployed system, the review frequency, escalation pathway, and authority to suspend use. The reusable governance checklist and responsibility (RACI) map that assign these roles are in {ref}`Responsible AI, Regulation, and Security <a-governance-checklist-and-responsibility-map>`. Predetermined stop rules might include severe incidents, sustained metric breach, data-pipeline corruption, or an unvalidated upstream change. A rollback path and downtime workflow should be tested before they are needed.
 
+## Worked Cases: Validate Consequences, Not Headlines
+
+These synthetic educational analyses use the fixed [casebook](../resources/cases.md).
+
+**Case A:** Mean Dice 0.91 across 20 structures is not the acceptance endpoint. Report each structure, clinically important boundary regions, discontinuities, laterality errors, edit burden, downstream dose, and failure severity with uncertainty. Compare against the existing human workflow and predefine stop conditions. An average weighted toward large structures can remain high while the cord or optic pathway is unsafe.
+
+**Case C:** After the CBCT update, compare performance by software version, field-of-view boundary, anatomy, and reviewer. The overall mean of 0.90 can mask a new field-edge omission. A monitoring plan should define denominators, alert/action limits, ownership, rollback, and revalidation before seeing the result; moving the threshold after the miss is not independent validation.
+
 ## Current Research and Recent Advances
 
 - **AI-specific reporting guidance:** TRIPOD+AI updates prediction-model reporting for regression and machine-learning methods and strengthens expectations around protocol, data, evaluation, and open science [[2]](https://doi.org/10.1136/bmj-2023-078378). _(added: 2026-07)_
 - **Updated risk-of-bias assessment:** PROBAST+AI separates development quality from evaluation bias and incorporates applicability and fairness throughout its domains, reflecting the broader evidence needed for clinical AI [[3]](https://doi.org/10.1136/bmj-2024-082505). _(added: 2026-07)_
 - **Total-lifecycle evaluation:** International GMLP principles emphasize representative datasets, independent test sets, human-AI team performance, clear user information, and monitoring of deployed models [[4]](https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles). _(added: 2026-07)_
+
+## Knowledge Check
+
+1. **Recall:** What is the first item in a validation plan?
+   - **Answer and reasoning:** A bounded intended use: population, user, input, output, decision, setting, exclusions, and consequence. Choosing metrics first risks validating the wrong claim. Review [Start with the Intended Use](#start-with-the-intended-use).
+2. **Calculation:** A detector finds 18 of 20 true errors and flags 8 of 80 correct cases. What are sensitivity and specificity?
+   - **Answer and reasoning:** Sensitivity is 18 ÷ 20 = 90%; specificity is 72 ÷ 80 = 90%. Overall accuracy would hide which error type occurs and is not a substitute for consequence-weighted analysis. Review [Classification Metrics](#classification-metrics).
+3. **Interpretation:** Why should evaluation splits use the patient or institution—not individual images—as the unit when those units drive independence?
+   - **Answer and reasoning:** Related images share anatomy, acquisition, and care context; splitting them leaks information. A larger image count does not create independent evidence. Review [Data for Development and Evaluation](#data-for-development-and-evaluation).
+4. **Application:** Does good performance at a second institution establish workflow benefit?
+   - **Answer and reasoning:** It supports external validity for the measured endpoint, not usability, time, decisions, safety, or patient outcomes. Those require human-workflow or impact evaluation. Review [From Technical to Clinical Validation](#from-technical-to-clinical-validation).
+5. **Case application:** Synthetic Case C's overall mean remains stable after a software update, but a field-edge failure appears. What should monitoring do?
+   - **Answer and reasoning:** Stratify by version, anatomy, field location, and consequence; apply predefined action limits, investigate, roll back or contain, and revalidate. Watching only the mean is the failure demonstrated by the case. Review [Worked Cases](#worked-cases-validate-consequences-not-headlines).
 
 ## Recap
 
